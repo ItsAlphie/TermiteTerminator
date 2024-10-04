@@ -1,0 +1,7 @@
+How to unity:
+	=> Print = Debug.log("")
+	=> zie da u script op een gameobject staat, dan kunt ge in u script aan eender wa geraken:
+		- GetComponent<Transform>()...
+		- shit is based op frames, ni tijd -> * Time.deltaTime
+		- public attributes can be changed on runtime
+	! Don't work in same SCENE ! (binaries are fucked)
