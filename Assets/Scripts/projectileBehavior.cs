@@ -7,6 +7,8 @@ public class projectileBehavior : MonoBehaviour
     [SerializeField] private float projectileSpeed;
     [SerializeField] private float lifespan = 10f;
 
+    [SerializeField] private int damage = 10;
+
     private GameObject nearestEnemy = null;
 
     private Vector2 targetPosition;
@@ -26,13 +28,12 @@ public class projectileBehavior : MonoBehaviour
     }
 
      private void MoveTowardsNearestEnemy(){
-        
         float closestDistance = 1000000;
-
+        Vector3 lastDirection;
 
         List<GameObject> enemies = EnemySpawner.enemyList;
         if (enemies.Count == 0) return;
-
+    
 
         foreach (GameObject enemy in enemies)
         {
@@ -46,18 +47,26 @@ public class projectileBehavior : MonoBehaviour
 
         if (nearestEnemy != null)
         {
+            
             Vector3 direction = (nearestEnemy.transform.position - transform.position).normalized;
-            transform.position += projectileSpeed * Time.deltaTime * direction;
+            lastDirection = direction;
+            transform.position += projectileSpeed * Time.deltaTime * lastDirection;
+
         }
+        
 
         
      }
 
       void OnCollisionEnter2D(Collision2D collision){
-        Debug.Log("hit1");
+        
         if (collision.gameObject.tag == "Enemy")
-        {
-            Debug.Log("hit2");
+        {   
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null){
+                enemy.takeDamage(damage);
+            }
+
             Destroy(gameObject);
         }
       }

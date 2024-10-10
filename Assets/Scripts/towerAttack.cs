@@ -18,13 +18,17 @@ public class towerAttack : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-        timeLeft -= Time.deltaTime;
+    {   
+        List<GameObject> enemies = EnemySpawner.enemyList;
+        if(enemies.Count != 0){
+            timeLeft -= Time.deltaTime;
         if(timeLeft <= 0){
             Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);  
             timeLeft = shootSpeed;
         }
+        }
+        
+        
         
       
     }

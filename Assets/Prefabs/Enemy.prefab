@@ -141,6 +141,7 @@ MonoBehaviour:
   - {fileID: 4740726953656487720, guid: 64019c3dcbb2d11078ab451f1e07fc19, type: 3}
   moveSpeed: 1
   pointsIndex: 0
+  health: 30
 --- !u!50 &-7639947875795090581
 Rigidbody2D:
   serializedVersion: 4

@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
 
 [SerializeField] private int pointsIndex;
 
+[SerializeField] private int health;
 
 
     // Start is called before the first frame update
@@ -27,4 +28,15 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+    public void takeDamage(int damage)
+{
+    health -= damage;
+    if(health <= 0){
+        Destroy(gameObject);
+        EnemySpawner.enemyList.Remove(gameObject);
+    }
 }
+
+}
+
