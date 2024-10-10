@@ -253,8 +253,8 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 8.15, y: 0, z: -10}
+  m_LocalScale: {x: 48.085686, y: 27.004831, z: 8.539078}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3845,6 +3845,7 @@ GameObject:
   - component: {fileID: 1693986350}
   - component: {fileID: 1693986349}
   - component: {fileID: 1693986348}
+  - component: {fileID: 1693986351}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3948,12 +3949,31 @@ Transform:
   m_GameObject: {fileID: 1693986347}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.64, y: -1.96, z: -0.014126102}
+  m_LocalPosition: {x: 12.93, y: -2.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1693986351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693986347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e03315ed955cb76dd9686c63cb6805d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Points:
+  - {fileID: 783874449}
+  - {fileID: 1161336800}
+  - {fileID: 855565148}
+  - {fileID: 605435471}
+  moveSpeed: 30
+  pointsIndex: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
