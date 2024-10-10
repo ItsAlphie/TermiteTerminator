@@ -12,6 +12,8 @@ public class EnemySpawner : MonoBehaviour
 
     private float timeUntilSpawn;
 
+    public static List<GameObject> enemyList = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,10 +22,12 @@ public class EnemySpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        GameObject Clone;
         timeUntilSpawn -= Time.deltaTime; //reduce time by amount of time that has passed in a frame
         if(timeUntilSpawn <= 0){
-            Instantiate(EnemyPrefab, SpawnPoint.transform.position, Quaternion.identity);
+            Clone = Instantiate(EnemyPrefab, SpawnPoint.transform.position, Quaternion.identity);
+            enemyList.Add(Clone);
             setTimeUntilSpawn();
         }
     }

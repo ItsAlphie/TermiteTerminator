@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyBehavior : MonoBehaviour
+public class Enemy : MonoBehaviour
 {   
 [SerializeField] Transform[] Points;
 [SerializeField] private float moveSpeed;
 
 [SerializeField] private int pointsIndex;
+
+
 
     // Start is called before the first frame update
     void Start()
