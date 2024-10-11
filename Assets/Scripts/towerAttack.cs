@@ -28,8 +28,10 @@ public class towerAttack : MonoBehaviour
         }
         }
         
-        
-        
       
+    }
+
+    void OnMouseDown(){
+        Destroy(gameObject);
     }
 }

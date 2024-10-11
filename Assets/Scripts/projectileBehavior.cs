@@ -23,18 +23,20 @@ public class projectileBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       MoveTowardsNearestEnemy();
+       if(EnemySpawner.enemyList.Count != 0){
+            MoveTowardsNearestEnemy();
+       } 
+       else{
+            Destroy(gameObject);
+       }
+       
 
     }
 
-     private void MoveTowardsNearestEnemy(){
+    private void findNearestEnemy(){
         float closestDistance = 1000000;
-        Vector3 lastDirection;
-
         List<GameObject> enemies = EnemySpawner.enemyList;
         if (enemies.Count == 0) return;
-    
-
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
@@ -44,6 +46,18 @@ public class projectileBehavior : MonoBehaviour
                 nearestEnemy = enemy;
             }
         }
+
+    }
+
+     private void MoveTowardsNearestEnemy(){
+        
+        Vector3 lastDirection;
+
+        List<GameObject> enemies = EnemySpawner.enemyList;
+        
+
+        findNearestEnemy();
+
 
         if (nearestEnemy != null)
         {
