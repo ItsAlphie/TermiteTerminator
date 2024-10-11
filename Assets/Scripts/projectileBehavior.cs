@@ -12,6 +12,8 @@ public class projectileBehavior : MonoBehaviour
     private GameObject nearestEnemy = null;
 
     private Vector2 targetPosition;
+
+    private Vector3 lastDirection = Vector3.zero;
     
     // Start is called before the first frame update
     void Start()
@@ -27,7 +29,7 @@ public class projectileBehavior : MonoBehaviour
             MoveTowardsNearestEnemy();
        } 
        else{
-            Destroy(gameObject);
+            transform.position += projectileSpeed * Time.deltaTime * lastDirection;
        }
        
 
@@ -50,8 +52,6 @@ public class projectileBehavior : MonoBehaviour
     }
 
      private void MoveTowardsNearestEnemy(){
-        
-        Vector3 lastDirection;
 
         List<GameObject> enemies = EnemySpawner.enemyList;
         
@@ -61,7 +61,6 @@ public class projectileBehavior : MonoBehaviour
 
         if (nearestEnemy != null)
         {
-            
             Vector3 direction = (nearestEnemy.transform.position - transform.position).normalized;
             lastDirection = direction;
             transform.position += projectileSpeed * Time.deltaTime * lastDirection;
@@ -83,5 +82,6 @@ public class projectileBehavior : MonoBehaviour
 
             Destroy(gameObject);
         }
+        
       }
 }
