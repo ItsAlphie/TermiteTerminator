@@ -13,7 +13,9 @@ public class projectileBehavior : MonoBehaviour
 
     private Vector2 targetPosition;
 
-    private Vector3 lastDirection = Vector3.zero;
+    private Vector3 enemyDirection = Vector3.zero;
+
+    private bool enemyFound = false;
     
     // Start is called before the first frame update
     void Start()
@@ -24,14 +26,18 @@ public class projectileBehavior : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-       if(EnemySpawner.enemyList.Count != 0){
-            MoveTowardsNearestEnemy();
-       } 
-       else{
-            transform.position += projectileSpeed * Time.deltaTime * lastDirection;
-       }
-       
+    { 
+        if(!enemyFound){
+            findNearestEnemy();
+        }
+            
+        else if(enemyFound){
+
+        if(nearestEnemy != null) {
+            getDirectionOfNearestEnemy();
+         } 
+        transform.position += projectileSpeed * Time.deltaTime * enemyDirection;
+    }
 
     }
 
@@ -46,25 +52,17 @@ public class projectileBehavior : MonoBehaviour
             {
                 closestDistance = distance;
                 nearestEnemy = enemy;
+                enemyFound = true;
             }
         }
 
     }
 
-     private void MoveTowardsNearestEnemy(){
-
-        List<GameObject> enemies = EnemySpawner.enemyList;
-        
-
-        findNearestEnemy();
-
+     private void getDirectionOfNearestEnemy(){
 
         if (nearestEnemy != null)
         {
-            Vector3 direction = (nearestEnemy.transform.position - transform.position).normalized;
-            lastDirection = direction;
-            transform.position += projectileSpeed * Time.deltaTime * lastDirection;
-
+            enemyDirection = (nearestEnemy.transform.position - transform.position).normalized;
         }
         
 
