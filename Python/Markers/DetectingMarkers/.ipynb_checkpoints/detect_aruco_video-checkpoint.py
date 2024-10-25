@@ -7,6 +7,7 @@ import imutils
 import time
 import cv2
 import sys
+import numpy as np
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -57,6 +58,29 @@ print("[INFO] starting video stream...")
 vs = VideoStream(src=0).start()
 time.sleep(2.0)
 
+# Absolute coordinates of TV Fiducials
+TV = np.array([[0, 0], [0, 0], [0, 0]])
+TVready = np.array([0, 0, 0, 0])
+
+# List of all markers relative position [ID,X,Y]
+towers = np.array([[1,0,0], [2,0,0], [3,0,0], [4,0,0], [5,0,0], [6,0,0], [7,0,0], [8,0,0], [9,0,0], [10,0,0]])
+
+# Define and draw axis system to transform absolute to relative coordinates
+def defineAxis():
+	x_axis = (TV[1] - TV[0])
+	y_axis = (TV[2] - TV[0])
+
+	print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + str(x_axis))
+	print("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee" + str(y_axis))
+	cv2.line(frame, TV[0], TV[1] , (255, 0, 0), 3)
+	cv2.line(frame, TV[0], TV[2] , (0, 0, 255), 3)
+
+	transform = np.column_stack((x_axis, y_axis))
+	print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" + str(transform))
+	TVready[3] = 1
+    return transform
+
+transform = 0
 # loop over the frames from the video stream
 while True:
 	# grab the frame from the threaded video stream and resize it
@@ -104,6 +128,43 @@ while True:
 				(topLeft[0], topLeft[1] - 15),
 				cv2.FONT_HERSHEY_SIMPLEX,
 				0.5, (0, 255, 0), 2)
+			if markerID == 1:
+				cv2.putText(frame, "HELLO",
+				(topRight[0], topRight[1] - 15),
+				cv2.FONT_HERSHEY_SIMPLEX,
+				0.5, (255, 0, 0), 2)
+			cv2.putText(frame, str(cX) +  str(cY),
+				(bottomRight[0], bottomRight[1] - 15),
+				cv2.FONT_HERSHEY_SIMPLEX,
+				0.5, (0, 255, 0), 2)
+
+			# Set TV coordinates
+			if markerID == 21:
+				TV[0] = np.array([cX, cY])
+				TVready[0] = 1
+				print("Origin set at x=" + str(cX) + " y=" + str(cY))
+			elif markerID == 22:
+				TV[1] = np.array([cX, cY])
+				TVready[1] = 1
+				print("X axis set at x=" + str(cX) + " y=" + str(cY))
+			elif markerID == 23:
+				TV[2] = np.array([cX, cY])
+				TVready[2] = 1
+				print("Y axis set at x=" + str(cX) + " y=" + str(cY))
+
+			if np.array_equal(TVready, np.array([1, 1, 1, 0])):
+				transform = defineAxis()
+
+			# Transform absolute cX, xY to relative coordinates
+			elif np.array_equal(TVready, np.array([1, 1, 1, 1])):
+				print(str(transform))
+				print(str(np.dot(transform.T, ([cX,cY] - TV[0]))))
+				TVxy = np.dot(transform.T, ([cX,cY] - TV[0]))
+				#print("Tower " + str(markerID) + " located at x=" + str(TVxy[0]) + " y=" + str(TVxy[1]))
+
+			# TODO: add code to check if tower is in screen or not
+	# TODO: make list of id, TVcX, TVcY
+	# TODO: pass data to unity
 
 	# show the output frame
 	cv2.imshow("Frame", frame)
