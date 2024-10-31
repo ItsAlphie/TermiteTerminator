@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {   
-
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private GameObject SpawnPoint;
     [SerializeField] private float minSpawnTime;
