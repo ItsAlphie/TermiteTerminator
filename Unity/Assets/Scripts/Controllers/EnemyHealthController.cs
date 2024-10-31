@@ -7,9 +7,12 @@ public class EnemyHealthController : HealthController
     private Animator animator;
     private GameObject enemySpriteObject;
 
+    BasicEnemy enemy;
+
     protected override void die()
     {
-        gameObject.GetComponent<BasicEnemy>().MoveSpeed = 0;
+        enemy.MoveSpeed = 0;
+        enemy.Alive = false;
         Destroy(gameObject.GetComponent<CircleCollider2D>());
         Destroy(gameObject.GetComponent<Rigidbody2D>());
         EnemySpawner.enemyList.Remove(gameObject);
@@ -19,7 +22,8 @@ public class EnemyHealthController : HealthController
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        enemy = gameObject.GetComponent<BasicEnemy>();
         enemySpriteObject = gameObject.transform.GetChild(0).gameObject;
         animator = enemySpriteObject.GetComponent<Animator>();
         currHealth = totalHealth;
