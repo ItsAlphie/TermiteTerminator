@@ -5,16 +5,16 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {   
     [SerializeField] private float projectileSpeed;
-    [SerializeField] private float lifespan = 10f;
-
     [SerializeField] private int damage = 10;
-
 
     private GameObject nearestEnemy = null;
 
     private Vector2 targetPosition;
 
     private Vector3 enemyDirection = Vector3.zero;
+
+    private GameObject projectileSprite;
+
     
     public void initialize(GameObject nearestEnemy){
         this.nearestEnemy = nearestEnemy;
@@ -23,8 +23,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, lifespan);
-    
+        projectileSprite = gameObject.transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -34,6 +33,9 @@ public class Projectile : MonoBehaviour
             getDirectionOfNearestEnemy();
          }
         transform.position += projectileSpeed * Time.deltaTime * enemyDirection;
+        if(!projectileSprite.GetComponent<SpriteRenderer>().isVisible){
+            Destroy(gameObject);
+        }
     }    
 
      private void getDirectionOfNearestEnemy(){
