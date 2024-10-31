@@ -11,12 +11,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - path
+  - ground
   - Water
   - UI
-  - characters
+  - enemy
   - towers
-  - 
+  - projectile
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: ' Layer 1'
+  - name: towers, enemies
     uniqueID: 3630607721
+    locked: 0
+  - name: projectile
+    uniqueID: 3337196883
     locked: 0
