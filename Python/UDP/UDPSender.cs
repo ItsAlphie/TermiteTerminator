@@ -1,24 +1,38 @@
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
+using UnityEngine;
+
+using System.Threading;
 
 public class UDPClient : MonoBehaviour
 {
-    IEnumerator Start()
+    private const int listenPort = 11069;
+    IPAddress targetAddress = IPAddress.Parse("127.0.0.1");
+    void Start()
     {
-        yield return new WaitForSeconds(1);
-        Send("test test test");
+        Send("A message");
     }
     private void Send(string msg)
     {
-        Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        try
+        {
+            while (true)
+            {
+                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-        IPAddress targetAddress = IPAddress.Parse("127.0.0.1");
+                byte[] sendbuf = Encoding.ASCII.GetBytes(msg);
+                IPEndPoint ep = new IPEndPoint(targetAddress, listenPort);
 
-        byte[] sendbuf = Encoding.ASCII.GetBytes(msg);
-        IPEndPoint ep = new IPEndPoint(targetAddress, 11000);
+                s.SendTo(sendbuf, ep); s.Close();
 
-        s.SendTo(sendbuf, ep); s.Close();
-
-        print("Message sent");
+                print("Message sent");
+            }
+        }
+        catch (SocketException e)
+        {
+            print(e);
+        }   
     }
 }
