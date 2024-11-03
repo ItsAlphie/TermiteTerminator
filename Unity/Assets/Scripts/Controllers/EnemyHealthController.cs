@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHealthController : HealthController
 {
     private Animator animator;
-    private GameObject enemySpriteObject;
+    private GameObject enemySprite;
 
     BasicEnemy enemy;
 
@@ -24,8 +24,8 @@ public class EnemyHealthController : HealthController
     void Start()
     {   
         enemy = gameObject.GetComponent<BasicEnemy>();
-        enemySpriteObject = gameObject.transform.GetChild(0).gameObject;
-        animator = enemySpriteObject.GetComponent<Animator>();
+        enemySprite = gameObject.transform.GetChild(0).gameObject;
+        animator = enemySprite.GetComponent<Animator>();
         currHealth = totalHealth;
     }
 
