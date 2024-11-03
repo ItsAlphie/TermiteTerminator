@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: -7639947875795090581}
   - component: {fileID: -2786433913775387447}
   m_Layer: 6
-  m_Name: BasicEnemy
+  m_Name: BasicAnt1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,4 +235,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f6b74f79633df7e491bae637e322e65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 50
+  totalHealth: 30
