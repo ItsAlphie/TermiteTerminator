@@ -9,7 +9,6 @@ import cv2
 import sys
 import numpy as np
 import socket
-import time
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -55,22 +54,17 @@ print("[INFO] detecting '{}' tags...".format(args["type"]))
 arucoDict = cv2.aruco.Dictionary_get(ARUCO_DICT[args["type"]])
 arucoParams = cv2.aruco.DetectorParameters_create()
 
-# Requirements for TCP communication to Unity
-# sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ip, port = "127.0.0.1", 11069
-# sock.connect((host, port))
-
-def sendData(data):	
-	sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-	sock.sendto(data.encode(), (ip, port))
+# initialize the video stream and allow the camera sensor to warm up
+print("[INFO] starting video stream...")
+vs = VideoStream(src=0).start()
+time.sleep(2.0)
 
 # Absolute coordinates of TV Fiducials
 TV = np.array([[0, 0], [0, 0], [0, 0]])
 TVready = np.array([0, 0, 0])
 
 # List of all markers relative position [ID,X,Y]
-towers = np.array([[1,0.0,0.0,0], [2,0.0,0.0,0], [3,0.0,0.0,0], [4,0.0,0.0,0], [5,0.0,0.0,0], [6,0.0,0.0,0], [7,0.0,0.0,0], [8,0.0,0.0,0], [9,0.0,0.0,0], [10,0.0,0.0,0]])
+towers = np.array([[1,0,0], [2,0,0], [3,0,0], [4,0,0], [5,0,0], [6,0,0], [7,0,0], [8,0,0], [9,0,0], [10,0,0]])
 
 # Define and draw axis system to transform absolute to relative coordinates (bunch of math hoohaa)
 def defineAxis():
@@ -84,24 +78,6 @@ def calculateRelative(absoluteX, absoluteY, transform):
 	vector = ([absoluteX - TV[0][0], absoluteY - TV[0][1]])
 	scalars = np.linalg.solve(transform, vector)
 	return scalars
-
-def getLength(topLeftX, topLeftY, bottomRightX, bottomRightY):
-	X = topLeftX - bottomRightX
-	Y = topLeftY - bottomRightY
-	distance = np.sqrt(np.square(X) + np.square(Y))
-	return distance
-
-def checkLifted(refLength, length):
-	scale = length/refLength
-	if(scale > 1):
-		return 1
-	else:
-		return 0
-
-# initialize the video stream and allow the camera sensor to warm up
-print("[INFO] starting video stream...")
-vs = VideoStream(src=0).start()
-time.sleep(2.0)
 
 # loop over the frames from the video stream
 while True:
@@ -160,7 +136,6 @@ while True:
 			if markerID == 21:
 				TV[0] = np.array([cX, cY])
 				TVready[0] = 1
-				refMarkerSize = getLength(int(topLeft[0]), int(topLeft[1]), int(bottomRight[0]), int(bottomRight[1]))
 				#print("Origin set at x=" + str(cX) + " y=" + str(cY))
 			elif markerID == 22:
 				TV[1] = np.array([cX, cY])
@@ -173,6 +148,22 @@ while True:
 
 			# Transform absolute cX, xY to relative coordinates
 			if np.array_equal(TVready, np.array([1, 1, 1])):
+				if markerID < 20:
+					transform = defineAxis()
+					absoluteCoordinates = np.array([cX,cY])
+
+					scalars = calculateRelative(cX, cY, transform)
+					#print("Tower " + str(markerID) + " located at x=" + str(round(scalars[0],3)) + " y=" + str(round(scalars[1],3)))
+					
+					# Check if tower is in screen or not
+					#if scalars[0] > 1 or scalars[1] > 1:
+						#print("Tower " + str(markerID) + "is out of the game area")
+
+					# Draw Relative Coordinates
+					cv2.putText(frame, str(round(scalars[0],3))+";"+str(round(scalars[1],3)),
+                                		(cX, cY),
+                                		cv2.FONT_HERSHEY_SIMPLEX,
+                                		0.5, (255, 255, 255), 2)
 				# Draw axis information
 				cv2.line(frame, (TV[0][0],TV[0][1]), (TV[1][0],TV[1][1]) , (0, 0, 255), 4,8,0)
 				cv2.putText(frame, "Y-axis",
@@ -184,46 +175,15 @@ while True:
                                 		(TV[2][0],TV[2][1]),
                                 		cv2.FONT_HERSHEY_SIMPLEX,
                                 		0.5, (255, 0, 0), 2)
-				
-				if markerID < 20:
-					transform = defineAxis()
-					absoluteCoordinates = np.array([cX,cY])
-
-					scalars = calculateRelative(cX, cY, transform)
-					#print("Tower " + str(markerID) + " located at x=" + str(round(scalars[0],3)) + " y=" + str(round(scalars[1],3)))
-					
-					# Check if tower is in screen or not
-					#if scalars[0] > 1 or scalars[1] > 1:
-					#	print("Tower " + str(markerID) + "is out of the game area")
-
-					# Draw Relative Coordinates
-					cv2.putText(frame, str(round(scalars[0],3))+";"+str(round(scalars[1],3)),
-                                		(cX, cY),
-                                		cv2.FONT_HERSHEY_SIMPLEX,
-                                		0.5, (255, 255, 255), 2)
-
-					# Check if the tower is lifted
-					markerSize = getLength(int(topLeft[0]), int(topLeft[1]), int(bottomRight[0]), int(bottomRight[1]))
-					lifted = checkLifted(refMarkerSize, markerSize)
-					
-				# Add markers to list of id, TVcX, TVcY, lifted
-					towers[markerID-1][1] = round(scalars[0],3)
-					towers[markerID-1][2] = round(scalars[1],3)
-					towers[markerID-1][3] = lifted
-
-		# Pass data to unity
-		if np.array_equal(TVready, np.array([1, 1, 1])):
-			print("Sending Data to Unity:")
-			print(str(towers))
-			sendData(str(towers))
-			print("Succesfully Sent Data to Unity")
+				# TODO: add markers to list of id, TVcX, TVcY
+				towers[markerID][1] = scalars[0]
+				towers[markerID][2] = scalars[1]
+				print(str(towers))
+		# TODO: pass data to unity
 
 	# show the output frame
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
-	print("Sleeping")
-	time.sleep(0.5)
-	print("Woke up")
 
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
