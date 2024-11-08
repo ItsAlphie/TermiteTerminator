@@ -207,8 +207,8 @@ while True:
 					lifted = checkLifted(refMarkerSize, markerSize)
 					
 				# Add markers to list of id, TVcX, TVcY, lifted
-					towers[markerID-1][1] = round(scalars[0],3)
-					towers[markerID-1][2] = round(scalars[1],3)
+					towers[markerID-1][1] = round(scalars[0],2)
+					towers[markerID-1][2] = round(scalars[1],2)
 					towers[markerID-1][3] = lifted
 
 		# Pass data to unity
@@ -222,7 +222,7 @@ while True:
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
 	print("Sleeping")
-	time.sleep(0.5)
+	time.sleep(1.5)
 	print("Woke up")
 
 	# if the `q` key was pressed, break from the loop
