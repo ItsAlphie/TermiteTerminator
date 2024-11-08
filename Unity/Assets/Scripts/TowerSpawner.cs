@@ -4,8 +4,8 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 using System.Collections.Generic;
-
 using System.Threading;
+using System.Collections.Concurrent;
 public class TowerSpawner : MonoBehaviour
 {
     // UDP Settings
@@ -16,9 +16,12 @@ public class TowerSpawner : MonoBehaviour
 
     // Game Related
     [SerializeField] GameObject TowerPrefab;
-    List<List<double>> towerList = new List<List<double>>();
+    private List<GameObject> towers = new List<GameObject>();
     int resolutionX = 1920;
     int resolutionY = 1080;
+
+    // Thread-safe queue to handle received matrices
+    private ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
 
     void Start(){
         TowerSpawn();
@@ -34,16 +37,13 @@ public class TowerSpawner : MonoBehaviour
                 print("Waiting for broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
 
-                // print($"Received broadcast from {groupEP} :");
-                // print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
+                print($"Received broadcast from {groupEP} :");
+                print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
                 // Read out received data                
-                float[,] matrix = processUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
-                
-                // TODO: Position Towers
-                
-                // TODO: Spawn towers if they're new
-                
+                float[,] matrix = ProcessUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
+                matrixQueue.Enqueue(matrix);
+
                 // Check if the data is received and processed properly
                 // PrintMatrix(matrix);
             }
@@ -51,6 +51,14 @@ public class TowerSpawner : MonoBehaviour
         catch (SocketException e)
         {
             print(e);
+        }
+    }
+    void Update()
+    {
+        // Process any matrices received by the UDP listener
+        while (matrixQueue.TryDequeue(out float[,] matrix))
+        {
+            ProcessTowers(matrix);
         }
     }
     private void OnDestroy(){
@@ -70,7 +78,7 @@ public class TowerSpawner : MonoBehaviour
         }
         Debug.Log("---------------------");
     }
-    static float[,] processUDP(string packet, int towerCount)
+    static float[,] ProcessUDP(string packet, int towerCount)
     {
         float[,] matrix = new float[towerCount, 4];
         
@@ -98,9 +106,22 @@ public class TowerSpawner : MonoBehaviour
 
     private void TowerSpawn(){
         Vector2 stashLocation = Camera.main.ScreenToWorldPoint(new Vector3 (-resolutionX,-resolutionY,0));
-        for (int i = 0; i < towerCount; i++){
-            Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+        for (int i = 1; i <= towerCount; i++){
+            GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+            clone.name = "Tower_" + i;
+            towers.Add(clone);
             // TODO spawn in invisible state
+        }
+    }
+
+    private void ProcessTowers(float[,] matrix){
+        print("Processing Towers NOW");
+        for (int i = 0; i < towerCount; i++){
+            float X = matrix[i,1] * resolutionX;
+            float Y = matrix[i,2] * resolutionY;
+            print("Putting tower " + i + " at " + X + "/"+ Y);
+            Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+            towers[i].transform.position = location;
         }
     }
 }

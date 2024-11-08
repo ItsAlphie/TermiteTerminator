@@ -100,7 +100,7 @@ def checkLifted(refLength, length):
 
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
-vs = VideoStream(src=0).start()
+vs = VideoStream(src=1).start()
 time.sleep(2.0)
 
 # loop over the frames from the video stream
@@ -222,7 +222,7 @@ while True:
 	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
 	print("Sleeping")
-	time.sleep(1.5)
+	time.sleep(0.5)
 	print("Woke up")
 
 	# if the `q` key was pressed, break from the loop
