@@ -12,14 +12,16 @@ public class TowerSpawner : MonoBehaviour
     private const int listenPort = 11069;
     UdpClient listener = new UdpClient(listenPort);
     IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-    int matrixRows = 10;
-    int matrixCols = 4;
+    int towerCount = 10;
 
     // Game Related
     [SerializeField] GameObject TowerPrefab;
     List<List<double>> towerList = new List<List<double>>();
+    int resolutionX = 1920;
+    int resolutionY = 1080;
 
     void Start(){
+        TowerSpawn();
         Thread thread = new Thread(Receive);
         thread.Start();
     }
@@ -35,14 +37,15 @@ public class TowerSpawner : MonoBehaviour
                 // print($"Received broadcast from {groupEP} :");
                 // print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
-                // Read out received data
-                    // Position Towers
-                        // Spawn towers if they're new
+                // Read out received data                
+                float[,] matrix = processUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
                 
-                float[,] matrix = processUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), matrixRows, matrixCols);
-
-                // Log the matrix to verify (or use it as needed)
-                PrintMatrix(matrix);
+                // TODO: Position Towers
+                
+                // TODO: Spawn towers if they're new
+                
+                // Check if the data is received and processed properly
+                // PrintMatrix(matrix);
             }
         }
         catch (SocketException e)
@@ -67,22 +70,22 @@ public class TowerSpawner : MonoBehaviour
         }
         Debug.Log("---------------------");
     }
-    static float[,] processUDP(string packet, int rows, int cols)
+    static float[,] processUDP(string packet, int towerCount)
     {
-        float[,] matrix = new float[rows, cols];
+        float[,] matrix = new float[towerCount, 4];
         
         // Remove unwanted characters from the received string
         string cleanData = packet.Replace("[", "").Replace("]", "").Replace("\n", "");
         string[] values = cleanData.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
         // Parse values into matrix
-        if (values.Length >= rows * cols)
+        if (values.Length >= towerCount * 4)
         {
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < towerCount; i++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < 4; j++)
                 {
-                    matrix[i, j] = float.Parse(values[i * cols + j]);
+                    matrix[i, j] = float.Parse(values[i * 4 + j]);
                 }
             }
         }
@@ -94,8 +97,10 @@ public class TowerSpawner : MonoBehaviour
     }
 
     private void TowerSpawn(){
-        Debug.Log("Click");
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
+        Vector2 stashLocation = Camera.main.ScreenToWorldPoint(new Vector3 (-resolutionX,-resolutionY,0));
+        for (int i = 0; i < towerCount; i++){
+            Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+            // TODO spawn in invisible state
+        }
     }
 }
