@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserProjectile : BasicTower
+public class Laser : BasicTower
 {
    //[SerializeField] private float defDistanceRay = 100;
     public Transform laserFirePoint;
@@ -26,14 +26,9 @@ public class LaserProjectile : BasicTower
         m_transform = GetComponent<Transform>();
     }
     
-    public void Draw2DRay(Vector2 startPos, Vector2 endPos){
+    public void Draw2DRay(Vector2 startPos, Vector2 endPos)
+    {
         m_lineRenderer.SetPosition(0, startPos);
         m_lineRenderer.SetPosition(1, endPos);
-    }
-    
-
-
-
-
-   
+    }   
 }

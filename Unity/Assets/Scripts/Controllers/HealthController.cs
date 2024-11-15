@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class HealthController : MonoBehaviour
 {
-    protected int currHealth;
+    public int currHealth;
     [SerializeField] protected int totalHealth;
 
     protected abstract void die();
