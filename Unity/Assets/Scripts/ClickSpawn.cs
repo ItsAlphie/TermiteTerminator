@@ -20,6 +20,7 @@ public class ClickSpawn : MonoBehaviour
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
         }
+
     }
 }
 

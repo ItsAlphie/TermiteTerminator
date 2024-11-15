@@ -29,6 +29,9 @@ public bool Alive { get => alive; set => alive = value; }
                 pointsIndex+=1;
             }
         }
+        else{
+            LevelManager.Instance.GameOver();
+        }
     }
 
     

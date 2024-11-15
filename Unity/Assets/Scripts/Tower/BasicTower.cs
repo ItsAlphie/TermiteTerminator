@@ -29,9 +29,6 @@ public class BasicTower : MonoBehaviour
             timeLeft = shootSpeed;
         }
         }
-        
-        
-      
     }
 
     void OnMouseDown(){
