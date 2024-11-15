@@ -40,15 +40,16 @@ void setup() {
 void loop() {
   if(towerKilled == false){
     int sensorValue = analogRead(A0);   // read the input on analog pin 0
-	  float LDRVoltageValue = sensorValue * (5.0 / 1023.0);   // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V)
+	  float LDRVoltageValue = sensorValue * (5 / 1023.0);   // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V)
 	  Serial.println(LDRVoltageValue);   // print out the value you read
     if (receiveMessage() == "k"){
       servo.write(180);
       towerKilled = true;
+      delay(1000);
       servo.write(0);
       Serial.println("Tower destroyed!");
     }
-    else if(LDRVoltageValue>=4.5){
+    else if(LDRVoltageValue>=4){
       const char* message = "b";
       udp.beginPacket(serverIP, serverPort);
       udp.write(message);
@@ -61,7 +62,7 @@ void loop() {
   else{
     if(receiveMessage() == "r"){
       towerKilled = false;
-      Serial.println("Message recieved to repair tower!");
+      Serial.println("Message recieved to repair barrier!");
     }
     delay(300);
   }
