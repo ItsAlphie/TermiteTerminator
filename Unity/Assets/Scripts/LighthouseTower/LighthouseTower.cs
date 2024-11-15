@@ -17,27 +17,27 @@ public class LighthouseTower : BasicTower
         
         laser = gameObject.transform.GetChild(0).gameObject;
         hitpoint = gameObject.transform.GetChild(1).gameObject;
+        targetPosition = transform.position;
+        ShootLaser();
     }
 
     // Update is called once per frame
     void Update()
-{
-    List<GameObject> enemies = EnemySpawner.enemyList;
-    nearestEnemy = findNearestEnemy();
-    
-    if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive)
     {
-        getPositionOfNearestEnemy();
-        Debug.Log("Tower Position: " + transform.position);
-        Debug.Log("Target Position: " + targetPosition);
-        ShootLaser();
+        List<GameObject> enemies = EnemySpawner.enemyList;
+
+        nearestEnemy = findNearestEnemy();
+        
+        if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
+            
+            getPositionOfNearestEnemy();
+            ShootLaser();
+        }
+        else{
+            targetPosition = transform.position;
+            ShootLaser();
+        }
     }
-    else
-    {
-        targetPosition = transform.position; // Set to own position when no enemy
-        Debug.Log("No enemy found, target position set to tower's position");
-    }
-}
     void ShootLaser(){
         laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition);
         hitpoint.GetComponent<HitMarker>().MoveHitMarker(targetPosition);
