@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: totalHealth
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 3317074277029450927, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 74f0dbe73df64ce0bbadd3aa11786ce0, type: 2}
     - target: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Name
       value: BasicAnt2
