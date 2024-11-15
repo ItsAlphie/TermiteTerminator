@@ -635,6 +635,7 @@ GameObject:
   - component: {fileID: 891508071}
   - component: {fileID: 891508072}
   - component: {fileID: 891508073}
+  - component: {fileID: 891508074}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -700,7 +701,20 @@ MonoBehaviour:
   SpawnPoint: {fileID: 7951326647625111514, guid: 922ef9426b7bae6218b494bb7d753fb2, type: 3}
   minSpawnTime: 1
   maxSpawnTime: 5
-  enemyWave: {fileID: 0}
+--- !u!114 &891508074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891508069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3352f3b38d3197e3ba5bb1c0e67a5b64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TowerPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
+  LightTowerPrefab: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
 --- !u!1 &896258056
 GameObject:
   m_ObjectHideFlags: 0
