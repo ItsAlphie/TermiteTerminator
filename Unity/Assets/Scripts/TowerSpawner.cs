@@ -4,22 +4,27 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 using System.Collections.Generic;
-
 using System.Threading;
+using System.Collections.Concurrent;
 public class TowerSpawner : MonoBehaviour
 {
     // UDP Settings
     private const int listenPort = 11069;
     UdpClient listener = new UdpClient(listenPort);
     IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-    int matrixRows = 10;
-    int matrixCols = 4;
+    int towerCount = 10;
 
     // Game Related
     [SerializeField] GameObject TowerPrefab;
-    List<List<double>> towerList = new List<List<double>>();
+    private List<GameObject> towers = new List<GameObject>();
+    int resolutionX = 1920;
+    int resolutionY = 1080;
+
+    // Thread-safe queue to handle received matrices
+    private ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
 
     void Start(){
+        TowerSpawn();
         Thread thread = new Thread(Receive);
         thread.Start();
     }
@@ -32,22 +37,28 @@ public class TowerSpawner : MonoBehaviour
                 print("Waiting for broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
 
-                // print($"Received broadcast from {groupEP} :");
-                // print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
+                print($"Received broadcast from {groupEP} :");
+                print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
-                // Read out received data
-                    // Position Towers
-                        // Spawn towers if they're new
-                
-                float[,] matrix = processUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), matrixRows, matrixCols);
+                // Read out received data                
+                float[,] matrix = ProcessUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
+                matrixQueue.Enqueue(matrix);
 
-                // Log the matrix to verify (or use it as needed)
-                PrintMatrix(matrix);
+                // Check if the data is received and processed properly
+                // PrintMatrix(matrix);
             }
         }
         catch (SocketException e)
         {
             print(e);
+        }
+    }
+    void Update()
+    {
+        // Process any matrices received by the UDP listener
+        while (matrixQueue.TryDequeue(out float[,] matrix))
+        {
+            ProcessTowers(matrix);
         }
     }
     private void OnDestroy(){
@@ -67,22 +78,22 @@ public class TowerSpawner : MonoBehaviour
         }
         Debug.Log("---------------------");
     }
-    static float[,] processUDP(string packet, int rows, int cols)
+    static float[,] ProcessUDP(string packet, int towerCount)
     {
-        float[,] matrix = new float[rows, cols];
+        float[,] matrix = new float[towerCount, 4];
         
         // Remove unwanted characters from the received string
         string cleanData = packet.Replace("[", "").Replace("]", "").Replace("\n", "");
         string[] values = cleanData.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
         // Parse values into matrix
-        if (values.Length >= rows * cols)
+        if (values.Length >= towerCount * 4)
         {
-            for (int i = 0; i < rows; i++)
+            for (int i = 0; i < towerCount; i++)
             {
-                for (int j = 0; j < cols; j++)
+                for (int j = 0; j < 4; j++)
                 {
-                    matrix[i, j] = float.Parse(values[i * cols + j]);
+                    matrix[i, j] = float.Parse(values[i * 4 + j]);
                 }
             }
         }
@@ -94,8 +105,23 @@ public class TowerSpawner : MonoBehaviour
     }
 
     private void TowerSpawn(){
-        Debug.Log("Click");
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
+        Vector2 stashLocation = Camera.main.ScreenToWorldPoint(new Vector3 (-resolutionX,-resolutionY,0));
+        for (int i = 1; i <= towerCount; i++){
+            GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+            clone.name = "Tower_" + i;
+            towers.Add(clone);
+            // TODO spawn in invisible state
+        }
+    }
+
+    private void ProcessTowers(float[,] matrix){
+        print("Processing Towers NOW");
+        for (int i = 0; i < towerCount; i++){
+            float X = matrix[i,1] * resolutionX;
+            float Y = matrix[i,2] * resolutionY;
+            print("Putting tower " + i + " at " + X + "/"+ Y);
+            Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+            towers[i].transform.position = location;
+        }
     }
 }

@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "RTR040N03TL")(type "KiCad")(uri "C:/Users/sarah/Downloads/RTR040N03TL (1)/KiCADv6/2024-10-19_08-41-38.kicad_sym")(options "")(descr ""))
+  (lib (name "MCP6042-E_SN")(type "KiCad")(uri "C:/Users/sarah/Downloads/MCP6042-E_SN/MCP6042-E_SN.kicad_sym")(options "")(descr ""))
+)

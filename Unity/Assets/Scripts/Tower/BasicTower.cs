@@ -35,7 +35,7 @@ public class BasicTower : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private GameObject findNearestEnemy(){
+    public GameObject findNearestEnemy(){
         float closestDistance = 1000000;
         List<GameObject> enemies = EnemySpawner.enemyList;
         if (enemies.Count == 0) return null;
