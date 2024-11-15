@@ -10,6 +10,7 @@ public class BasicTower : MonoBehaviour
     
     private float timeLeft;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +31,6 @@ public class BasicTower : MonoBehaviour
         }
         }
         
-        
-      
     }
 
     void OnMouseDown(){
@@ -53,4 +52,9 @@ public class BasicTower : MonoBehaviour
         }
         return null;
     }
+
+    public void TakeDamage(int damage){
+        Destroy(gameObject);
+    }
+
 }

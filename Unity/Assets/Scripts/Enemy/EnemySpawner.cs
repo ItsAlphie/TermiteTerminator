@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {   
     [SerializeField] private GameObject EnemyPrefab;
+    [SerializeField] private GameObject EnemyPrefab2;
     [SerializeField] private GameObject SpawnPoint;
     [SerializeField] private float minSpawnTime;
     [SerializeField] private float maxSpawnTime;
@@ -25,7 +26,11 @@ public class EnemySpawner : MonoBehaviour
         GameObject Clone;
         timeUntilSpawn -= Time.deltaTime; //reduce time by amount of time that has passed in a frame
         if(timeUntilSpawn <= 0){
-            Clone = Instantiate(EnemyPrefab, SpawnPoint.transform.position, Quaternion.identity);
+            if(Random.Range(0, 5) == 1){
+                Clone = Instantiate(EnemyPrefab2, SpawnPoint.transform.position, Quaternion.identity);
+            } else {
+                Clone = Instantiate(EnemyPrefab, SpawnPoint.transform.position, Quaternion.identity);
+            }
             enemyList.Add(Clone);
             setTimeUntilSpawn();
         }

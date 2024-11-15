@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour
 {   
-[SerializeField] Transform[] Points;
-[SerializeField] private float moveSpeed = 0.5f;
+    [SerializeField] protected Transform[] Points;
+    [SerializeField] protected float moveSpeed = 0.5f;
 
-[SerializeField] private int pointsIndex;
+    [SerializeField] protected int pointsIndex;
 
-private bool alive = true;
+    protected bool alive = true;
 
-public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
-public bool Alive { get => alive; set => alive = value; }
+    public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
+    public bool Alive { get => alive; set => alive = value; }
+
 
     // Start is called before the first frame update
     void Start()

@@ -18,7 +18,8 @@ public class ClickSpawn : MonoBehaviour
         if(Input.GetMouseButtonDown(1)){
             Debug.Log("Click");
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
+            TowerSpawner.towers.Add(Instantiate(TowerPrefab, mousePosition, Quaternion.identity));
+            //Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
         }
     }
 }
