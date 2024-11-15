@@ -10,7 +10,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2786433913775387447, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: totalHealth
-      value: 60
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177522596826309070, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177522596826309070, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177522596826309070, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3317074277029450927, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Controller
