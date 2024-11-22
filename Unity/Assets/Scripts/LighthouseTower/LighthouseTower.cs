@@ -24,7 +24,7 @@ public class LighthouseTower : BasicTower
     // Update is called once per frame
     void Update()
     {
-        List<GameObject> enemies = EnemySpawner.enemyList;
+        List<GameObject> enemies = EnemySpawner.Instance.enemyList;
 
         nearestEnemy = findNearestEnemy();
         
