@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class LevelManager : MonoBehaviour
 {   
     
     [SerializeField] private GameObject GameOverScreen;
+    public static UnityEvent OnWaveFinish = new UnityEvent();
     private static LevelManager _instance;
     public static LevelManager Instance{
         get{
@@ -51,4 +53,8 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
+    public void TriggerWaveFinish(){
+        OnWaveFinish.Invoke();
+        Debug.Log("Wave finished");
+    }
 }

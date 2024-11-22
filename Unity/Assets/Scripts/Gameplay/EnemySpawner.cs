@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -7,8 +8,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private GameObject SpawnPoint;
     [SerializeField] private Wave enemyWave;
+    
+    private bool waveOngoing = false;
 
     private float timeUntilSpawn;
+
+    private int enemySpawnIndex = 0;
 
     public static List<GameObject> enemyList = new List<GameObject>();
 
@@ -21,21 +26,45 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log("TIME SET");
-        GameObject Clone;
-        timeUntilSpawn -= Time.deltaTime; //reduce time by amount of time that has passed in a frame
-        if(timeUntilSpawn <= 0){
-            int i = Random.Range(0, enemyWave.waveSequence.Count);
-            Clone = Instantiate(enemyWave.waveSequence[i], SpawnPoint.transform.position, Quaternion.identity);
-            enemyList.Add(Clone);
-            initializeEnemyWave();
+        if(waveOngoing){
+            if(!isEndOfWave()){
+            timeUntilSpawn -= Time.deltaTime; 
+            if(timeUntilSpawn <= 0){
+                resetSpawnCountdown();
+                spawnEnemy();
+                }
+            }
+        else{
+            if(!enemyList.Any()){
+                LevelManager.Instance.TriggerWaveFinish();
+                waveOngoing = false;
+                }
+            }
         }
+        
     }
 
+    private void resetSpawnCountdown(){
+        timeUntilSpawn = enemyWave.timeBetweenSpawn;
+    }
 
+    private bool isEndOfWave(){
+        if(enemySpawnIndex == enemyWave.waveSequence.Count){
+            return true;
+        }
+        return false;
+    }
 
     private void initializeEnemyWave(){
-        timeUntilSpawn = enemyWave.timeBetweenSpawn;
+        resetSpawnCountdown();
+        waveOngoing = true;
+    }
+
+    private void spawnEnemy(){
+        GameObject Clone;
+        Clone = Instantiate(enemyWave.waveSequence[enemySpawnIndex], SpawnPoint.transform.position, Quaternion.identity);
+        enemyList.Add(Clone);
+        enemySpawnIndex++;
     }
 
     // private IEnumerator SpawnEnemyWave(){
