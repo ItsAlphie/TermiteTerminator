@@ -17,6 +17,7 @@ public class TowerSpawner : MonoBehaviour
     // Game Related
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] GameObject LightTowerPrefab;
+    [SerializeField] GameObject RailGunPrefab;
     public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
@@ -82,20 +83,20 @@ public class TowerSpawner : MonoBehaviour
     }
     static float[,] ProcessUDP(string packet, int towerCount)
     {
-        float[,] matrix = new float[towerCount, 4];
+        float[,] matrix = new float[towerCount, 5];
         
         // Remove unwanted characters from the received string
         string cleanData = packet.Replace("[", "").Replace("]", "").Replace("\n", "");
         string[] values = cleanData.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
         // Parse values into matrix
-        if (values.Length >= towerCount * 4)
+        if (values.Length >= towerCount * 5)
         {
             for (int i = 0; i < towerCount; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 5; j++)
                 {
-                    matrix[i, j] = float.Parse(values[i * 4 + j]);
+                    matrix[i, j] = float.Parse(values[i * 5 + j]);
                 }
             }
         }
@@ -112,6 +113,12 @@ public class TowerSpawner : MonoBehaviour
         for (int i = 1; i <= towerCount; i++){
             if (i == 1){
                 GameObject clone = Instantiate(LightTowerPrefab, stashLocation, Quaternion.identity);
+                clone.name = "Tower_" + i;
+                clone.active = false;
+                towers.Add(clone);
+            }
+            else if (i == 5){
+                GameObject clone = Instantiate(RailGunPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
                 clone.active = false;
                 towers.Add(clone);
@@ -138,6 +145,7 @@ public class TowerSpawner : MonoBehaviour
                 print("Putting tower " + i + " at " + X + "/"+ Y);
                 Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
                 towers[i].transform.position = location;
+                towers[i].transform.rotation = Quaternion.Euler(0, 0, matrix[i,4]);
             }
         }
     }
