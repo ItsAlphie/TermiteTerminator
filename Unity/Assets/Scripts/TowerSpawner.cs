@@ -17,7 +17,7 @@ public class TowerSpawner : MonoBehaviour
     // Game Related
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] GameObject LightTowerPrefab;
-    private List<GameObject> towers = new List<GameObject>();
+    public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
 
