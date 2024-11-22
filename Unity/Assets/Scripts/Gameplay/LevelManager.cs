@@ -14,6 +14,10 @@ using System.Threading;
 public class LevelManager : MonoBehaviour
 {   
     
+    private int level = 1;
+
+    private int environment = 0; //To do: change this to an enum
+
     public static UnityEvent OnWaveFinish = new UnityEvent();
     public static UnityEvent OnGameOver = new UnityEvent();
 
@@ -53,6 +57,13 @@ public class LevelManager : MonoBehaviour
         KillAll();
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
+    }
+    int GetLevel(){
+        return level;
+    }
+
+    public int GetEnvironment(){
+        return environment;
     }
 
     private IEnumerator WaitForGameRestart() {
