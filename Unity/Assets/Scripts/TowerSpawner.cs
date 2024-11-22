@@ -18,8 +18,8 @@ public class TowerSpawner : MonoBehaviour
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] GameObject LightTowerPrefab;
     private List<GameObject> towers = new List<GameObject>();
-    int resolutionX = 3840;
-    int resolutionY = 2160;
+    int resolutionX = Screen.width;
+    int resolutionY = Screen.height;
 
     // Thread-safe queue to handle received matrices
     private ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
@@ -36,11 +36,11 @@ public class TowerSpawner : MonoBehaviour
         {
             while (true)
             {
-                print("Waiting for broadcast");
+                print("Waiting for positioning broadcast");
                 byte[] bytes = listener.Receive(ref groupEP);
 
-                print($"Received broadcast from {groupEP} :");
-                print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
+                print($"Received Positioning");
+                //print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
                 // Read out received data                
                 float[,] matrix = ProcessUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
@@ -113,12 +113,14 @@ public class TowerSpawner : MonoBehaviour
             if (i == 1){
                 GameObject clone = Instantiate(LightTowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
+                clone.active = false;
                 towers.Add(clone);
             }
             else{
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
-            clone.name = "Tower_" + i;
-            towers.Add(clone);
+                clone.name = "Tower_" + i;
+                clone.active = false;
+                towers.Add(clone);
             }
         }
     }
@@ -128,11 +130,11 @@ public class TowerSpawner : MonoBehaviour
         for (int i = 0; i < towerCount; i++){
             float X = matrix[i,1] * resolutionX;
             float Y = matrix[i,2] * resolutionY;
-            if (X == 0 && Y == 0){
-                Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (10000, 10000, 0));
-                towers[i].transform.position = location;
+            if ((X == 0 && Y == 0) || (X > resolutionX || Y > resolutionY) || (X < 0 || Y < 0)){
+                towers[i].active = false;
             }
             else{
+            	towers[i].active = true;
                 print("Putting tower " + i + " at " + X + "/"+ Y);
                 Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
                 towers[i].transform.position = location;
