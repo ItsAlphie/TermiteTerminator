@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 
 public class BasicTower : MonoBehaviour
 {
     [SerializeField] private GameObject ProjectilePrefab;
+    [SerializeField] private GameObject BoostProjectilePrefab;
 
     [SerializeField] private float shootSpeed;
-    
+    public bool Booster = false;
     private float timeLeft;
 
     // Start is called before the first frame update
@@ -22,13 +28,23 @@ public class BasicTower : MonoBehaviour
         List<GameObject> enemies = EnemySpawner.enemyList;
         if(enemies.Count != 0){
             timeLeft -= Time.deltaTime;
-        if(timeLeft <= 0){
-            GameObject nearestEnemy = findNearestEnemy();
-            GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);  
-            projectile.GetComponent<Projectile>().initialize(nearestEnemy);
-            timeLeft = shootSpeed;
+            if(timeLeft <= 0){
+                GameObject nearestEnemy = findNearestEnemy();
+                // TODO: get boost from Controller
+                if(Booster){
+                    print("Boosted Projectile");
+                    GameObject projectile = Instantiate(BoostProjectilePrefab, transform.position, Quaternion.identity);
+                    projectile.GetComponent<Projectile>().initialize(nearestEnemy);
+                    timeLeft = shootSpeed;
+                }
+                else{
+                    GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);  
+                    projectile.GetComponent<Projectile>().initialize(nearestEnemy);
+                    timeLeft = shootSpeed;
+                }
+            }
         }
-        }
+        
     }
 
     void OnMouseDown(){
@@ -50,4 +66,9 @@ public class BasicTower : MonoBehaviour
         }
         return null;
     }
+
+    public void TakeDamage(int damage){
+        Destroy(gameObject);
+    }
+
 }

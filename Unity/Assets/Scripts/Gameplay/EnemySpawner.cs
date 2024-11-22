@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {   
     [SerializeField] private GameObject EnemyPrefab;
+    [SerializeField] private GameObject EnemyPrefab2;
     [SerializeField] private GameObject SpawnPoint;
     [SerializeField] private Wave enemyWave;
     

@@ -5,6 +5,11 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 
 public class LevelManager : MonoBehaviour
 {   
@@ -42,6 +47,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void GameOver(){
+        KillAll();
         GameOverScreen.SetActive(true);
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
@@ -56,5 +62,26 @@ public class LevelManager : MonoBehaviour
     public void TriggerWaveFinish(){
         OnWaveFinish.Invoke();
         Debug.Log("Wave finished");
+    }
+    private void KillAll()
+    {
+        try
+        {
+            while (true)
+            {
+                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+                byte[] sendbuf = Encoding.ASCII.GetBytes("k");
+                IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.24.139"), 11000);
+
+                s.SendTo(sendbuf, ep); s.Close();
+
+                print("Message sent");
+            }
+        }
+        catch (SocketException e)
+        {
+            print(e);
+        }   
     }
 }

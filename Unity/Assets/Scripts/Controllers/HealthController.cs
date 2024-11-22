@@ -30,4 +30,9 @@ public abstract class HealthController : MonoBehaviour
         
     }
 
+    public void DoubleHealth(){
+        totalHealth = 2*totalHealth;
+        currHealth = 2*currHealth;
+    }
+
 }
