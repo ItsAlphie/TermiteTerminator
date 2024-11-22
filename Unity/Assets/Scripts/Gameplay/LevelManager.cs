@@ -14,6 +14,10 @@ using System.Threading;
 public class LevelManager : MonoBehaviour
 {   
     
+    private int level = 1;
+
+    private int environment = 0; //To do: change this to an enum
+
     [SerializeField] private GameObject GameOverScreen;
     public static UnityEvent OnWaveFinish = new UnityEvent();
     private static LevelManager _instance;
@@ -44,6 +48,14 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    int GetLevel(){
+        return level;
+    }
+
+    public int GetEnvironment(){
+        return environment;
     }
 
     public void GameOver(){

@@ -7,9 +7,9 @@ public class TypeEnemy : BasicEnemy
 
     //these enemies should receive double damage by certain towers, where to implement?
 
-    private int type = 1; //To do: change this to an enum
+    private int type = 1; //To do: change this to an enum?
 
-    private int environment = 0; //To do: change this to an enum
+    private int environment = 0; //To do: change this to an enum?
 
     // Start is called before the first frame update
     void Start()
