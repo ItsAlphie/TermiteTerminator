@@ -18,8 +18,10 @@ public class LevelManager : MonoBehaviour
 
     private int environment = 0; //To do: change this to an enum
 
-    public static UnityEvent OnWaveFinish = new UnityEvent();
-    public static UnityEvent OnGameOver = new UnityEvent();
+    public bool GameOver = false;
+
+    [SerializeField] private UnityEvent OnWaveFinish;
+    [SerializeField] private UnityEvent OnGameOver;
 
     private static LevelManager _instance;
     public static LevelManager Instance{
@@ -52,9 +54,10 @@ public class LevelManager : MonoBehaviour
     }
 
     public void TriggerGameOver(){
+        GameOver = true;
         OnGameOver.Invoke();
         Debug.Log("Game Over");
-        KillAll();
+        // KillAll();
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
     }

@@ -31,7 +31,10 @@ public class BasicEnemy : MonoBehaviour
             }
         }
         else{
-            LevelManager.Instance.GameOver();
+            if(!LevelManager.Instance.GameOver){
+                LevelManager.Instance.TriggerGameOver();
+            }
+            
         }
     }
 

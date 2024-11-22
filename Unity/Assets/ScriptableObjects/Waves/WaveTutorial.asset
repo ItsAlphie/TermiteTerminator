@@ -15,5 +15,5 @@ MonoBehaviour:
   waveSequence:
   - {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
   - {fileID: 2838611505213734618, guid: 7a3493da0af5c5d798b0d059dd171825, type: 3}
-  - {fileID: 3918666466775473211, guid: f664a79582f8c5aee8254e79ee834bd8, type: 3}
+  - {fileID: 8105342550296756692, guid: 1cdcfea81d52f2449b19b0b994fde76d, type: 3}
   timeBetweenSpawn: 3
