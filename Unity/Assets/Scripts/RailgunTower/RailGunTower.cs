@@ -23,7 +23,7 @@ public class RailGunTower : BasicTower
     void Update()
     {
         
-        
+        /*
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0; 
 
@@ -33,9 +33,11 @@ public class RailGunTower : BasicTower
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         firepoint.rotation = Quaternion.Euler(0, 0, angle);
+        */
 
         if (Input.GetButtonDown("Fire1"))
         {
+            firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);
         }
     }   
