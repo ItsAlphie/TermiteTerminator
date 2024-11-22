@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MoneyManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private int currentMoney;
+    [SerializeField] private int starterMoney;
+
+    [SerializeField] private UnityEvent OnMoneyDeducted;
+    [SerializeField] private UnityEvent OnMoneyAdded;
+
+    public int CurrentMoney { get => currentMoney; set => currentMoney = value; }
+
+    public void addMoney(int amount){
+        currentMoney += amount;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void deductMoney(int amount){
+        currentMoney -= amount;
     }
+
+    void Start(){
+        currentMoney = starterMoney;
+    }
+
+
 }
