@@ -15,7 +15,7 @@ public class EnemyHealthController : HealthController
         enemy.Alive = false;
         Destroy(gameObject.GetComponent<CircleCollider2D>());
         Destroy(gameObject.GetComponent<Rigidbody2D>());
-        EnemySpawner.enemyList.Remove(gameObject);
+        EnemySpawner.Instance.enemyList.Remove(gameObject);
         animator.SetBool("isDead", true);
         Destroy(gameObject, 3);
     }

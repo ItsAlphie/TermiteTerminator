@@ -11,7 +11,7 @@ public class BasicTower : MonoBehaviour
 {
     [SerializeField] private GameObject ProjectilePrefab;
     [SerializeField] private GameObject BoostProjectilePrefab;
-
+    List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
     public bool Booster = false;
     private float timeLeft;
@@ -25,7 +25,7 @@ public class BasicTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        List<GameObject> enemies = EnemySpawner.enemyList;
+        updateEnemyList();
         if(enemies.Count != 0){
             timeLeft -= Time.deltaTime;
             if(timeLeft <= 0){
@@ -53,7 +53,7 @@ public class BasicTower : MonoBehaviour
 
     public GameObject findNearestEnemy(){
         float closestDistance = 1000000;
-        List<GameObject> enemies = EnemySpawner.enemyList;
+        updateEnemyList();
         if (enemies.Count == 0) return null;
         foreach (GameObject enemy in enemies)
         {
@@ -71,4 +71,7 @@ public class BasicTower : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void updateEnemyList(){
+        enemies = EnemySpawner.Instance.enemyList;
+    }
 }

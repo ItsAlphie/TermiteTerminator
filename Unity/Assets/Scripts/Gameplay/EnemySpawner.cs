@@ -3,12 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+
 public class EnemySpawner : MonoBehaviour
 {   
     [SerializeField] private GameObject EnemyPrefab;
     [SerializeField] private GameObject EnemyPrefab2;
     [SerializeField] private GameObject SpawnPoint;
     [SerializeField] private Wave enemyWave;
+
+    private static EnemySpawner _instance;
+    public static EnemySpawner Instance{
+        get{
+            if(_instance == null){
+                Debug.LogError("EnemySpawner instance is null");
+            }
+            return  _instance;  
+        }
+    }
+
+    private void Awake(){
+        _instance = this;
+    }
     
     private bool waveOngoing = false;
 
@@ -16,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int enemySpawnIndex = 0;
 
-    public static List<GameObject> enemyList = new List<GameObject>();
+    public List<GameObject> enemyList = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -67,8 +83,4 @@ public class EnemySpawner : MonoBehaviour
         enemyList.Add(Clone);
         enemySpawnIndex++;
     }
-
-    // private IEnumerator SpawnEnemyWave(){
-
-    // }
 }
