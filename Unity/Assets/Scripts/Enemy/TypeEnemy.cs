@@ -14,12 +14,10 @@ public class TypeEnemy : BasicEnemy
     // Start is called before the first frame update
     void Start()
     {
-        environment = GameObject.Find("LevelManager").GetComponent<LevelManager>().GetWeather();
+        environment = GameObject.Find("LevelManager").GetComponent<LevelManager>().GetEnvironment();
         if(environment == type ){
-            Debug.Log(environment);
             gameObject.GetComponent<EnemyHealthController>().DoubleHealth();
             //to do: add visual effect to differentiate boosted enemies
-            Debug.Log("Boosted enemy");
         }
 
         transform.position = Points[pointsIndex].transform.position;
