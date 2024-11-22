@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8825516a494ef78aebd13b8d089db6, type: 3}
+  m_Name: ShopPrices
+  m_EditorClassIdentifier: 
+  shopPrices:
+  - shopItemName: Basic Tower
+    shopItemPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
+    price: 10
+    totalAmount: 0
+  - shopItemName: Lighthouse Tower
+    shopItemPrefab: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+    price: 20
+    totalAmount: 0
+  - shopItemName: Railgun Tower
+    shopItemPrefab: {fileID: 3598248750024016555, guid: 0394cbefc334c0e4c98a335c07731356, type: 3}
+    price: 20
+    totalAmount: 0
