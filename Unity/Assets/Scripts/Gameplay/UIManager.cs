@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject HUD;
 
 
-
     public static UIManager Instance{
         get{
             if(_instance == null){
@@ -28,8 +27,12 @@ public class UIManager : MonoBehaviour
         _instance = this;
     }
 
-    public void setScreen(GameObject UIScreen){
-        UIScreen.SetActive(true);  
+    public void setGameOverScreen(){
+        gameOverScreen.SetActive(true);  
+    }
+
+    public void setWaveFinishedScreen(){
+        waveFinishedScreen.SetActive(true);  
     }
 
 }

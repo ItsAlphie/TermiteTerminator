@@ -14,8 +14,9 @@ using System.Threading;
 public class LevelManager : MonoBehaviour
 {   
     
-    [SerializeField] private GameObject GameOverScreen;
     public static UnityEvent OnWaveFinish = new UnityEvent();
+    public static UnityEvent OnGameOver = new UnityEvent();
+
     private static LevelManager _instance;
     public static LevelManager Instance{
         get{
@@ -46,9 +47,10 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void GameOver(){
+    public void TriggerGameOver(){
+        OnGameOver.Invoke();
+        Debug.Log("Game Over");
         KillAll();
-        UIManager.Instance.setScreen(UIManager.Instance.gameOverScreen);
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
     }
