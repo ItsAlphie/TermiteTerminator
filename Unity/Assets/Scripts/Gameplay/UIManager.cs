@@ -7,6 +7,14 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     private static UIManager _instance;
+
+    [Header("UI Objects")]
+    [SerializeField] public GameObject gameOverScreen;
+    [SerializeField] public GameObject waveFinishedScreen;
+    [SerializeField] public GameObject HUD;
+
+
+
     public static UIManager Instance{
         get{
             if(_instance == null){
@@ -18,6 +26,10 @@ public class UIManager : MonoBehaviour
 
     private void Awake(){
         _instance = this;
+    }
+
+    public void setScreen(GameObject UIScreen){
+        UIScreen.SetActive(true);  
     }
 
 }

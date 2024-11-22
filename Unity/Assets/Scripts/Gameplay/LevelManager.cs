@@ -48,7 +48,7 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver(){
         KillAll();
-        GameOverScreen.SetActive(true);
+        UIManager.Instance.setScreen(UIManager.Instance.gameOverScreen);
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
     }
