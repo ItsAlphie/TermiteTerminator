@@ -425,6 +425,9 @@ bool charged = false;
 // WiFi credentials
 #define ssid "Galaxy S22A88A"         // Replace with your WiFi SSID
 #define password "uzjw7402"           // Replace with your WiFi password
+IPAddress ip(192, 168, 24, 5);
+IPAddress gateway(192, 168, 24, 20);
+IPAddress subnet(255, 255, 255, 0);
 
 // Server settings
 #define serverIP "192.168.4.121"      // Unity server's IP address
@@ -436,7 +439,7 @@ WiFiUDP udp;
 bool towerKilled = false;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(9600);
  
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
     Serial.println(F("SSD1306 allocation failed"));
@@ -465,7 +468,7 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-
+  WiFi.config(ip, gateway, subnet);
   Serial.println("\nConnected to WiFi");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());
