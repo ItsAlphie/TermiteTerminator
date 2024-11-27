@@ -22,7 +22,7 @@ public class ShopManager : MonoBehaviour
 
     
     public int getPrice(GameObject prefab){
-        return shopPrices.priceList.Find(x => x.shopItemPrefab = prefab).price;
+        return shopPrices.priceList.Find(x => x.shopItemPrefab = prefab).buyPrice;
     }
 
     public int getTotalAmount(GameObject prefab){
@@ -31,15 +31,23 @@ public class ShopManager : MonoBehaviour
     
     public bool buyTower(GameObject prefab){
         var shopItem = shopPrices.priceList.Find(x => x.shopItemPrefab = prefab);
-        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.price)){
-            MoneyManager.Instance.deductMoney(shopItem.price);
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)){
+            MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopItem.totalAmount--;
+            InventoryManager.Instance.addItem(prefab);
             return true;
         }
         return false;
     }
 
     public bool sellTower(GameObject prefab){
+        if(InventoryManager.Instance.inventoryItems.Contains(prefab)){
+            var shopItem = shopPrices.priceList.Find(x => x.shopItemPrefab = prefab);
+            MoneyManager.Instance.addMoney(shopItem.sellPrice);
+            InventoryManager.Instance.removeItem(prefab);
+            shopItem.totalAmount++;
+            return true;
+        }
         return false;
     }
     

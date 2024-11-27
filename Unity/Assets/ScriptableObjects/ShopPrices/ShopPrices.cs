@@ -9,8 +9,9 @@ public class ShopPrices : ScriptableObject
     public class ShopItem{
         public string shopItemName;
         public GameObject shopItemPrefab;
-        public int price;
-        public int totalAmount; //copied at runtime in ShopManager
+        public int buyPrice;
+        public int sellPrice;
+        public int totalAmount;
     }
 
     public List<ShopItem> priceList;
