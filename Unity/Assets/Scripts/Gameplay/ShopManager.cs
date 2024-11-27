@@ -36,6 +36,7 @@ public class ShopManager : MonoBehaviour
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopPrices.priceList.Remove(shopItem);
             InventoryManager.Instance.addItem(prefab);
+            Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
         return false;
