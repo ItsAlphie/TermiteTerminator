@@ -6,13 +6,13 @@ using UnityEngine;
 public class ShopPrices : ScriptableObject
 {
     [System.Serializable]
-    public class shopItem{
+    public class ShopItem{
         public string shopItemName;
         public GameObject shopItemPrefab;
         public int price;
         public int totalAmount; //copied at runtime in ShopManager
     }
 
-    public List<shopItem> shopPrices;
+    public List<ShopItem> priceList;
     
 }

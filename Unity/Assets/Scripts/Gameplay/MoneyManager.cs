@@ -5,6 +5,16 @@ using UnityEngine.Events;
 
 public class MoneyManager : MonoBehaviour
 {
+
+    private static MoneyManager _instance;
+    public static MoneyManager Instance{
+        get{
+            if(_instance == null){
+                Debug.LogError("MoneyManager instance is null");
+            }
+            return  _instance;  
+        }
+    }
     [SerializeField] private int currentMoney;
     [SerializeField] private int starterMoney;
 

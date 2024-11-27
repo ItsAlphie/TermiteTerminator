@@ -1,18 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private ShopPrices shopPrices;    
+    private static ShopManager _instance;
+    public static ShopManager Instance{
+        get{
+            if(_instance == null){
+                Debug.LogError("ShopManager instance is null");
+            }
+            return  _instance;  
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    private void Awake(){
+        _instance = this;
     }
+
+    
+    public int getPrice(GameObject prefab){
+        return shopPrices.priceList.Find(x => x.shopItemPrefab = prefab).price;
+    }
+
+    public int getTotalAmount(GameObject prefab){
+        return shopPrices.priceList.Find(x => x.shopItemPrefab = prefab).totalAmount;
+    }
+    
+    public bool buyTower(GameObject prefab){
+        var shopItem = shopPrices.priceList.Find(x => x.shopItemPrefab = prefab);
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.price)){
+            MoneyManager.Instance.deductMoney(shopItem.price);
+            shopItem.totalAmount--;
+            return true;
+        }
+        return false;
+    }
+
+    public bool sellTower(GameObject prefab){
+        return false;
+    }
+    
 }
