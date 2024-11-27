@@ -11,6 +11,7 @@ public class ShopPrices : ScriptableObject
         public GameObject shopItemPrefab;
         public int buyPrice;
         public int sellPrice;
+        public int totalAmount;
     }
 
     public List<ShopItem> priceList;

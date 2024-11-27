@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -27,14 +26,14 @@ public class ShopManager : MonoBehaviour
     }
 
     public int getTotalAmount(GameObject prefab){
-        return shopPrices.priceList.Count(x => x.shopItemPrefab == prefab);   
+        return shopPrices.priceList.Find(x => x.shopItemPrefab = prefab).totalAmount;
     }
     
     public bool buyTower(GameObject prefab){
         var shopItem = shopPrices.priceList.Find(x => x.shopItemPrefab = prefab);
-        if((shopItem != null ) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)){
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)){
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
-            shopPrices.priceList.Remove(shopItem);
+            shopItem.totalAmount--;
             InventoryManager.Instance.addItem(prefab);
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
@@ -47,7 +46,7 @@ public class ShopManager : MonoBehaviour
             var shopItem = shopPrices.priceList.Find(x => x.shopItemPrefab = prefab);
             MoneyManager.Instance.addMoney(shopItem.sellPrice);
             InventoryManager.Instance.removeItem(prefab);
-            shopPrices.priceList.Add(shopItem);
+            shopItem.totalAmount++;
             return true;
         }
         return false;
