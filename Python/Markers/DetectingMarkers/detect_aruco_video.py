@@ -57,7 +57,7 @@ arucoParams = cv2.aruco.DetectorParameters_create()
 
 # Requirements for TCP communication to Unity
 # sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ip, port = "127.0.0.1", 11069
+ip, port = "127.0.0.1", 11000
 # sock.connect((host, port))
 
 def sendData(data):	
@@ -70,7 +70,7 @@ TV = np.array([[0, 0], [0, 0], [0, 0]])
 TVready = np.array([0, 0, 0])
 
 # List of all markers relative position [ID,X,Y]
-towers = np.array([[1,0.0,0.0,0,0], [2,0.0,0.0,0,0], [3,0.0,0.0,0,0], [4,0.0,0.0,0,0], [5,0.0,0.0,0,0], [6,0.0,0.0,0,0], [7,0.0,0.0,0,0], [8,0.0,0.0,0,0], [9,0.0,0.0,0,0], [10,0.0,0.0,0,0]])
+towers = np.array([[1,0.0,0.0,0,0.0], [2,0.0,0.0,0,0.0], [3,0.0,0.0,0,0.0], [4,0.0,0.0,0,0.0], [5,0.0,0.0,0,0.0], [6,0.0,0.0,0,0.0], [7,0.0,0.0,0,0.0], [8,0.0,0.0,0,0.0], [9,0.0,0.0,0,0.0], [10,0.0,0.0,0,0.0]])
 
 # Define and draw axis system to transform absolute to relative coordinates (bunch of math hoohaa)
 def defineAxis():
@@ -241,7 +241,7 @@ while True:
 					towers[markerID-1][1] = round(scalars[0],2)
 					towers[markerID-1][2] = round(scalars[1],2)
 					towers[markerID-1][3] = lifted
-					towers[markerID-1][4] = int(round(getMarkerAngle(angle),0))
+					towers[markerID-1][4] = round(getMarkerAngle(angle),0)*0.1
 
 		# Pass data to unity
 		if np.array_equal(TVready, np.array([1, 1, 1])):
