@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject waveFinishedScreen;
     [SerializeField] public GameObject HUD;
 
+    private TMP_Text currentMoneyDisplay;
 
     public static UIManager Instance{
         get{
@@ -27,12 +29,25 @@ public class UIManager : MonoBehaviour
         _instance = this;
     }
 
+    void Start(){
+        currentMoneyDisplay = HUD.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+        Debug.Log(currentMoneyDisplay);
+    }
+
+    public void InitializeHUD(){
+        updateCurrentMoney();
+    }
+
     public void setGameOverScreen(){
         gameOverScreen.SetActive(true);  
     }
 
     public void setWaveFinishedScreen(){
         waveFinishedScreen.SetActive(true);  
+    }
+
+    public void updateCurrentMoney(){
+        currentMoneyDisplay.text = MoneyManager.Instance.CurrentMoney.ToString();
     }
 
 }
