@@ -26,21 +26,18 @@ public class TowerSpawner : MonoBehaviour
     private ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
 
     void Start(){
-        print(Screen.currentResolution);
         TowerSpawn();
-        Thread thread = new Thread(Receive);
-        thread.Start();
     }
 
-    private void Receive(){
+    public void ReceiveTowerInfo(byte[] bytes){
         try
         {
             while (true)
             {
-                print("Waiting for positioning broadcast");
-                byte[] bytes = listener.Receive(ref groupEP);
+                //print("Waiting for positioning broadcast");
+                //byte[] bytes = listener.Receive(ref groupEP);
 
-                print($"Received Positioning");
+                //print($"Received Positioning");
                 //print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
 
                 // Read out received data                
