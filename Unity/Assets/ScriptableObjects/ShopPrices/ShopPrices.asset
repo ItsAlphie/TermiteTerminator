@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShopPrices
   m_EditorClassIdentifier: 
   priceList:
-  - shopItemName: 
-    shopItemPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
-    buyPrice: 0
-    sellPrice: 0
+  - tag: Tower
+    buyPrice: 10
+    sellPrice: 5
+    totalAmount: 1

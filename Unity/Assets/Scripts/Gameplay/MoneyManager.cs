@@ -15,6 +15,11 @@ public class MoneyManager : MonoBehaviour
             return  _instance;  
         }
     }
+
+     private void Awake(){
+        _instance = this;
+    }
+
     [SerializeField] private int currentMoney;
     [SerializeField] private int starterMoney;
 

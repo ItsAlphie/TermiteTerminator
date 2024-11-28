@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 9196861167556253517}
   - component: {fileID: 3616347195302716334}
   - component: {fileID: 6359639095416734115}
+  - component: {fileID: -1101210875908141781}
   m_Layer: 7
   m_Name: BasicTower
   m_TagString: Tower
@@ -179,6 +180,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 4748434344119101974, guid: 67aae0f5966053c67b2f94f65ecb9222, type: 3}
   BoostProjectilePrefab: {fileID: 1882620363957009387, guid: 8a648b4620cc1a843a635078368aeecb, type: 3}
   shootSpeed: 1
+  Booster: 0
 --- !u!114 &6359639095416734115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,5 +193,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e9967336fc34f84cb2c0d18592db223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currHealth: 0
   totalHealth: 30
-  Booster: 0
+--- !u!114 &-1101210875908141781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129546351905534963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de035cf41e545765fb7952d43af38fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopPrices: {fileID: 11400000, guid: b8b5c8ce5dc0b0cd6954a8547efc1eb8, type: 2}

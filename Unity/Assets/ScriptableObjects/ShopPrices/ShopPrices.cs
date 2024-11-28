@@ -7,8 +7,7 @@ public class ShopPrices : ScriptableObject
 {
     [System.Serializable]
     public class ShopItem{
-        public string shopItemName;
-        public GameObject shopItemPrefab;
+        public string tag;
         public int buyPrice;
         public int sellPrice;
         public int totalAmount;

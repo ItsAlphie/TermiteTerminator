@@ -640,7 +640,6 @@ GameObject:
   - component: {fileID: 891508072}
   - component: {fileID: 891508073}
   - component: {fileID: 891508074}
-  - component: {fileID: 891508076}
   - component: {fileID: 891508075}
   - component: {fileID: 891508077}
   m_Layer: 0
@@ -766,27 +765,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e670d41f07d86020a0c92ac5777a6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentMoney: 0
-  starterMoney: 0
+  currentMoney: 500
+  starterMoney: 500
   OnMoneyDeducted:
     m_PersistentCalls:
       m_Calls: []
   OnMoneyAdded:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &891508076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 891508069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de035cf41e545765fb7952d43af38fb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopPrices: {fileID: 0}
 --- !u!114 &891508077
 MonoBehaviour:
   m_ObjectHideFlags: 0
