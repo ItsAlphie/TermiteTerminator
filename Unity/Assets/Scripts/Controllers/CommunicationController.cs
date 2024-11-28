@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -13,6 +14,7 @@ public class CommunicationController : MonoBehaviour
     IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
     private float boostTime = 3;
     TowerSpawner towerSpawner;
+    public ConcurrentQueue<Action> mainThreadActions = new ConcurrentQueue<Action>();
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +47,8 @@ public class CommunicationController : MonoBehaviour
                     towerSpawner.ReceiveTowerInfo(bytes);
                 }
                 else{
-                    print("Handling boost");
-                    BoostTower(bytes, senderIP);
+                    print("Queueing boost");
+                    mainThreadActions.Enqueue(() => BoostTower(bytes, senderIP));
                 }
             }
         }
@@ -62,17 +64,30 @@ public class CommunicationController : MonoBehaviour
     */
     private void BoostTower(byte[] bytes, string towerIP)
     {
+        print("Handling boost of tower " + towerIP);
         string towerID = towerIP.Substring(towerIP.Length-1);
         print("I think I got a message from tower " + towerID);
-        GameObject towerObject = GameObject.Find("Tower_" + towerID);
+
+        List<GameObject> towers = TowerSpawner.towers;
+        GameObject towerObject = towers[int.Parse(towerID)-1];
         BasicTower tower = towerObject.GetComponent<BasicTower>();
+
         tower.Booster = true;
+        print(towerID + " is boosted");
         StartCoroutine(BoostReset(tower));
     }
     private IEnumerator BoostReset(BasicTower tower)
     {
         yield return new WaitForSeconds(boostTime);
         tower.Booster = false;
+    }
+    void Update()
+    {
+        // Process all actions queued for the main thread
+        while (mainThreadActions.TryDequeue(out var action))
+        {
+            action?.Invoke();
+        }
     }
 /*
     //TODO: send message method
