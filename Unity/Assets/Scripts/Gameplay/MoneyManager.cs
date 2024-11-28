@@ -30,10 +30,13 @@ public class MoneyManager : MonoBehaviour
 
     public void addMoney(int amount){
         currentMoney += amount;
+        OnMoneyAdded.Invoke();
+
     }
 
     public void deductMoney(int amount){
         currentMoney -= amount;
+        OnMoneyDeducted.Invoke();
     }
 
     void Start(){
