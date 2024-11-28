@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -11,12 +12,17 @@ public class CommunicationController : MonoBehaviour
     private const int listenPort = 11000;
     UdpClient listener = new UdpClient(listenPort);
     IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-    public volatile bool shouldBoost = false;
     private float boostTime = 3;
+    TowerSpawner towerSpawner;
+    public ConcurrentQueue<Action> mainThreadActions = new ConcurrentQueue<Action>();
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject levelManager = GameObject.Find("LevelManager");
+        towerSpawner = levelManager.GetComponent<TowerSpawner>();
+        
+        print("Starting Communication thread");
         Thread towerThread = new Thread(ReceiveMessages);
         towerThread.Start();
     }
@@ -28,20 +34,21 @@ public class CommunicationController : MonoBehaviour
     */
     private void ReceiveMessages()
     {
-        GameObject levelManager = GameObject.Find("LevelManager");
-        TowerSpawner towerSpawner = levelManager.GetComponent<TowerSpawner>();
-        
         try
         {
             while (true)
             {
+                print("Waiting for messages");
                 byte[] bytes = listener.Receive(ref groupEP);
                 string senderIP = groupEP.Address.ToString();
+                print("Got message from " + senderIP);
                 if (senderIP.Equals("127.0.0.1")){
+                    print("Handling towers");
                     towerSpawner.ReceiveTowerInfo(bytes);
                 }
                 else{
-                    BoostTower(bytes, senderIP);
+                    print("Queueing boost");
+                    mainThreadActions.Enqueue(() => BoostTower(bytes, senderIP));
                 }
             }
         }
@@ -57,10 +64,16 @@ public class CommunicationController : MonoBehaviour
     */
     private void BoostTower(byte[] bytes, string towerIP)
     {
-        string towerID = towerIP.Substring(towerIP.Length-3);
-        GameObject towerObject = GameObject.Find("Tower_" + towerID);
+        print("Handling boost of tower " + towerIP);
+        string towerID = towerIP.Substring(towerIP.Length-1);
+        print("I think I got a message from tower " + towerID);
+
+        List<GameObject> towers = TowerSpawner.towers;
+        GameObject towerObject = towers[int.Parse(towerID)-1];
         BasicTower tower = towerObject.GetComponent<BasicTower>();
+
         tower.Booster = true;
+        print(towerID + " is boosted");
         StartCoroutine(BoostReset(tower));
     }
     private IEnumerator BoostReset(BasicTower tower)
@@ -68,4 +81,35 @@ public class CommunicationController : MonoBehaviour
         yield return new WaitForSeconds(boostTime);
         tower.Booster = false;
     }
+    void Update()
+    {
+        // Process all actions queued for the main thread
+        while (mainThreadActions.TryDequeue(out var action))
+        {
+            action?.Invoke();
+        }
+    }
+/*
+    //TODO: send message method
+    private void SendMessage(string msg, BasicTower tower)
+    {
+        try
+        {
+            while (true)
+            {
+                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+                byte[] sendbuf = Encoding.ASCII.GetBytes(msg);
+                string IP = tower.GameObject.name;
+                IPAddress targetAddress = IPAddress.Parse();
+                IPEndPoint ep = new IPEndPoint(targetAddress, listenPort);
+
+                s.SendTo(sendbuf, ep); s.Close();
+            }
+        }
+        catch (SocketException e)
+        {
+            print(e);
+        }   
+    }*/
 }

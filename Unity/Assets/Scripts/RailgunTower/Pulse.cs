@@ -9,34 +9,26 @@ public class Pulse : BasicTower
     public float maxDistance = 10f;
     private int damage = 40;
     private Vector2 startPosition;
-    private float rotationSpeed;
-    private Vector2 mousePos;
+   
     
      
     void Start()
     {
         direction = new Vector2(1, 0);
         startPosition = transform.position;
-
     }
     
     
 
     void Update()
     {
-       
-
         direction = updateVector(direction.x);
         transform.Translate(direction * Time.deltaTime);
 
         float distanceTraveled = Vector2.Distance(startPosition,transform.position);
         if(distanceTraveled >=maxDistance){
             Destroy(gameObject);
-        }
-
-        
-
-        
+        } 
     }
     
     void OnTriggerEnter2D(Collider2D collision){

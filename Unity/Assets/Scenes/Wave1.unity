@@ -642,6 +642,7 @@ GameObject:
   - component: {fileID: 891508074}
   - component: {fileID: 891508075}
   - component: {fileID: 891508077}
+  - component: {fileID: 891508078}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -752,7 +753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TowerPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
   LightTowerPrefab: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
-  RailGunPrefab: {fileID: 0}
+  RailGunPrefab: {fileID: 3598248750024016555, guid: 0394cbefc334c0e4c98a335c07731356, type: 3}
 --- !u!114 &891508075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,6 +811,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItems: []
+--- !u!114 &891508078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891508069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75a18901b5aa0dcaa879d6be9c93b9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &896258056
 GameObject:
   m_ObjectHideFlags: 0
