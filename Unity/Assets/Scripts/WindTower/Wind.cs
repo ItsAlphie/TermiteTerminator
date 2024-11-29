@@ -44,6 +44,9 @@ public class Wind : MonoBehaviour
         if (collidedEnemy.tag == "Enemy" && collidedEnemy.GetComponent<BasicEnemy>().Alive)
         {
             HealthController healthController = collidedEnemy.GetComponent<HealthController>();
+            if(collidedEnemy.GetComponent<BasicEnemy>().type == 1){
+                damage = damage * 2;
+            }
             healthController.takeDamage(damage);
         }
 

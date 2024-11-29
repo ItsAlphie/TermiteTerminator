@@ -29,12 +29,8 @@ public class UIManager : MonoBehaviour
         _instance = this;
     }
 
-    void Start(){
-        currentMoneyDisplay = HUD.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
-        Debug.Log(currentMoneyDisplay);
-    }
-
     public void InitializeHUD(){
+        currentMoneyDisplay = HUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         updateCurrentMoney();
     }
 
