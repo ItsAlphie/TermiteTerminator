@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0dd3697904be138a4eb54093e774ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
+  TowerPrefab: {fileID: 3598248750024016555, guid: 0394cbefc334c0e4c98a335c07731356, type: 3}
 --- !u!114 &891508072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850a0b87f94495806bf9aebcbadc58b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameOverScreen: {fileID: 0}
   Path: []
 --- !u!1 &896258056
 GameObject:
@@ -3826,10 +3827,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 7040709146438770483, guid: a4039d048a00b4a488e1891a65cabb73, type: 3}
-  EnemyPrefab2: {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
+  EnemyPrefab2: {fileID: 7040709146438770483, guid: a4039d048a00b4a488e1891a65cabb73, type: 3}
   SpawnPoint: {fileID: 553292977}
-  minSpawnTime: 1
-  maxSpawnTime: 10
+  enemyWave: {fileID: 11400000, guid: c1b938793c42803eab6693e1627f2a96, type: 2}
+  enemyList: []
 --- !u!4 &1644054705
 Transform:
   m_ObjectHideFlags: 0
