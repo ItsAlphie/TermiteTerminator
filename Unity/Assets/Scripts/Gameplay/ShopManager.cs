@@ -17,7 +17,7 @@ public class ShopManager : MonoBehaviour
     
     public bool buyItem(){
         var shopItem = shopPrices.priceList.Find(x => x.tag == gameObject.tag);
-        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)){
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice) && !InventoryManager.Instance.inventoryItems.Contains(gameObject)){
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopItem.totalAmount--;
             InventoryManager.Instance.addItem(gameObject);
