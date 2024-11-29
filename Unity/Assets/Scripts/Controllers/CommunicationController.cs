@@ -98,7 +98,7 @@ public class CommunicationController : MonoBehaviour
             byte[] sendbuf = Encoding.ASCII.GetBytes(msg);
             IPAddress IP = receivingTower.GetIP();
             print("Sending " + msg + " to " + IP);
-            IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), listenPort);
+            IPEndPoint ep = new IPEndPoint(IP, listenPort);
 
             s.SendTo(sendbuf, ep); s.Close();
         }
