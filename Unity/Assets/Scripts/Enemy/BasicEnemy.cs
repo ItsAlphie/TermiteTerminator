@@ -14,7 +14,7 @@ public class BasicEnemy : MonoBehaviour
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public bool Alive { get => alive; set => alive = value; }
 
-    [SerializeField] public int type = 0; // 0 = normal, 1 = fire, 2 = ice, 3 = ??
+    [SerializeField] public int type = 0; // 0 = normal, 1 = fire, 2 = ??, 3 = ??
 
     private int environment = 0;
 
