@@ -131,7 +131,7 @@ while True:
 	# grab the frame from the threaded video stream and resize it
 	# to have a maximum width of 600 pixels
 	frame = vs.read()
-	frame = imutils.resize(frame, width=1000)
+	#frame = imutils.resize(frame, width=1000)
 
 	# detect ArUco markers in the input frame
 	(corners, ids, rejected) = cv2.aruco.detectMarkers(frame,

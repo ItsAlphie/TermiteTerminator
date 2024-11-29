@@ -18,6 +18,9 @@ public class TowerSpawner : MonoBehaviour
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] GameObject LightTowerPrefab;
     [SerializeField] GameObject RailGunPrefab;
+    [SerializeField] float skewFactorX = 1;
+    [SerializeField] float skewFactorY = 1;
+    [SerializeField] float startSkewY = 0;
     public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
@@ -184,8 +187,9 @@ public class TowerSpawner : MonoBehaviour
         }
     }
 
-    private void ProcessTowers(float[,] matrix){
+    private void ProcessTowers(float[,] preCalibrationMatrix){
         print("Processing Towers");
+        float[,] matrix = CameraCalibartion(preCalibrationMatrix);
         for (int i = 0; i < towers.Count; i++){
             float X = matrix[i,1] * resolutionX;
             float Y = matrix[i,2] * resolutionY;
@@ -208,5 +212,28 @@ public class TowerSpawner : MonoBehaviour
                 towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
             }
         }
+    }
+
+    private float[,] CameraCalibartion(float[,] matrix){
+        float[,] calibratedMatrix = matrix;
+        for (int i = 0; i < towers.Count; i++){
+            float X = matrix[i,1];
+            float Y = matrix[i,2];
+            // horizontal skew
+            if (X > 0.5){
+                float d = (X - (float)0.5) / (float)0.5;
+                X = X * (1 - skewFactorX * d);
+            }
+            else{
+                float d = ((float)0.5 - X) / (float)0.5;
+                X = X * (1 + skewFactorX * d);
+            }
+            // vertical skew
+            Y = Y * skewFactorY - startSkewY;
+
+            calibratedMatrix[i,1] = X;
+            calibratedMatrix[i,2] = Y;
+        }
+        return calibratedMatrix;
     }
 }
