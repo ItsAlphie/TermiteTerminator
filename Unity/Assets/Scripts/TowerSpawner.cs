@@ -142,10 +142,11 @@ public class TowerSpawner : MonoBehaviour
                 towers.Add(clone);
             }
             else{
+                /*
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
                 clone.SetActive(false);
-                towers.Add(clone);
+                towers.Add(clone);*/
             }
         }
     }
@@ -153,7 +154,7 @@ public class TowerSpawner : MonoBehaviour
     private void SetIps(){
         for (int i = 0; i < towers.Count; i++){
             BasicTower tower = towers[i].GetComponent<BasicTower>();
-            tower.SetIP(IPAddress.Parse("192.168.26." + i));
+            tower.SetIP(IPAddress.Parse("192.168.24." + i));
         }
     }
 
