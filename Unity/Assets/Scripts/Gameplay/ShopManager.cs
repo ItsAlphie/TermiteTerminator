@@ -6,17 +6,22 @@ using UnityEngine;
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopPrices shopPrices;    
+    private ShopPrices shopPricesCopy;    
+
+    void Start(){
+        shopPricesCopy = Instantiate(shopPrices);
+    }
     
     public int getPrice(){
-        return shopPrices.priceList.Find(x => x.tag == gameObject.tag).buyPrice;
+        return shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag).buyPrice;
     }
 
     public int getTotalAmount(){
-        return shopPrices.priceList.Find(x => x.tag == gameObject.tag).totalAmount;
+        return shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag).totalAmount;
     }
     
     public bool buyItem(){
-        var shopItem = shopPrices.priceList.Find(x => x.tag == gameObject.tag);
+        var shopItem = shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag);
         if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)){
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopItem.totalAmount--;
@@ -29,7 +34,7 @@ public class ShopManager : MonoBehaviour
 
     public bool sellItem(){
         if(InventoryManager.Instance.inventoryItems.Contains(gameObject)){
-            var shopItem = shopPrices.priceList.Find(x => x.tag == gameObject.tag);
+            var shopItem = shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag);
             MoneyManager.Instance.addMoney(shopItem.sellPrice);
             InventoryManager.Instance.removeItem(gameObject);
             shopItem.totalAmount++;
