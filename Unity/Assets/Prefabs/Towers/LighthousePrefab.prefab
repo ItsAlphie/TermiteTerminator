@@ -27,12 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3109151678914659340}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.3125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6104325801851498009}
+  m_Father: {fileID: 3500894841532853571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4431523369676023873
 MonoBehaviour:
@@ -108,56 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!1 &4505979759898187865
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6104325801851498009}
-  - component: {fileID: 8740607203372029585}
-  m_Layer: 8
-  m_Name: LaserFirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6104325801851498009
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505979759898187865}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.3125, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1088459771610346057}
-  - {fileID: 8185687430632412903}
-  m_Father: {fileID: 3500894841532853571}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8740607203372029585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4505979759898187865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29b0600b120824a489ddbdbba0c057dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 0}
-  BoostProjectilePrefab: {fileID: 0}
-  shootSpeed: 0
-  Booster: 0
 --- !u!1 &5356104189857425583
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3500894841532853571}
   - component: {fileID: 4916200420820039536}
+  - component: {fileID: 6697925405669998240}
   m_Layer: 0
   m_Name: LighthousePrefab
   m_TagString: Untagged
@@ -188,7 +139,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6104325801851498009}
+  - {fileID: 1088459771610346057}
+  - {fileID: 8185687430632412903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4916200420820039536
@@ -204,6 +156,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopPrices: {fileID: 11400000, guid: b8b5c8ce5dc0b0cd6954a8547efc1eb8, type: 2}
+--- !u!114 &6697925405669998240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356104189857425583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b0600b120824a489ddbdbba0c057dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ProjectilePrefab: {fileID: 0}
+  BoostProjectilePrefab: {fileID: 0}
+  shootSpeed: 0
+  Booster: 0
 --- !u!1 &8448505019337411285
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,10 +200,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.3125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6104325801851498009}
+  m_Father: {fileID: 3500894841532853571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &4243949226765438077
 LineRenderer:
@@ -358,6 +326,6 @@ MonoBehaviour:
   BoostProjectilePrefab: {fileID: 0}
   shootSpeed: 0.37
   Booster: 0
-  laserFirePoint: {fileID: 6104325801851498009}
+  laserFirePoint: {fileID: 0}
   m_lineRenderer: {fileID: 4243949226765438077}
   targetPosition: {x: 0, y: 0}
