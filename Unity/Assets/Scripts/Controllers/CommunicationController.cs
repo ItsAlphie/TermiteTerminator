@@ -91,10 +91,8 @@ public class CommunicationController : MonoBehaviour
     }
     public void SendMsg(string msg, BasicTower receivingTower)
     {
-        print("Prep1 udp for " + msg + " to " + receivingTower);
         try
         {
-            print("Prep2 udp for " + msg + " to " + receivingTower);
             Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
             byte[] sendbuf = Encoding.ASCII.GetBytes(msg);

@@ -35,7 +35,6 @@ public class ShopManager : MonoBehaviour
             shopItem.totalAmount++;
             return true;
         }
-        Debug.Log("no sell:()");
         return false;
     }
     

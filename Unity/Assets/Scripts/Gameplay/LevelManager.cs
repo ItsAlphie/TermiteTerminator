@@ -87,7 +87,6 @@ public class LevelManager : MonoBehaviour
         foreach (GameObject towerObject in towers){
             BasicTower tower = towerObject.GetComponent<BasicTower>();
             CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
-            print("Killing tower " + tower + " with " + cmCtrl);
             cmCtrl.SendMsg("k", tower);
         }
     }
