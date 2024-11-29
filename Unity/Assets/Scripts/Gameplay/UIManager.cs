@@ -46,4 +46,14 @@ public class UIManager : MonoBehaviour
         currentMoneyDisplay.text = MoneyManager.Instance.CurrentMoney.ToString();
     }
 
+    public void showMoneyDeducted(){
+        currentMoneyDisplay.GetComponent<Animator>().SetTrigger("OnMoneyDeducted");
+        updateCurrentMoney();
+    }
+
+    public void showMoneyAdded(){
+        currentMoneyDisplay.GetComponent<Animator>().SetTrigger("OnMoneyAdded");
+        updateCurrentMoney();
+    }
+
 }
