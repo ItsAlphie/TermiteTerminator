@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MoneyManager : MonoBehaviour
+public class    MoneyManager : MonoBehaviour
 {
 
     private static MoneyManager _instance;
