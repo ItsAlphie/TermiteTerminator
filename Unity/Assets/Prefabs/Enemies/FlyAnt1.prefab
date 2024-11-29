@@ -60,37 +60,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3963292400792368574, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 8478252323540464279}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
---- !u!1 &7040709146438770483 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
-  m_PrefabInstance: {fileID: 5949422524605272570}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8478252323540464279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7040709146438770483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f144650385f9e4395bd384d41dea84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Points:
-  - {fileID: 5216704547164563804, guid: 3df156ea6427090fc9097ba79dd7bfb0, type: 3}
-  - {fileID: 2811635201444189113, guid: 59c36c12238db8fa0825db1787af2b8f, type: 3}
-  - {fileID: 8488031229871601342, guid: 2c0cef65636b4a11db6468a059ce7ace, type: 3}
-  - {fileID: 4740726953656487720, guid: 64019c3dcbb2d11078ab451f1e07fc19, type: 3}
-  moveSpeed: 0.5
-  pointsIndex: 0
-  type: 2
