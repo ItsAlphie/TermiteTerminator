@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : BasicTower
+public class Laser: MonoBehaviour
 {
    //[SerializeField] private float defDistanceRay = 100;
     public Transform laserFirePoint;

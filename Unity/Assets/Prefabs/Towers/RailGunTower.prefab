@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -4027984210536897073}
   m_Layer: 8
   m_Name: RailGunTower
-  m_TagString: Untagged
+  m_TagString: RailgunTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

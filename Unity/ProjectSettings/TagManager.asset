@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Tower
   - Projectile
+  - LightHouseTower
+  - RailgunTower
   layers:
   - Default
   - TransparentFX
@@ -49,6 +51,9 @@ TagManager:
     locked: 0
   - name: projectile
     uniqueID: 3337196883
+    locked: 0
+  - name: environment
+    uniqueID: 615626733
     locked: 0
   - name: ui
     uniqueID: 2755858137

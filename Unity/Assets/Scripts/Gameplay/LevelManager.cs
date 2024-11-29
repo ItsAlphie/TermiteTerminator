@@ -56,10 +56,10 @@ public class LevelManager : MonoBehaviour
     }
 
     public void TriggerGameOver(){
+        KillAll();
         GameOver = true;
         OnGameOver.Invoke();
         Debug.Log("Game Over");
-        // KillAll();
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
     }
@@ -81,25 +81,13 @@ public class LevelManager : MonoBehaviour
         OnWaveFinish.Invoke();
         Debug.Log("Wave finished");
     }
-    private void KillAll()
-    {
-        try
-        {
-            while (true)
-            {
-                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+    private void KillAll(){
+        List<GameObject> towers = TowerSpawner.towers;
 
-                byte[] sendbuf = Encoding.ASCII.GetBytes("k");
-                IPEndPoint ep = new IPEndPoint(IPAddress.Parse("192.168.24.139"), 11000);
-
-                s.SendTo(sendbuf, ep); s.Close();
-
-                print("Message sent");
-            }
+        foreach (GameObject towerObject in towers){
+            BasicTower tower = towerObject.GetComponent<BasicTower>();
+            CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
+            cmCtrl.SendMsg("k", tower);
         }
-        catch (SocketException e)
-        {
-            print(e);
-        }   
     }
 }
