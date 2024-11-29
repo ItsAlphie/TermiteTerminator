@@ -27,6 +27,7 @@ public class TowerSpawner : MonoBehaviour
 
     void Start(){
         TowerSpawn();
+        SetIps();
     }
 
     public void ReceiveTowerInfo(byte[] bytes){
@@ -109,62 +110,95 @@ public class TowerSpawner : MonoBehaviour
             if (i == 1 || i == 2){
                 GameObject clone = Instantiate(LightTowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.active = false;
+                clone.SetActive(false);
                 towers.Add(clone);
             }
             // Trigger Tower
             else if (i == 3 || i == 4){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.active = false;
+                clone.SetActive(false);
                 towers.Add(clone);
             }
             // Railgun Tower
             else if (i == 5 || i == 6){
                 GameObject clone = Instantiate(RailGunPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.active = false;
+                clone.SetActive(false);
                 towers.Add(clone);
             }
-            // Wind Tower
+            // Wind TowerIPAddress.Parse
             else if (i == 7 || i == 8){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.active = false;
+                clone.SetActive(false);
                 towers.Add(clone);
             }
             // Barrier
             else if (i == 9){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.active = false;
+                clone.SetActive(false);
                 towers.Add(clone);
             }
             else{
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.active = false;
+                clone.SetActive(false);
                 towers.Add(clone);
             }
         }
     }
 
-    private void ProcessTowers(float[,] matrix){
+    private void SetIps(){
+        for (int i = 0; i < towers.Count; i++){
+            BasicTower tower = towers[i].GetComponent<BasicTower>();
+            tower.SetIP(IPAddress.Parse("192.168.26." + i));
+        }
+    }
+
+    private void OldProcessTowers(float[,] matrix){
         print("Processing Towers NOW");
         for (int i = 0; i < towerCount; i++){
             float X = matrix[i,1] * resolutionX;
             float Y = matrix[i,2] * resolutionY;
             if ((X == 0 && Y == 0) || (X > resolutionX || Y > resolutionY) || (X < 0 || Y < 0)){
-                towers[i].active = false;
+                towers[i].SetActive(false);
             }
             else{
-            	towers[i].active = true;
+            	towers[i].SetActive(true);
                 print("Putting tower " + i + " at " + X + "/"+ Y);
                 Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
                 towers[i].transform.position = location;
                 float newAngle = matrix[i,4]*10;
                 print(newAngle);
                 towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
+            }
+        }
+    }
+
+    private void ProcessTowers(float[,] matrix){
+        print("Processing Towers");
+        for (int i = 0; i < towerCount; i++){
+            float X = matrix[i,1] * resolutionX;
+            float Y = matrix[i,2] * resolutionY;
+            bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
+            ShopManager shopManager = towers[i].GetComponent<ShopManager>();
+
+            if (outOfScreen){
+                towers[i].SetActive(false);
+                shopManager.sellItem();
+            }
+            else{
+                if (shopManager.buyItem()){
+                    towers[i].SetActive(true);
+                    print("Putting tower " + i + " at " + X + "/"+ Y);
+                    Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+                    towers[i].transform.position = location;
+                    float newAngle = matrix[i,4]*10;
+                    print(newAngle);
+                    towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
+                }
             }
         }
     }

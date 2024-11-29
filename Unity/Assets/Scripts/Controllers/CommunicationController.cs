@@ -89,9 +89,7 @@ public class CommunicationController : MonoBehaviour
             action?.Invoke();
         }
     }
-/*
-    //TODO: send message method
-    private void SendMessage(string msg, BasicTower tower)
+    private void SendMessage(string msg, BasicTower receivingTower)
     {
         try
         {
@@ -100,9 +98,9 @@ public class CommunicationController : MonoBehaviour
                 Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
                 byte[] sendbuf = Encoding.ASCII.GetBytes(msg);
-                string IP = tower.GameObject.name;
-                IPAddress targetAddress = IPAddress.Parse();
-                IPEndPoint ep = new IPEndPoint(targetAddress, listenPort);
+                IPAddress IP = receivingTower.GetIP();
+                print("Sending " + msg + " to " + IP);
+                IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), listenPort);
 
                 s.SendTo(sendbuf, ep); s.Close();
             }
@@ -111,5 +109,5 @@ public class CommunicationController : MonoBehaviour
         {
             print(e);
         }   
-    }*/
+    }
 }
