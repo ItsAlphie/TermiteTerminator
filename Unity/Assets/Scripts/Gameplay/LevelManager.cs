@@ -18,8 +18,11 @@ public class LevelManager : MonoBehaviour
 
     private int environment = 0; //To do: change this to an enum
 
-    [SerializeField] private GameObject GameOverScreen;
-    public static UnityEvent OnWaveFinish = new UnityEvent();
+    public bool GameOver = false;
+
+    [SerializeField] private UnityEvent OnWaveFinish;
+    [SerializeField] private UnityEvent OnGameOver;
+
     private static LevelManager _instance;
     public static LevelManager Instance{
         get{
@@ -42,6 +45,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MoneyManager.Instance.initializeMoney(100);
+        UIManager.Instance.InitializeHUD();
     }
 
     // Update is called once per frame
@@ -50,19 +55,20 @@ public class LevelManager : MonoBehaviour
         
     }
 
+    public void TriggerGameOver(){
+        GameOver = true;
+        OnGameOver.Invoke();
+        Debug.Log("Game Over");
+        // KillAll();
+        Time.timeScale = 0;
+        StartCoroutine(WaitForGameRestart());
+    }
     int GetLevel(){
         return level;
     }
 
     public int GetEnvironment(){
         return environment;
-    }
-
-    public void GameOver(){
-        KillAll();
-        UIManager.Instance.setScreen(UIManager.Instance.gameOverScreen);
-        Time.timeScale = 0;
-        StartCoroutine(WaitForGameRestart());
     }
 
     private IEnumerator WaitForGameRestart() {

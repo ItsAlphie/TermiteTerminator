@@ -4,6 +4,9 @@
 
 #define ssid "Galaxy S22A88A"         // Replace with your WiFi SSID
 #define password "uzjw7402"           // Replace with your WiFi password
+IPAddress ip(192, 168, 24, 9);
+IPAddress gateway(192, 168, 24, 20);
+IPAddress subnet(255, 255, 255, 0);
 
 // Server settings
 #define serverIP "192.168.4.121"      // Unity server's IP address
@@ -16,7 +19,7 @@ bool barrierKilled;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   servo.attach(D1);
   servo.write(0);
   delay(10);
@@ -30,7 +33,7 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-
+  WiFi.config(ip, gateway, subnet);
   Serial.println("\nConnected to WiFi");
   Serial.print("IP address: ");
   Serial.println(WiFi.localIP());

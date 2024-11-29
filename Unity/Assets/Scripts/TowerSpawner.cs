@@ -17,38 +17,31 @@ public class TowerSpawner : MonoBehaviour
     // Game Related
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] GameObject LightTowerPrefab;
+    [SerializeField] GameObject RailGunPrefab;
     public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
 
     // Thread-safe queue to handle received matrices
-    private ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
+    public ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
 
     void Start(){
-        print(Screen.currentResolution);
         TowerSpawn();
-        Thread thread = new Thread(Receive);
-        thread.Start();
     }
 
-    private void Receive(){
+    public void ReceiveTowerInfo(byte[] bytes){
         try
         {
-            while (true)
-            {
-                print("Waiting for positioning broadcast");
-                byte[] bytes = listener.Receive(ref groupEP);
+            //print("Waiting for positioning broadcast");
+            //byte[] bytes = listener.Receive(ref groupEP);
 
-                print($"Received Positioning");
-                //print($" {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
+            // Read out received data                
+            float[,] matrix = ProcessUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
+            print("Processed towers, sending info to main thread");
+            matrixQueue.Enqueue(matrix);
 
-                // Read out received data                
-                float[,] matrix = ProcessUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
-                matrixQueue.Enqueue(matrix);
-
-                // Check if the data is received and processed properly
-                // PrintMatrix(matrix);
-            }
+            // Check if the data is received and processed properly
+            //PrintMatrix(matrix);
         }
         catch (SocketException e)
         {
@@ -60,6 +53,7 @@ public class TowerSpawner : MonoBehaviour
         // Process any matrices received by the UDP listener
         while (matrixQueue.TryDequeue(out float[,] matrix))
         {
+            print("Main thread processing tower matrix");
             ProcessTowers(matrix);
         }
     }
@@ -82,20 +76,20 @@ public class TowerSpawner : MonoBehaviour
     }
     static float[,] ProcessUDP(string packet, int towerCount)
     {
-        float[,] matrix = new float[towerCount, 4];
+        float[,] matrix = new float[towerCount, 5];
         
         // Remove unwanted characters from the received string
         string cleanData = packet.Replace("[", "").Replace("]", "").Replace("\n", "");
         string[] values = cleanData.Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
         // Parse values into matrix
-        if (values.Length >= towerCount * 4)
+        if (values.Length >= towerCount * 5)
         {
             for (int i = 0; i < towerCount; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 5; j++)
                 {
-                    matrix[i, j] = float.Parse(values[i * 4 + j]);
+                    matrix[i, j] = float.Parse(values[i * 5 + j]);
                 }
             }
         }
@@ -107,11 +101,41 @@ public class TowerSpawner : MonoBehaviour
     }
 
     private void TowerSpawn(){
+        print("Spawning towers");
         Vector2 stashLocation = Camera.main.ScreenToWorldPoint(new Vector3 (-resolutionX,-resolutionY,0));
 
         for (int i = 1; i <= towerCount; i++){
-            if (i == 1){
+            // Light Tower
+            if (i == 1 || i == 2){
                 GameObject clone = Instantiate(LightTowerPrefab, stashLocation, Quaternion.identity);
+                clone.name = "Tower_" + i;
+                clone.active = false;
+                towers.Add(clone);
+            }
+            // Trigger Tower
+            else if (i == 3 || i == 4){
+                GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+                clone.name = "Tower_" + i;
+                clone.active = false;
+                towers.Add(clone);
+            }
+            // Railgun Tower
+            else if (i == 5 || i == 6){
+                GameObject clone = Instantiate(RailGunPrefab, stashLocation, Quaternion.identity);
+                clone.name = "Tower_" + i;
+                clone.active = false;
+                towers.Add(clone);
+            }
+            // Wind Tower
+            else if (i == 7 || i == 8){
+                GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+                clone.name = "Tower_" + i;
+                clone.active = false;
+                towers.Add(clone);
+            }
+            // Barrier
+            else if (i == 9){
+                GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
                 clone.active = false;
                 towers.Add(clone);
@@ -138,6 +162,9 @@ public class TowerSpawner : MonoBehaviour
                 print("Putting tower " + i + " at " + X + "/"+ Y);
                 Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
                 towers[i].transform.position = location;
+                float newAngle = matrix[i,4]*10;
+                print(newAngle);
+                towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
             }
         }
     }

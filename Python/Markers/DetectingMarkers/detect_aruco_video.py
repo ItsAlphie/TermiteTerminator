@@ -57,7 +57,7 @@ arucoParams = cv2.aruco.DetectorParameters_create()
 
 # Requirements for TCP communication to Unity
 # sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-ip, port = "127.0.0.1", 11069
+ip, port = "127.0.0.1", 11000
 # sock.connect((host, port))
 
 def sendData(data):	
@@ -70,7 +70,7 @@ TV = np.array([[0, 0], [0, 0], [0, 0]])
 TVready = np.array([0, 0, 0])
 
 # List of all markers relative position [ID,X,Y]
-towers = np.array([[1,0.0,0.0,0], [2,0.0,0.0,0], [3,0.0,0.0,0], [4,0.0,0.0,0], [5,0.0,0.0,0], [6,0.0,0.0,0], [7,0.0,0.0,0], [8,0.0,0.0,0], [9,0.0,0.0,0], [10,0.0,0.0,0]])
+towers = np.array([[1,0.0,0.0,0,0.0], [2,0.0,0.0,0,0.0], [3,0.0,0.0,0,0.0], [4,0.0,0.0,0,0.0], [5,0.0,0.0,0,0.0], [6,0.0,0.0,0,0.0], [7,0.0,0.0,0,0.0], [8,0.0,0.0,0,0.0], [9,0.0,0.0,0,0.0], [10,0.0,0.0,0,0.0]])
 
 # Define and draw axis system to transform absolute to relative coordinates (bunch of math hoohaa)
 def defineAxis():
@@ -98,10 +98,33 @@ def checkLifted(refLength, length):
 	else:
 		return 0
 
+def getMarkerAngle(angle):
+    # Returns the angle in degrees
+	x_axis = (TV[2] - TV[0])
+	y_axis = (TV[1] - TV[0])
+
+	u = np.array(angle)
+	x = np.array(x_axis)
+	y = np.array(y_axis)
+
+	# Positive or negative angle
+	cos_thetaY = np.dot(u, y) / (np.linalg.norm(u) * np.linalg.norm(y))
+	angleY_rad = np.arccos(np.clip(cos_thetaY, -1.0, 1.0))
+	angleY_deg = np.degrees(angleY_rad)
+
+	cos_thetaX = np.dot(u, x) / (np.linalg.norm(u) * np.linalg.norm(x))
+	angleX_rad = np.arccos(np.clip(cos_thetaX, -1.0, 1.0))
+	angleX_deg = np.degrees(angleX_rad)
+
+	if (angleY_deg > 90):
+		return 360 - angleX_deg
+	else:
+		return angleX_deg
+
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
 vs = VideoStream(src=1).start()
-time.sleep(2.0)
+time.sleep(1.5)
 
 # loop over the frames from the video stream
 while True:
@@ -144,6 +167,7 @@ while True:
 			cX = int((topLeft[0] + bottomRight[0]) / 2.0)
 			cY = int((topLeft[1] + bottomRight[1]) / 2.0)
 			cv2.circle(frame, (cX, cY), 4, (0, 0, 255), -1)
+			center = ([cX, cY])
 
 			# draw the ArUco marker ID on the frame
 			cv2.putText(frame, str(markerID),
@@ -201,15 +225,23 @@ while True:
                                 		(cX, cY),
                                 		cv2.FONT_HERSHEY_SIMPLEX,
                                 		0.5, (255, 255, 255), 2)
+					
+					# Angle logic
+					vTR = ([topRight[0] - cX, topRight[1] - cY])
+					vBR = ([bottomRight[0] - cX, bottomRight[1] - cY])
+					angle = ([vTR[0] + vBR[0], vTR[1] + vBR[1]])
+					drawAngle = (angle[0] + cX, angle[1] + cY)
+					cv2.line(frame, center, drawAngle, (255, 0, 255), 2)
 
 					# Check if the tower is lifted
-					markerSize = getLength(int(topLeft[0]), int(topLeft[1]), int(bottomRight[0]), int(bottomRight[1]))
+					markerSize = getLength(topLeft[0], topLeft[1], bottomRight[0], bottomRight[1])
 					lifted = checkLifted(refMarkerSize, markerSize)
 					
 				# Add markers to list of id, TVcX, TVcY, lifted
 					towers[markerID-1][1] = round(scalars[0],2)
 					towers[markerID-1][2] = round(scalars[1],2)
 					towers[markerID-1][3] = lifted
+					towers[markerID-1][4] = round(getMarkerAngle(angle),0)*0.1
 
 		# Pass data to unity
 		if np.array_equal(TVready, np.array([1, 1, 1])):

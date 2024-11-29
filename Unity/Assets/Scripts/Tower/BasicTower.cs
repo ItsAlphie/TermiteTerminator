@@ -44,12 +44,21 @@ public class BasicTower : MonoBehaviour
                 }
             }
         }
+
+        if(Input.GetMouseButtonDown(2)){
+            Debug.Log("Middle click");
+            gameObject.GetComponent<ShopManager>().buyItem();
+
+        }
         
     }
 
     void OnMouseDown(){
-        Destroy(gameObject);
+        gameObject.GetComponent<ShopManager>().sellItem();
+        Debug.Log("mouse down");
     }
+
+    
 
     public GameObject findNearestEnemy(){
         float closestDistance = 1000000;
