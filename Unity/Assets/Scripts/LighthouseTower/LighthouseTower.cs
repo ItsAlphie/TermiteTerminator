@@ -9,6 +9,9 @@ public class LighthouseTower : BasicTower
     private Vector3 enemyDirection = Vector3.zero;
     private GameObject nearestEnemy = null;
     private Vector2 targetPosition;
+    private float thickness = 0.2f;
+    private float boostedThickness = 0.4f;
+    private LineRenderer lineRenderer;
 
 
     // Start is called before the first frame update
@@ -16,8 +19,15 @@ public class LighthouseTower : BasicTower
     {
         
         laser = gameObject.transform.GetChild(0).gameObject;
+        lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
         targetPosition = transform.position;
+
+        //Setting the laser thickness to thin for the start
+        
+        lineRenderer.startWidth = thickness;
+        lineRenderer.endWidth = thickness;
+    
         ShootLaser();
     }
 
@@ -27,6 +37,15 @@ public class LighthouseTower : BasicTower
         List<GameObject> enemies = EnemySpawner.Instance.enemyList;
 
         nearestEnemy = findNearestEnemy();
+        //Checking if boosted and adjusting the laser thickness 
+        if(Booster){
+            lineRenderer.startWidth = boostedThickness;
+            lineRenderer.endWidth = boostedThickness;
+        }
+        else{
+            lineRenderer.startWidth = thickness;
+            lineRenderer.endWidth = thickness;
+        }
         
         if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
             
@@ -46,6 +65,6 @@ public class LighthouseTower : BasicTower
     private void getPositionOfNearestEnemy(){
         targetPosition = nearestEnemy.transform.position;
         //Debug.Log("dhjks");
-     }
+    }
      
 }

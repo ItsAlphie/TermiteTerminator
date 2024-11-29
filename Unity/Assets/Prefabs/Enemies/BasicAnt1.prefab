@@ -194,8 +194,9 @@ MonoBehaviour:
   - {fileID: 2811635201444189113, guid: 59c36c12238db8fa0825db1787af2b8f, type: 3}
   - {fileID: 8488031229871601342, guid: 2c0cef65636b4a11db6468a059ce7ace, type: 3}
   - {fileID: 4740726953656487720, guid: 64019c3dcbb2d11078ab451f1e07fc19, type: 3}
-  moveSpeed: 0.5
+  moveSpeed: 0.6
   pointsIndex: 0
+  type: 0
 --- !u!50 &-7639947875795090581
 Rigidbody2D:
   serializedVersion: 4
