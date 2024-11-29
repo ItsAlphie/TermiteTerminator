@@ -14,11 +14,22 @@ public class BasicEnemy : MonoBehaviour
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public bool Alive { get => alive; set => alive = value; }
 
+    [SerializeField] public int type = 0;
+
+    private int environment = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        environment = GameObject.Find("LevelManager").GetComponent<LevelManager>().GetEnvironment();
+        if(environment == type && environment != 0){
+            gameObject.GetComponent<EnemyHealthController>().DoubleHealth();
+            //to do: add visual effect to differentiate boosted enemies
+        }
+
         transform.position = Points[pointsIndex].transform.position;
+
     }
 
     // Update is called once per frame
