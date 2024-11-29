@@ -64,7 +64,7 @@ public class HitMarker : MonoBehaviour
         while (enemy.Alive && healthController.currHealth > 0)
         {
             Debug.Log("Applying damage to enemy.");
-            if(enemy.GetComponent<BasicEnemy>().type == 3){
+            if(enemy.GetComponent<BasicEnemy>().type == 2){
                 Bdamage *= 2;
                 }
             healthController.takeDamage(Bdamage);
