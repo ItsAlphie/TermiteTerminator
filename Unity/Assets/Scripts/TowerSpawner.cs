@@ -199,13 +199,13 @@ public class TowerSpawner : MonoBehaviour
             else{
                 if (shopManager.buyItem()){
                     towers[i].SetActive(true);
-                    print("Putting tower " + i + " at " + X + "/"+ Y);
-                    Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
-                    towers[i].transform.position = location;
-                    float newAngle = matrix[i,4]*10;
-                    print(newAngle);
-                    towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
                 }
+                print("Putting tower " + i + " at " + X + "/"+ Y);
+                Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+                towers[i].transform.position = location;
+                float newAngle = matrix[i,4]*10;
+                print(newAngle);
+                towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
             }
         }
     }
