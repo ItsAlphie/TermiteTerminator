@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
 
     public void InitializeHUD(){
         currentMoneyDisplay = HUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        Debug.Log(currentMoneyDisplay);
         updateCurrentMoney();
     }
 
