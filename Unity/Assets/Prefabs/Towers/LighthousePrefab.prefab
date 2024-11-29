@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6697925405669998240}
   m_Layer: 0
   m_Name: LighthousePrefab
-  m_TagString: Untagged
+  m_TagString: LightHouseTower
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -322,10 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220384e970460f447ab13a8efd2cb53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectilePrefab: {fileID: 0}
-  BoostProjectilePrefab: {fileID: 0}
-  shootSpeed: 0.37
-  Booster: 0
   laserFirePoint: {fileID: 0}
   m_lineRenderer: {fileID: 4243949226765438077}
   targetPosition: {x: 0, y: 0}
