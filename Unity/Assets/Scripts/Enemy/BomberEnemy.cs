@@ -52,7 +52,7 @@ public class BomberEnemy : BasicEnemy
             {
                 closestDistance = distance;
                 return closestDistance;
-            }
+            }   
             
             
         }
