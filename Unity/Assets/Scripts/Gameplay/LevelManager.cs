@@ -56,10 +56,10 @@ public class LevelManager : MonoBehaviour
     }
 
     public void TriggerGameOver(){
+        KillAll();
         GameOver = true;
         OnGameOver.Invoke();
         Debug.Log("Game Over");
-        KillAll();
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
     }
@@ -83,11 +83,12 @@ public class LevelManager : MonoBehaviour
     }
     private void KillAll(){
         List<GameObject> towers = TowerSpawner.towers;
-        CommunicationController cmCtrl = this.GetComponent<CommunicationController>();
 
         foreach (GameObject towerObject in towers){
             BasicTower tower = towerObject.GetComponent<BasicTower>();
-            cmCtrl.SendMessage("k", tower);
+            CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
+            print("Killing tower " + tower + " with " + cmCtrl);
+            cmCtrl.SendMsg("k", tower);
         }
     }
 }
