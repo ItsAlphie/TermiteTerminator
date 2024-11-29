@@ -8,7 +8,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private ShopPrices shopPrices;    
     private ShopPrices shopPricesCopy;    
 
-    void Start(){
+    void Awake(){
         shopPricesCopy = Instantiate(shopPrices);
     }
     

@@ -17,7 +17,7 @@ public class BasicTower : MonoBehaviour
     private float timeLeft;
     [SerializeField] public IPAddress IP;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         timeLeft = shootSpeed;
     }

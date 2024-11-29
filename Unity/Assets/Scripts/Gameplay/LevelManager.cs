@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
     {
         MoneyManager.Instance.initializeMoney(100);
         UIManager.Instance.InitializeHUD();
+
     }
 
     // Update is called once per frame
@@ -83,7 +84,7 @@ public class LevelManager : MonoBehaviour
     }
     private void KillAll(){
         List<GameObject> towers = TowerSpawner.towers;
-
+        print("Killing all towers");
         foreach (GameObject towerObject in towers){
             BasicTower tower = towerObject.GetComponent<BasicTower>();
             CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();

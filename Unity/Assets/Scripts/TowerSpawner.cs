@@ -28,6 +28,7 @@ public class TowerSpawner : MonoBehaviour
     void Start(){
         TowerSpawn();
         SetIps();
+        HideTowers();
     }
 
     public void ReceiveTowerInfo(byte[] bytes){
@@ -110,35 +111,35 @@ public class TowerSpawner : MonoBehaviour
             if (i == 1 || i == 2){
                 GameObject clone = Instantiate(LightTowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.SetActive(false);
+                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Trigger Tower
             else if (i == 3 || i == 4){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.SetActive(false);
+                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Railgun Tower
             else if (i == 5 || i == 6){
                 GameObject clone = Instantiate(RailGunPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.SetActive(false);
+                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Wind TowerIPAddress.Parse
             else if (i == 7 || i == 8){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.SetActive(false);
+                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Barrier
             else if (i == 9){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.SetActive(false);
+                //clone.SetActive(false);
                 towers.Add(clone);
             }
             else{
@@ -157,10 +158,15 @@ public class TowerSpawner : MonoBehaviour
             tower.SetIP(IPAddress.Parse("192.168.24." + i));
         }
     }
+    private void HideTowers(){
+        for (int i = 0; i < towers.Count; i++){
+            towers[i].SetActive(false);
+        }
+    }
 
     private void OldProcessTowers(float[,] matrix){
         print("Processing Towers NOW");
-        for (int i = 0; i < towerCount; i++){
+        for (int i = 0; i < towers.Count; i++){
             float X = matrix[i,1] * resolutionX;
             float Y = matrix[i,2] * resolutionY;
             if ((X == 0 && Y == 0) || (X > resolutionX || Y > resolutionY) || (X < 0 || Y < 0)){
@@ -180,7 +186,7 @@ public class TowerSpawner : MonoBehaviour
 
     private void ProcessTowers(float[,] matrix){
         print("Processing Towers");
-        for (int i = 0; i < towerCount; i++){
+        for (int i = 0; i < towers.Count; i++){
             float X = matrix[i,1] * resolutionX;
             float Y = matrix[i,2] * resolutionY;
             bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
