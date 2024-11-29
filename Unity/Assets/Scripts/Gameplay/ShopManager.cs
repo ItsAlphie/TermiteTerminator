@@ -22,7 +22,7 @@ public class ShopManager : MonoBehaviour
     
     public bool buyItem(){
         var shopItem = shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag);
-        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)){
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)&& !InventoryManager.Instance.inventoryItems.Contains(gameObject)){
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopItem.totalAmount--;
             InventoryManager.Instance.addItem(gameObject);
@@ -40,7 +40,6 @@ public class ShopManager : MonoBehaviour
             shopItem.totalAmount++;
             return true;
         }
-        Debug.Log("no sell:()");
         return false;
     }
     

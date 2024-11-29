@@ -2140,7 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyPrefab: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
-  EnemyPrefab2: {fileID: 0}
+  EnemyPrefab2: {fileID: 2838611505213734618, guid: 7a3493da0af5c5d798b0d059dd171825, type: 3}
   SpawnPoint: {fileID: 7951326647625111514, guid: 922ef9426b7bae6218b494bb7d753fb2, type: 3}
   enemyWave: {fileID: 11400000, guid: c1b938793c42803eab6693e1627f2a96, type: 2}
   enemyList: []

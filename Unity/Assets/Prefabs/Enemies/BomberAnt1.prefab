@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BomberAnt1
       objectReference: {fileID: 0}
+    - target: {fileID: 8835319684226665381, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1494085170, guid: dbb8b38e218966f818b4936eb18e7237, type: 3}
     - target: {fileID: 9019209479636983635, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -89,4 +93,5 @@ MonoBehaviour:
   - {fileID: 4740726953656487720, guid: 64019c3dcbb2d11078ab451f1e07fc19, type: 3}
   moveSpeed: 0.5
   pointsIndex: 0
+  type: 0
   bombPrefab: {fileID: 1881378327498523590, guid: e9bcd2e81481ace4fa2e5bf86418e07b, type: 3}

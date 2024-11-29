@@ -38,7 +38,7 @@ public class Pulse : BasicTower
         {   
             HealthController healthController = collidedEnemy.GetComponent<HealthController>();
             if (collidedEnemy.GetComponent<BasicEnemy>() != null){
-                if(collidedEnemy.GetComponent<BasicEnemy>().type == 2){
+                if(collidedEnemy.GetComponent<BasicEnemy>().type == 3){
                     damage *= 2;
                 }
                 healthController.takeDamage(damage);
