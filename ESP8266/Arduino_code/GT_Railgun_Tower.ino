@@ -417,7 +417,7 @@ static const uint8_t image_battery_empty[1024] = {
 static const uint8_t* OLEDCapacity[] = {image_battery_empty, image_battery_1bars, image_battery_2bars,image_battery_3bars, image_battery_4bars, image_battery_full};
 
 static struct pt pt1;
-const int buttonPin = 15;
+const int buttonPin = 13;
 bool buttonPressed = 0;
 bool boosted = false;
 bool charged = false;
@@ -430,7 +430,7 @@ IPAddress gateway(192, 168, 24, 20);
 IPAddress subnet(255, 255, 255, 0);
 
 // Server settings
-#define serverIP "192.168.4.121"      // Unity server's IP address
+#define serverIP "192.168.24.60"      // Unity server's IP address
 #define serverPort 11000               // Unity server's port
 
 Servo servo;
@@ -462,6 +462,7 @@ void setup() {
 
   Serial.print("Connecting to WiFi...");
   WiFi.mode(WIFI_STA);
+
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
@@ -484,6 +485,7 @@ void loop() {
     if (receiveMessage() == "k"){
       servo.write(180);
       towerKilled = true;
+      charged = false;
       delay(500);
       servo.write(0);
       Serial.println("Tower destroyed!");
@@ -557,7 +559,7 @@ static int protothreadOLEDUpdate(struct pt *pt)
       lastTimeUpdatedButton = millis();
       PT_WAIT_UNTIL(pt, millis() - lastTimeUpdatedButton > 350);
       if(boosted){
-        Serial.println("Too qucik");
+        //Serial.println("Too qucik");
         capacity = 0;
         boosted = false;
         charged = false;
