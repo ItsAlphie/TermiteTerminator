@@ -25,6 +25,12 @@ public class BomberEnemy : BasicEnemy
                 pointsIndex+=1;
             }
         }
+        else{
+            if(!LevelManager.Instance.GameOver){
+                LevelManager.Instance.TriggerGameOver();
+            }
+            
+        }
 
         float distance = FindNearestTower();
         if(distance < 2f && !bombDropped){ // drop bomb if enemy is close to tower
@@ -52,7 +58,7 @@ public class BomberEnemy : BasicEnemy
             {
                 closestDistance = distance;
                 return closestDistance;
-            }
+            }   
             
             
         }

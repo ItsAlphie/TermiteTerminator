@@ -38,7 +38,18 @@ public class Pulse : BasicTower
         {   
             HealthController healthController = collidedEnemy.GetComponent<HealthController>();
             if (collidedEnemy.GetComponent<BasicEnemy>() != null){
-                healthController.takeDamage(damage);
+
+                
+                if(collidedEnemy.GetComponent<BasicEnemy>().type == 1){
+                    healthController.takeDamage(2*damage);
+                    Debug.Log("Double damage");
+                }
+                else{
+                    healthController.takeDamage(damage);
+                    Debug.Log("Normal damage1");
+                }
+                    
+                
             }
             
         }

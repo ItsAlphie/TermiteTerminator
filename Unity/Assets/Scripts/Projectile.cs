@@ -48,6 +48,9 @@ public class Projectile : MonoBehaviour
         {   
             HealthController healthController = collidedEnemy.GetComponent<HealthController>();
             if (collidedEnemy.GetComponent<BasicEnemy>() != null){
+                if(collidedEnemy.GetComponent<BasicEnemy>().type == 1){
+                    damage *= 2;
+                }
                 healthController.takeDamage(damage);
             }
             Destroy(gameObject);
