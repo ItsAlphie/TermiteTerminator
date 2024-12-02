@@ -72,14 +72,14 @@ public class CommunicationController : MonoBehaviour
         GameObject towerObject = towers[int.Parse(towerID)-1];
         BasicTower tower = towerObject.GetComponent<BasicTower>();
 
-        tower.Booster = true;
+        tower.boosted = true;
         print(towerID + " is boosted");
         StartCoroutine(BoostReset(tower));
     }
     private IEnumerator BoostReset(BasicTower tower)
     {
         yield return new WaitForSeconds(boostTime);
-        tower.Booster = false;
+        tower.boosted = false;
     }
     void Update()
     {

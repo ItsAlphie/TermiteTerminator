@@ -38,7 +38,7 @@ public class LighthouseTower : BasicTower
 
         nearestEnemy = findNearestEnemy();
         //Checking if boosted and adjusting the laser thickness 
-        if(Booster){
+        if(boosted){
             lineRenderer.startWidth = boostedThickness;
             lineRenderer.endWidth = boostedThickness;
         }

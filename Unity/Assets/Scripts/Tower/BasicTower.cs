@@ -13,7 +13,7 @@ public class BasicTower : MonoBehaviour
     [SerializeField] private GameObject BoostProjectilePrefab;
     List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
-    public bool Booster = false;
+    public bool boosted = false;
     private float timeLeft;
     [SerializeField] public IPAddress IP;
     // Start is called before the first frame update
@@ -30,7 +30,7 @@ public class BasicTower : MonoBehaviour
             timeLeft -= Time.deltaTime;
             if(timeLeft <= 0){
                 GameObject nearestEnemy = findNearestEnemy();
-                if(Booster){
+                if(boosted){
                     print("Boosted Projectile");
                     GameObject projectile = Instantiate(BoostProjectilePrefab, transform.position, Quaternion.identity);
                     projectile.GetComponent<Projectile>().initialize(nearestEnemy);

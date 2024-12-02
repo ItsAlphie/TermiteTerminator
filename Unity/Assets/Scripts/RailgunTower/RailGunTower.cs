@@ -36,12 +36,12 @@ public class RailGunTower : BasicTower
         */
 
 
-        if (Booster)
+        if (boosted)
         {
             
             firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);
-            Booster = false;
+            boosted = false;
         }
     }   
     void OnMouseDown(){
