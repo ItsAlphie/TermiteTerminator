@@ -12,18 +12,21 @@ public class TowerSpawner : MonoBehaviour
     private const int listenPort = 11069;
     UdpClient listener = new UdpClient(listenPort);
     IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-    int towerCount = 10;
 
     // Game Related
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] GameObject LightTowerPrefab;
     [SerializeField] GameObject RailGunPrefab;
-    [SerializeField] float skewFactorX = 1;
-    [SerializeField] float skewFactorY = 1;
-    [SerializeField] float startSkewY = 0;
+    [SerializeField] GameObject HealingHammerPrefab;
     public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
+    int towerCount = 8;
+
+    // Fine-tuning params
+    [SerializeField] float skewFactorX = 1;
+    [SerializeField] float skewFactorY = 1;
+    [SerializeField] float startSkewY = 0;
 
     // Thread-safe queue to handle received matrices
     public ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
@@ -114,43 +117,36 @@ public class TowerSpawner : MonoBehaviour
             if (i == 1 || i == 2){
                 GameObject clone = Instantiate(LightTowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Trigger Tower
             else if (i == 3 || i == 4){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Railgun Tower
             else if (i == 5 || i == 6){
                 GameObject clone = Instantiate(RailGunPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Wind TowerIPAddress.Parse
             else if (i == 7 || i == 8){
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                //clone.SetActive(false);
                 towers.Add(clone);
             }
             // Barrier
             else if (i == 9){
-                GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
+                GameObject clone = Instantiate(HealingHammerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                //clone.SetActive(false);
                 towers.Add(clone);
             }
             else{
-                /*
                 GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "Tower_" + i;
-                clone.SetActive(false);
-                towers.Add(clone);*/
+                towers.Add(clone);
             }
         }
     }
@@ -167,54 +163,7 @@ public class TowerSpawner : MonoBehaviour
         }
     }
 
-    private void OldProcessTowers(float[,] matrix){
-        print("Processing Towers NOW");
-        for (int i = 0; i < towers.Count; i++){
-            float X = matrix[i,1] * resolutionX;
-            float Y = matrix[i,2] * resolutionY;
-            if ((X == 0 && Y == 0) || (X > resolutionX || Y > resolutionY) || (X < 0 || Y < 0)){
-                towers[i].SetActive(false);
-            }
-            else{
-            	towers[i].SetActive(true);
-                print("Putting tower " + i + " at " + X + "/"+ Y);
-                Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
-                towers[i].transform.position = location;
-                float newAngle = matrix[i,4]*10;
-                print(newAngle);
-                towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
-            }
-        }
-    }
-
-    private void ProcessTowers(float[,] preCalibrationMatrix){
-        print("Processing Towers");
-        float[,] matrix = CameraCalibartion(preCalibrationMatrix);
-        for (int i = 0; i < towers.Count; i++){
-            float X = matrix[i,1] * resolutionX;
-            float Y = matrix[i,2] * resolutionY;
-            bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
-            ShopManager shopManager = towers[i].GetComponent<ShopManager>();
-
-            if (outOfScreen){
-                towers[i].SetActive(false);
-                shopManager.sellItem();
-            }
-            else{
-                if (shopManager.buyItem()){
-                    towers[i].SetActive(true);
-                }
-                print("Putting tower " + i + " at " + X + "/"+ Y);
-                Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
-                towers[i].transform.position = location;
-                float newAngle = matrix[i,4]*10;
-                print(newAngle);
-                towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
-            }
-        }
-    }
-
-    private float[,] CameraCalibartion(float[,] matrix){
+    public float[,] CameraCalibartion(float[,] matrix){
         float[,] calibratedMatrix = matrix;
         for (int i = 0; i < towers.Count; i++){
             float X = matrix[i,1];
@@ -235,5 +184,34 @@ public class TowerSpawner : MonoBehaviour
             calibratedMatrix[i,2] = Y;
         }
         return calibratedMatrix;
+    }
+    public void ProcessTowers(float[,] preCalibrationMatrix){
+        print("Processing Towers");
+        float[,] matrix = CameraCalibartion(preCalibrationMatrix);
+        for (int i = 0; i < towers.Count; i++){
+            float X = matrix[i,1] * resolutionX;
+            float Y = matrix[i,2] * resolutionY;
+            int towerLifted = (int)matrix[i,3];
+            bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
+            ShopManager shopManager = towers[i].GetComponent<ShopManager>();
+
+            if (outOfScreen){
+                towers[i].SetActive(false);
+                shopManager.sellItem();
+            }
+            else if (towerLifted == 1){
+                // Tower preview, not yet placed nor bought.
+            }
+            else{
+                if (shopManager.buyItem()){
+                    towers[i].SetActive(true);
+                }
+                print("Putting marker " + i + " at " + X + "/"+ Y);
+                Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+                towers[i].transform.position = location;
+                float newAngle = matrix[i,4]*10;
+                towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
+            }
+        }
     }
 }
