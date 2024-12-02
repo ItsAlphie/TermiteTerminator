@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class TowerHealthController : HealthController
 {
+    public bool killed = false;
     // Implement the abstract method die()
     protected override void die()
     {
-        //TowerSpawner.towers.Remove(gameObject);
-        Destroy(gameObject);
+        // Make object inactive
+        // Take tower out of inventory
+        // Send kill message
     }
 
     // Start is called before the first frame update

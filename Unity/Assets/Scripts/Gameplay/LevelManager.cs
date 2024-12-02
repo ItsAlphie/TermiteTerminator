@@ -84,20 +84,20 @@ public class LevelManager : MonoBehaviour
     }
     private void KillAll(){
         List<GameObject> towers = TowerSpawner.towers;
+        CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){
             BasicTower tower = towerObject.GetComponent<BasicTower>();
-            CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
             cmCtrl.SendMsg("k", tower);
         }
     }
 
     private void RepairAll(){
         List<GameObject> towers = TowerSpawner.towers;
+        CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){
             BasicTower tower = towerObject.GetComponent<BasicTower>();
-            CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
             cmCtrl.SendMsg("r", tower);
         }
     }

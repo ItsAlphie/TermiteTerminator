@@ -17,3 +17,11 @@ MonoBehaviour:
     buyPrice: 10
     sellPrice: 5
     totalAmount: 2
+  - tag: RailgunTower
+    buyPrice: 10
+    sellPrice: 5
+    totalAmount: 2
+  - tag: LightHouseTower
+    buyPrice: 10
+    sellPrice: 5
+    totalAmount: 2

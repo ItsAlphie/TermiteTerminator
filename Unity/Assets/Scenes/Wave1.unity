@@ -2797,6 +2797,10 @@ MonoBehaviour:
   TowerPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
   LightTowerPrefab: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
   RailGunPrefab: {fileID: 3598248750024016555, guid: 0394cbefc334c0e4c98a335c07731356, type: 3}
+  HealingHammerPrefab: {fileID: 9114385848691523251, guid: ec187dcebc477eb82a265a91625a3edf, type: 3}
+  skewFactorX: 1
+  skewFactorY: 1
+  startSkewY: 0
 --- !u!114 &891508075
 MonoBehaviour:
   m_ObjectHideFlags: 0

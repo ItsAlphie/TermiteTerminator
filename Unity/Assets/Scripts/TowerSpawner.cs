@@ -21,7 +21,8 @@ public class TowerSpawner : MonoBehaviour
     public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
-    int towerCount = 8;
+    int towerCount = 9;
+    public static int hammerID = 8; // "Tower 9"
 
     // Fine-tuning params
     [SerializeField] float skewFactorX = 1;
@@ -140,13 +141,10 @@ public class TowerSpawner : MonoBehaviour
             // Barrier
             else if (i == 9){
                 GameObject clone = Instantiate(HealingHammerPrefab, stashLocation, Quaternion.identity);
-                clone.name = "Tower_" + i;
+                clone.name = "HealHammer";
                 towers.Add(clone);
             }
             else{
-                GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
-                clone.name = "Tower_" + i;
-                towers.Add(clone);
             }
         }
     }
@@ -195,23 +193,42 @@ public class TowerSpawner : MonoBehaviour
             bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
             ShopManager shopManager = towers[i].GetComponent<ShopManager>();
 
-            if (outOfScreen){
-                towers[i].SetActive(false);
-                shopManager.sellItem();
-            }
-            else if (towerLifted == 1){
-                // Tower preview, not yet placed nor bought.
+            //TODO: Differentiate tower and hammer here
+            if(i == hammerID){
+                if (outOfScreen){
+                    towers[i].SetActive(false);
+                }
+                else{
+                    towers[i].SetActive(true);
+                    print("Putting Healing Hammer " + i + " at " + X + "/"+ Y);
+                    Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+                    towers[i].transform.position = location;
+                    float newAngle = matrix[i,4]*10;
+                    towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
+                }
             }
             else{
-                if (shopManager.buyItem()){
-                    towers[i].SetActive(true);
+                if (outOfScreen){
+                    towers[i].SetActive(false);
+                    shopManager.sellItem();
                 }
-                print("Putting marker " + i + " at " + X + "/"+ Y);
-                Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
-                towers[i].transform.position = location;
-                float newAngle = matrix[i,4]*10;
-                towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
+                /*
+                else if (towerLifted == 1){
+                    // Tower preview, not yet placed nor bought.
+                }*/
+                else{
+                    print("Attempting to buy " + towers[i] + shopManager);
+                    if(shopManager.buyItem()){
+                        towers[i].SetActive(true);
+                    }
+                    print("Putting tower " + i + " at " + X + "/"+ Y);
+                    Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
+                    towers[i].transform.position = location;
+                    float newAngle = matrix[i,4]*10;
+                    towers[i].transform.rotation = Quaternion.Euler(0, 0, newAngle);
+                }
             }
+            
         }
     }
 }
