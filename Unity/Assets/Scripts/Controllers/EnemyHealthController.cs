@@ -21,17 +21,13 @@ public class EnemyHealthController : HealthController
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {   
+        base.Start();
         enemy = gameObject.GetComponent<BasicEnemy>();
         enemySprite = gameObject.transform.GetChild(0).gameObject;
         animator = enemySprite.GetComponent<Animator>();
-        currHealth = totalHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  
 }
