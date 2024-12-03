@@ -22,10 +22,11 @@ public class ShopManager : MonoBehaviour
     
     public bool buyItem(){
         var shopItem = shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag);
-        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)&& !InventoryManager.Instance.inventoryItems.Contains(gameObject)){
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)&& gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopItem.totalAmount--;
             InventoryManager.Instance.addItem(gameObject);
+            gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
@@ -33,10 +34,11 @@ public class ShopManager : MonoBehaviour
     }
 
     public bool sellItem(){
-        if(InventoryManager.Instance.inventoryItems.Contains(gameObject)){
+        if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Bought) {
             var shopItem = shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag);
             MoneyManager.Instance.addMoney(shopItem.sellPrice);
             InventoryManager.Instance.removeItem(gameObject);
+            gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Available;
             shopItem.totalAmount++;
             return true;
         }

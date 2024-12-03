@@ -2870,6 +2870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItems: []
+  brokenInventoryItems: []
 --- !u!114 &891508078
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public List<GameObject> inventoryItems; 
+    public List<GameObject> brokenInventoryItems;
     private static InventoryManager _instance;
     public static InventoryManager Instance{
         get{
@@ -27,4 +28,21 @@ public class InventoryManager : MonoBehaviour
         inventoryItems.Remove(gameObject);
     }
 
+    public void addBrokenItem(GameObject gameObject){
+        brokenInventoryItems.Add(gameObject);
+    }
+
+    public void removeBrokenItem(GameObject gameObject){
+        brokenInventoryItems.Remove(gameObject);
+    }
+
+    public void moveToBroken(GameObject gameObject){
+        removeItem(gameObject);
+        addBrokenItem(gameObject);
+    }
+
+    public void removeFromBroken(GameObject gameObject){
+        removeBrokenItem(gameObject);
+        addItem(gameObject);
+    }
 }

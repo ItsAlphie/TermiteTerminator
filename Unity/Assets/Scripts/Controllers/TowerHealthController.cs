@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class TowerHealthController : HealthController
 {
-    public bool killed = false;
     [SerializeField] GameObject healthDisplay;
     // Implement the abstract method die()
     protected override void die()
     {
-        gameObject.SetActive(false);
         gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Broken;
+        InventoryManager.Instance.moveToBroken(gameObject);
         // Make object inactive
         // Take tower out of inventory
         // Send kill message
@@ -21,6 +20,10 @@ public class TowerHealthController : HealthController
         base.Start();
     }
     
-    
+    void Update(){
+        if(currHealth > 0){
+            InventoryManager.Instance.removeFromBroken(gameObject);
+        }
+    }
 
 }
