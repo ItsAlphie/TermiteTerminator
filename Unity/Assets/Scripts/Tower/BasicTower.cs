@@ -13,9 +13,13 @@ public class BasicTower : MonoBehaviour
     [SerializeField] private GameObject BoostProjectilePrefab;
     List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
+    private bool broken;
     public bool boosted = false;
     private float timeLeft;
     [SerializeField] public IPAddress IP;
+
+    public bool Broken { get => broken; set => broken = value; }
+
     // Start is called before the first frame update
     void Awake()
     {

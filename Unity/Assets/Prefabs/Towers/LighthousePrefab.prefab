@@ -142,6 +142,7 @@ Transform:
   m_Children:
   - {fileID: 1088459771610346057}
   - {fileID: 8185687430632412903}
+  - {fileID: 7710996259205306518}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4916200420820039536
@@ -188,6 +189,7 @@ MonoBehaviour:
   currHealth: 0
   totalHealth: 30
   killed: 0
+  healthDisplay: {fileID: 3819436822134357511}
 --- !u!1 &8448505019337411285
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,3 +343,70 @@ MonoBehaviour:
   laserFirePoint: {fileID: 0}
   m_lineRenderer: {fileID: 4243949226765438077}
   targetPosition: {x: 0, y: 0}
+--- !u!1001 &8111257793371636126
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3500894841532853571}
+    m_Modifications:
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 624.989
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5012968667337752473, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+      propertyPath: m_Name
+      value: HealthDisplay
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+--- !u!1 &3819436822134357511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5012968667337752473, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+  m_PrefabInstance: {fileID: 8111257793371636126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7710996259205306518 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+  m_PrefabInstance: {fileID: 8111257793371636126}
+  m_PrefabAsset: {fileID: 0}

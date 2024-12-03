@@ -5,23 +5,21 @@ using UnityEngine;
 public class TowerHealthController : HealthController
 {
     public bool killed = false;
+    [SerializeField] GameObject healthDisplay;
     // Implement the abstract method die()
     protected override void die()
     {
+        gameObject.SetActive(false);
+        gameObject.GetComponent<BasicTower>().Broken = true;
+        // InventoryManager.Instance.removeItem(gameObject); //broken bool in tower
+
         // Make object inactive
         // Take tower out of inventory
         // Send kill message
     }
 
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        currHealth = totalHealth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        base.Start();
     }
 }
