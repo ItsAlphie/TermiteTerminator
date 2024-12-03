@@ -8,8 +8,8 @@ public abstract class HealthController : MonoBehaviour
 {
     public int currHealth;
     [SerializeField] protected int totalHealth;
-    [SerializeField] private UnityEvent onHeal;
-    [SerializeField] private UnityEvent onDamage;
+    [SerializeField] protected UnityEvent<int, int> onHeal;
+    [SerializeField] protected UnityEvent<int, int> onDamage;
 
 
     protected abstract void die();
@@ -21,6 +21,7 @@ public abstract class HealthController : MonoBehaviour
     public void takeDamage(int damage)
     {
         currHealth -= damage;
+        onDamage.Invoke(currHealth, totalHealth);
         if(currHealth <= 0){
             currHealth = 0;
             die();
@@ -36,6 +37,7 @@ public abstract class HealthController : MonoBehaviour
                 currHealth = totalHealth;
             };
         }
+        onHeal.Invoke(currHealth, totalHealth);
         
     }
 

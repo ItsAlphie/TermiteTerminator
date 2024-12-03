@@ -7,18 +7,19 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 
-public class BasicTower : MonoBehaviour
+public partial class BasicTower : MonoBehaviour
 {
     [SerializeField] private GameObject ProjectilePrefab;
     [SerializeField] private GameObject BoostProjectilePrefab;
     List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
-    private bool broken;
     public bool boosted = false;
     private float timeLeft;
+    public enum TowerState { Broken, Bought, Available};
+    TowerState state = TowerState.Available;
     [SerializeField] public IPAddress IP;
 
-    public bool Broken { get => broken; set => broken = value; }
+    public TowerState State { get => state; set => state = value; }
 
     // Start is called before the first frame update
     void Awake()
@@ -47,21 +48,13 @@ public class BasicTower : MonoBehaviour
                 }
             }
         }
-
-        if(Input.GetMouseButtonDown(2)){
-            Debug.Log("Middle click");
-            gameObject.GetComponent<ShopManager>().buyItem();
-
-        }
         
     }
 
     void OnMouseDown(){
-        gameObject.GetComponent<ShopManager>().sellItem();
-        Debug.Log("mouse down");
+        gameObject.GetComponent<TowerHealthController>().takeDamage(10);
     }
 
-    
 
     public GameObject findNearestEnemy(){
         float closestDistance = 1000000;

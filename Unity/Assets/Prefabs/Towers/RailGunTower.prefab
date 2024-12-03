@@ -84,6 +84,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currHealth: 0
   totalHealth: 30
+  onHeal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8912625415906521224}
+        m_TargetAssemblyTypeName: HealthDisplay, Assembly-CSharp
+        m_MethodName: updateHealthDisplay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8912625415906521224}
+        m_TargetAssemblyTypeName: HealthDisplay, Assembly-CSharp
+        m_MethodName: updateHealthDisplay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   killed: 0
   healthDisplay: {fileID: 3371511910598617875}
 --- !u!1 &4647971379834741499
@@ -360,3 +390,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1986667715309689096, guid: 741d12c21736c12179aab69d0144f826, type: 3}
   m_PrefabInstance: {fileID: 7735953021773730954}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8912625415906521224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1219246045013681154, guid: 741d12c21736c12179aab69d0144f826, type: 3}
+  m_PrefabInstance: {fileID: 7735953021773730954}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3371511910598617875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1a557aafa81aa188b243ee961a0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

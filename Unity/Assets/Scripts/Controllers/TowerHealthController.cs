@@ -10,9 +10,7 @@ public class TowerHealthController : HealthController
     protected override void die()
     {
         gameObject.SetActive(false);
-        gameObject.GetComponent<BasicTower>().Broken = true;
-        // InventoryManager.Instance.removeItem(gameObject); //broken bool in tower
-
+        gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Broken;
         // Make object inactive
         // Take tower out of inventory
         // Send kill message
@@ -22,4 +20,7 @@ public class TowerHealthController : HealthController
     {
         base.Start();
     }
+    
+    
+
 }

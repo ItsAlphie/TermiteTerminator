@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1986667715309689096}
   - component: {fileID: 3008364341135819124}
+  - component: {fileID: 1219246045013681154}
   m_Layer: 0
   m_Name: HealthDisplay
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: -1539109159
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1135654804, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
+  m_Sprite: {fileID: -573129234, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,3 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1219246045013681154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5012968667337752473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1a557aafa81aa188b243ee961a0ac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthDisplaySprites:
+  - {fileID: 1135654804, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
+  - {fileID: -1364797819, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
+  - {fileID: -573129234, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
+  - {fileID: 1180820052, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
+  - {fileID: -693571748, guid: 5dc64e2e9016af786ad28f5857946a44, type: 3}
