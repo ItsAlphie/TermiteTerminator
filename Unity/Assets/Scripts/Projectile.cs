@@ -43,17 +43,24 @@ public class Projectile : MonoBehaviour
      }
 
       void OnCollisionEnter2D(Collision2D collision){
-        GameObject collidedEnemy = collision.gameObject;
-        if ((collidedEnemy.tag == "Enemy") && collidedEnemy.GetComponent<BasicEnemy>().Alive)
+        GameObject collidedObject = collision.gameObject;
+        HealthController healthController = collidedObject.GetComponent<HealthController>();
+
+        if (collidedObject.tag == "Enemy")
         {   
-            HealthController healthController = collidedEnemy.GetComponent<HealthController>();
-            if (collidedEnemy.GetComponent<BasicEnemy>() != null){
-                if(collidedEnemy.GetComponent<BasicEnemy>().type == 1){
+            if (collidedObject.GetComponent<BasicEnemy>() != null){
+                if(collidedObject.GetComponent<BasicEnemy>().type == 1){
                     damage *= 2;
                 }
                 healthController.takeDamage(damage);
             }
-            Destroy(gameObject);
         }
+        else{
+            if(collidedObject != null){
+                healthController.takeDamage(damage);
+            }
+        }
+        Destroy(gameObject);
+
       }
 }
