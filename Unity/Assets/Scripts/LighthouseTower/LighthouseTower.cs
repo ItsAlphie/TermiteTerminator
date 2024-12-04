@@ -34,28 +34,31 @@ public class LighthouseTower : BasicTower
     // Update is called once per frame
     void Update()
     {
-        List<GameObject> enemies = EnemySpawner.Instance.enemyList;
+        if(State == TowerState.Bought){
+            List<GameObject> enemies = EnemySpawner.Instance.enemyList;
 
-        nearestEnemy = findNearestEnemy();
-        //Checking if boosted and adjusting the laser thickness 
-        if(boosted){
-            lineRenderer.startWidth = boostedThickness;
-            lineRenderer.endWidth = boostedThickness;
-        }
-        else{
-            lineRenderer.startWidth = thickness;
-            lineRenderer.endWidth = thickness;
+            nearestEnemy = findNearestEnemy();
+            //Checking if boosted and adjusting the laser thickness 
+            if(boosted){
+                lineRenderer.startWidth = boostedThickness;
+                lineRenderer.endWidth = boostedThickness;
+            }
+            else{
+                lineRenderer.startWidth = thickness;
+                lineRenderer.endWidth = thickness;
+            }
+            
+            if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
+                
+                getPositionOfNearestEnemy();
+                ShootLaser();
+            }
+            else{
+                targetPosition = transform.position;
+                ShootLaser();
+            }
         }
         
-        if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
-            
-            getPositionOfNearestEnemy();
-            ShootLaser();
-        }
-        else{
-            targetPosition = transform.position;
-            ShootLaser();
-        }
     }
     void ShootLaser(){
         laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition);

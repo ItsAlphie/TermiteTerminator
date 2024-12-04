@@ -36,7 +36,7 @@ public class RailGunTower : BasicTower
         */
 
 
-        if (boosted)
+        if (boosted && State == TowerState.Bought)
         {
             
             firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);

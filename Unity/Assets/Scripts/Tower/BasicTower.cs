@@ -30,6 +30,13 @@ public partial class BasicTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        if(State == TowerState.Bought){
+            shoot();
+        }
+        
+    }
+
+    void shoot(){
         updateEnemyList();
         if(enemies.Count != 0){
             timeLeft -= Time.deltaTime;
@@ -48,7 +55,6 @@ public partial class BasicTower : MonoBehaviour
                 }
             }
         }
-        
     }
 
     void OnMouseDown(){
