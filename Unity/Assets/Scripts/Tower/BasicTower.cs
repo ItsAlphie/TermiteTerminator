@@ -50,8 +50,6 @@ public partial class BasicTower : MonoBehaviour
                 }
                 else{
                     GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
-                    // Debug.Log("projectile " + projectile.GetComponent<Collider2D>());
-                    // Debug.Log("tower " + gameObject.GetComponent<Collider2D>());
                     Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
                     projectile.GetComponent<Projectile>().initialize(nearestEnemy);
                     timeLeft = shootSpeed;
