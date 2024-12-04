@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BomberAnt1
       objectReference: {fileID: 0}
+    - target: {fileID: 8825249917363962011, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.2839908
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825249917363962011, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.009867467
+      objectReference: {fileID: 0}
     - target: {fileID: 8835319684226665381, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Sprite
       value: 
