@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3317074277029450927, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: ec6f5039a8bd4bc4b9c67a6d0df0ad8e, type: 2}
     - target: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Name
       value: IronAnt1

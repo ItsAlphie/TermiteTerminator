@@ -6,12 +6,12 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BomberAnt1Controller
+  m_Name: FlyingAnt1Controller
   m_Controller: {fileID: 9100000, guid: 8f9763a04edfb4e4fafd87091c0f5a5f, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 5aa84890a934e28adaa8ac47e5a4ea39, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 5aa84890a934e28adaa8ac47e5a4ea39, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: d8127b442c6cb65a2b16125b1642c6c0, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 4380812c0b5af2d419c280510bab40f4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 835b173883a9edb4ca9695c7e464f782, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: cf8aa80e5706989b9bb3461c883a2f28, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 4349a6164abf44c4f9d7c53f805f919d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 3c1d0a06da58574469ed671af41cf5ac, type: 2}
