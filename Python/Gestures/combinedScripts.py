@@ -590,7 +590,10 @@ def GestureMain(frame):
         # Collecting data to send to Unity
         if CheckTriangle(thumbL, indexL, thumbR, indexR, indexRootR, hand_sign_idR, hand_sign_idL):
             X,Y = getCenter(thumbL, thumbR, indexL, indexR)
-            msg = "0," + str(round(X, 0)) + "," + str(round(Y, 0))
+            transform = defineAxis()
+            scalars = calculateRelative(X, Y, transform)
+            msg = "0," + str(scalars[0]) + "," + str(scalars[1])
+            print(msg)
             sendData(msg)
 
     else:
@@ -854,7 +857,8 @@ def main():
         if frame is None:
             break
         refMarkerSize = MarkerMain(frame, refMarkerSize)
-        GestureMain(frame)
+        if np.array_equal(TVready, np.array([1, 1, 1])):
+            GestureMain(frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
