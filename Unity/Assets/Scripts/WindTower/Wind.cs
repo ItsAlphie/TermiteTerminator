@@ -5,40 +5,33 @@ using UnityEngine;
 public class Wind : MonoBehaviour
 {
     public Animator animator;
-    public Vector2 direction;
+    public Vector2 direction; 
     public float maxDistance = 30f;
     private int damage = 20;
     private Vector2 startPosition;
+  
 
     void Start()
     {
-        direction = new Vector2(1, 0);
         startPosition = transform.position;
-        animator =  GetComponent<Animator>();
+        animator = GetComponent<Animator>();
+        Debug.Log("Wind initialized. Direction: " + direction);
     }
 
     void Update()
     {
-        animator.SetBool("Hit", true);
-        
-        direction = updateVector(direction.x);
         transform.Translate(direction * Time.deltaTime);
-
         float distanceTraveled = Vector2.Distance(startPosition, transform.position);
         if (distanceTraveled >= maxDistance)
         {
             StartCoroutine(DelayedDestroy());
         }
-
-        Debug.Log("Animator 'Hit' value: " + animator.GetBool("Hit"));
+        updateVector(direction.x);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        direction = Vector2.zero; // Stop movement on collision
         animator.SetInteger("Number_animation", 1);
-        Debug.Log(animator.GetBool("Hit"));
-        Debug.Log("Collision detected with: " + collision.gameObject.name);
 
         GameObject collidedEnemy = collision.gameObject;
         if (collidedEnemy.tag == "Enemy" && collidedEnemy.GetComponent<BasicEnemy>().Alive)
@@ -53,17 +46,20 @@ public class Wind : MonoBehaviour
         StartCoroutine(DelayedDestroy());
     }
 
+    IEnumerator DelayedDestroy()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        yield return new WaitForSeconds(stateInfo.length);
+        Debug.Log("Destroying Wind object.");
+        Destroy(gameObject);
+    }
+    public void setDirection(Vector2 calculatedDirection){
+        direction = calculatedDirection;
+        Debug.Log("Direction set to: "+ direction); 
+    }
     private Vector2 updateVector(float xvalue)
     {
         direction.x = xvalue * 1.005f;
         return direction;
-    }
-
-    IEnumerator DelayedDestroy()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        yield return new WaitForSeconds(stateInfo.length); // Wait for the animation length
-        Debug.Log("Destroying object: " + gameObject.name);
-        Destroy(gameObject);
     }
 }

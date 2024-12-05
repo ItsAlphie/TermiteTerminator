@@ -356,10 +356,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 0}
+  BoostProjectilePrefab: {fileID: 0}
   shootSpeed: 0
+  Booster: 0
   direction: {x: 0, y: 0}
   speed: 5
   maxDistance: 10
+  shootSoundclip: {fileID: 8300000, guid: af61c4773df377144b3ccfa073a5d99e, type: 3}
 --- !u!1 &6903136098132001066
 GameObject:
   m_ObjectHideFlags: 0

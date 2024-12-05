@@ -9,6 +9,7 @@ public class Pulse : BasicTower
     public float maxDistance = 10f;
     private int damage = 40;
     private Vector2 startPosition;
+    [SerializeField] private AudioClip shootSoundclip;
    
     
      
@@ -16,6 +17,7 @@ public class Pulse : BasicTower
     {
         direction = new Vector2(1, 0);
         startPosition = transform.position;
+        SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 1f);
     }
     
     

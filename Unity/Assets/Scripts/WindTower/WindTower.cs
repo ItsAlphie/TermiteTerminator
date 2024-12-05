@@ -5,42 +5,64 @@ using UnityEngine;
 public class WindTower : BasicTower
 {
     private Vector2 targetPosition;
-    public Transform firepoint; // Position to spawn projectiles
-    public GameObject pulsePrefab;    // Projectile prefab
+    public Transform firepoint; 
+    public GameObject windPrefab; 
     public bool charged;
-    private Vector2 mousePos;
-    
+    private GameObject nearestEnemy;
+    public Vector2 direction;
 
-    // Start is called before the first frame update
+    
     void Start()
     {
         firepoint = transform.Find("Firepoint");
         charged = false;
-        
     }
 
-   
     void Update()
     {
-        
-        
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; 
-
-        
-        Vector2 direction = (mousePosition - firepoint.position).normalized;
-
-        
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        firepoint.rotation = Quaternion.Euler(0, 0, angle);
-
-        if (Input.GetButtonDown("Fire1"))
+        nearestEnemy = findNearestEnemy();
+        if (nearestEnemy != null)
         {
-            GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);
+            direction = (nearestEnemy.transform.position - firepoint.position).normalized;
+           // Debug.Log("direction = "+ direction);
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            firepoint.rotation = Quaternion.Euler(0, 0, angle);
         }
-    }   
-    void OnMouseDown(){
-        mousePos = Input.mousePosition;
-        Debug.Log(mousePos);
+
+       
+        if (Input.GetButtonDown("Fire1") && nearestEnemy != null)
+        {
+            GameObject windProjectile = Instantiate(windPrefab, firepoint.position, firepoint.rotation);
+            Wind windScript = windProjectile.GetComponentInChildren<Wind>();
+
+            if (windScript != null)
+            {
+                Debug.Log("this is the direction = " + direction);
+                windScript.setDirection(direction); // Pass the direction
+            }
+            else
+            {
+                Debug.LogError("Wind script not found on the instantiated prefab!");
+            }
+        }
+    }
+    private GameObject findNearestEnemy()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Find all active enemies in the scene
+        float closestDistance = float.MaxValue;
+        GameObject closestEnemy = null;
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy != null && enemy.GetComponent<BasicEnemy>().Alive)
+            {
+                float distance = Vector2.Distance(transform.position, enemy.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestEnemy = enemy;
+                }
+            }
+        }
+        return closestEnemy;
     }
 }
