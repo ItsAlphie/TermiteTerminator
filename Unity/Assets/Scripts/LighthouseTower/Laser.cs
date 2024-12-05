@@ -25,7 +25,7 @@ public class Laser : MonoBehaviour
         if (startPos != endPos)
         {
             laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.2f);
-            
+        
             StartCoroutine(StopSoundAfterDelay(laserAudioSource, 0.1f));
         }
         else

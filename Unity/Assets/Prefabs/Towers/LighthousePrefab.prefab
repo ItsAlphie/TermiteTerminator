@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220384e970460f447ab13a8efd2cb53c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserFirePoint: {fileID: 0}
+  laserFirePoint: {fileID: 8185687430632412903}
   shootSoundclip: {fileID: 8300000, guid: a82e1f648e5bf2f4289a2ea6c9346429, type: 3}
   m_lineRenderer: {fileID: 4243949226765438077}
   laserAudioSource: {fileID: 0}

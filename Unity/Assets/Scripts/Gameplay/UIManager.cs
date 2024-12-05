@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject gameOverScreen;
     [SerializeField] public GameObject waveFinishedScreen;
     [SerializeField] public GameObject HUD;
+    [SerializeField] public GameObject towerFeedbackScreen;
 
     private TMP_Text currentMoneyDisplay;
 
@@ -40,6 +41,10 @@ public class UIManager : MonoBehaviour
 
     public void setWaveFinishedScreen(){
         waveFinishedScreen.SetActive(true);  
+    }
+
+    public void setTowerFeedbackScreen(){
+        towerFeedbackScreen.SetActive(true);
     }
 
     public void updateCurrentMoney(){
