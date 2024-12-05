@@ -18,55 +18,66 @@ public class LighthouseTower : BasicTower
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Starting LighthouseTower.");
+        Debug.Log("Boosted value in Start: " + boosted);
+
         placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
-        laser = gameObject.transform.GetChild(0).gameObject;
+        laser = gameObject.transform.GetChild(0).gameObject; // Initialize laser before using it.
+        projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, boosted,boostedClip, projectileClip);
         lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
         targetPosition = transform.position;
 
-        //Setting the laser thickness to thin for the start
-        
         lineRenderer.startWidth = thickness;
         lineRenderer.endWidth = thickness;
-    
-        ShootLaser();
+
+        Debug.Log("Shooting laser for the first time.");
+        ShootLaser(boosted);
     }
+
 
    
     void Update()
     {
         if(State == TowerState.Bought){
             List<GameObject> enemies = EnemySpawner.Instance.enemyList;
-
             nearestEnemy = findNearestEnemy();
-            //Checking if boosted and adjusting the laser thickness 
-            if(boosted){
-                lineRenderer.startWidth = boostedThickness;
-                lineRenderer.endWidth = boostedThickness;
-            }
-            else{
+            Debug.Log("Boosted value in Update: " + boosted);
+            if (boosted == false)
+            {
+                Debug.Log("not boosted");
                 lineRenderer.startWidth = thickness;
                 lineRenderer.endWidth = thickness;
             }
-            
-            if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
-                getPositionOfNearestEnemy();
-                ShootLaser();
+            else
+            {
+                Debug.Log("i am boosted");
+                lineRenderer.startWidth = boostedThickness;
+                lineRenderer.endWidth = boostedThickness;
             }
-            else{
+
+            if (nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive)
+            {
+                Debug.Log("Shooting Laser at enemy.");
+                getPositionOfNearestEnemy();
+                ShootLaser(boosted);
+            }
+            else
+            {
+                Debug.Log("No enemy. Laser stationary.");
                 targetPosition = transform.position;
-                ShootLaser();
+                ShootLaser(boosted);
             }
         }
-        
     }
-    void ShootLaser(){
-        laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition);
-        Debug.Log(laser.GetComponent<Laser>());
 
+    void ShootLaser(bool isBoosted)
+    {
+        // Pass boostedClip as the fourth parameter.
+        projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, isBoosted, boostedClip,projectileClip);
         hitpoint.GetComponent<HitMarker>().MoveHitMarker(targetPosition);
-        Debug.Log(hitpoint.GetComponent<HitMarker>());
-    }   
+    }
+
     
     private void getPositionOfNearestEnemy(){
         targetPosition = nearestEnemy.transform.position;

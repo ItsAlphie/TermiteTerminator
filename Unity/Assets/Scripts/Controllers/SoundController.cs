@@ -30,35 +30,31 @@ public class SoundController : MonoBehaviour
         audioSource.volume = volume;
         // Play sound
         audioSource.Play();
-
         // Track active AudioSource
         activeAudioSources.Add(audioSource);
-
         // Get length of sound FX clip
         float cliplength = audioSource.clip.length;
-
         // Remove from tracking after it finishes
         StartCoroutine(CleanupAfterPlay(audioSource, cliplength));
-
         return audioSource; // Return the AudioSource so it can be used elsewhere
     }
 
     public void StopSound(AudioSource source)
-{
-    if (source != null)
     {
-        Debug.Log($"Stopping sound for AudioSource: {source}");
-        source.Stop();
-        Debug.Log("Sound stopped. Destroying AudioSource GameObject...");
-        Destroy(source.gameObject);
-        activeAudioSources.Remove(source);
-        Debug.Log("AudioSource removed from active list.");
+        if (source != null)
+        {
+            
+            source.Stop();
+            
+            Destroy(source.gameObject);
+            activeAudioSources.Remove(source);
+            
+        }
+        else
+        {
+            Debug.LogWarning("Attempted to stop a null AudioSource.");
+        }
     }
-    else
-    {
-        Debug.LogWarning("Attempted to stop a null AudioSource.");
-    }
-}
 
 
     public void StopAllSounds()
@@ -87,5 +83,9 @@ public class SoundController : MonoBehaviour
     public void InterruptSound()
     {
         StopAllSounds();
+    }
+    public void ChangeVolume(AudioSource audioSource, float volume)
+    {
+        audioSource.volume = volume;
     }
 }
