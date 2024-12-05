@@ -8,8 +8,10 @@ public class Laser : MonoBehaviour
     public Transform laserFirePoint;
     [SerializeField] private AudioClip shootSoundclip;
     public LineRenderer m_lineRenderer;
-    public AudioSource laserAudioSource;  
+    public AudioSource laserAudioSource; 
+    public AudioSource boostAudioSource; 
     Transform m_transform;
+    public bool firstBoost = true;
     public Vector2 targetPosition;
 
     void Start() {}
@@ -20,9 +22,10 @@ public class Laser : MonoBehaviour
         m_transform = GetComponent<Transform>();
     }
 
-    public AudioSource Draw2DRay(Vector2 startPos, Vector2 endPos, bool boost)
+    public AudioSource Draw2DRay(Vector2 startPos, Vector2 endPos, bool boost, AudioClip boostClip, AudioClip shootSoundclip)
     {
         if(boost==false){
+            firstBoost = true;
             if(laserAudioSource == null ){
                 Debug.Log("boost is false laser");
                 laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.2f);
@@ -34,6 +37,10 @@ public class Laser : MonoBehaviour
         }
         if(boost == true){
             Debug.Log("boost is true laser");
+            if(firstBoost == true){
+                boostAudioSource = SoundController.instance.PlaySoundFXClip(boostClip, transform, 0.8f);
+            }
+            firstBoost = false;
             if(laserAudioSource == null){
                 laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.8f);
             }

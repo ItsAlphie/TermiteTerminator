@@ -23,7 +23,7 @@ public class LighthouseTower : BasicTower
 
         placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
         laser = gameObject.transform.GetChild(0).gameObject; // Initialize laser before using it.
-        projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, boosted);
+        projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, boosted,boostedClip, projectileClip);
         lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
         targetPosition = transform.position;
@@ -71,10 +71,13 @@ public class LighthouseTower : BasicTower
         //}
     }
 
-    void ShootLaser(bool isBoosted){
-        projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition,isBoosted);
+    void ShootLaser(bool isBoosted)
+    {
+        // Pass boostedClip as the fourth parameter.
+        projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, isBoosted, boostedClip,projectileClip);
         hitpoint.GetComponent<HitMarker>().MoveHitMarker(targetPosition);
     }
+
     
     private void getPositionOfNearestEnemy(){
         targetPosition = nearestEnemy.transform.position;
