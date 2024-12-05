@@ -50,7 +50,6 @@ public class LighthouseTower : BasicTower
             }
             
             if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
-                
                 getPositionOfNearestEnemy();
                 ShootLaser();
             }
@@ -63,12 +62,14 @@ public class LighthouseTower : BasicTower
     }
     void ShootLaser(){
         laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition);
+        Debug.Log(laser.GetComponent<Laser>());
+
         hitpoint.GetComponent<HitMarker>().MoveHitMarker(targetPosition);
-    }
+        Debug.Log(hitpoint.GetComponent<HitMarker>());
+    }   
     
     private void getPositionOfNearestEnemy(){
         targetPosition = nearestEnemy.transform.position;
-        //Debug.Log("dhjks");
     }
      
 }
