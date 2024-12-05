@@ -10,7 +10,7 @@ public class HitMarker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("StartHit");
+       
     }
 
     // Update is called once per frame
@@ -23,7 +23,7 @@ public class HitMarker : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger detected");
+        
 
         // Make sure we're colliding with an enemy
         if (other.CompareTag("Enemy"))
@@ -35,18 +35,18 @@ public class HitMarker : MonoBehaviour
                 
                 if (healthController != null)
                 {
-                    Debug.Log("Starting repeated damage to enemy.");
+                    
                     damageCoroutine = StartCoroutine(RepeatedDamage(enemyComponent, healthController));
                 }
             }
             else
             {
-                Debug.LogError("No BasicEnemy or enemy is dead!");
+                
             }
         }
         else
         {
-            Debug.LogError("Triggered with a non-enemy object.");
+            
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -64,7 +64,7 @@ public class HitMarker : MonoBehaviour
         // Repeat while the enemy is alive and health controller is valid
         while (enemy.Alive && healthController.currHealth > 0)
         {
-            Debug.Log("Applying damage to enemy.");
+            
             if(enemy.GetComponent<BasicEnemy>().type == 2){
                 Bdamage *= 2;
                 }
@@ -75,7 +75,7 @@ public class HitMarker : MonoBehaviour
         
         // Stop the coroutine when the enemy is dead
         damageCoroutine = null;
-        Debug.Log("Enemy is dead or no longer valid, stopping damage.");
+        
     }
 
 }
