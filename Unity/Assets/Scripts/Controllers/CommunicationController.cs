@@ -15,6 +15,20 @@ public class CommunicationController : MonoBehaviour
     private float boostTime = 3;
     TowerSpawner towerSpawner;
     public ConcurrentQueue<Action> mainThreadActions = new ConcurrentQueue<Action>();
+    private static CommunicationController _instance;
+
+    public static CommunicationController Instance{
+            get{
+                if(_instance == null){
+                    Debug.LogError("CommunicationController instance is null");
+                }
+                return  _instance;  
+            }
+        }
+
+        private void Awake(){
+            _instance = this;
+        }
 
     // Start is called before the first frame update
     void Start()
