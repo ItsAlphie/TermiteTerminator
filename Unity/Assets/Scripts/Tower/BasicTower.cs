@@ -11,17 +11,18 @@ public partial class BasicTower : MonoBehaviour
 {
     [SerializeField] private GameObject ProjectilePrefab;
     [SerializeField] private GameObject BoostProjectilePrefab;
-    [SerializeField] private AudioClip projectileClip;
+    [SerializeField] public AudioClip projectileClip;
+    [SerializeField] public AudioClip boostedClip;
     [SerializeField] public AudioClip placeClip;
     public AudioSource placingAudioSource;  
     public AudioSource projectileAudioSource;
+    public AudioSource boostedAudioSource;
     
     List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
-    public bool boosted = false;
+    [SerializeField] public bool boosted = false;
     private float timeLeft;
-    //
-    //
+  
     public enum TowerState { Broken, Bought, Available};
     TowerState state = TowerState.Available;
     [SerializeField] public IPAddress IP;
