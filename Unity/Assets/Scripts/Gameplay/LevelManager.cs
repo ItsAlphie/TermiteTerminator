@@ -45,9 +45,9 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        RepairAll();
         MoneyManager.Instance.initializeMoney(100);
         UIManager.Instance.InitializeHUD();
-        RepairAll();
     }
 
     // Update is called once per frame
@@ -76,6 +76,7 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(10);
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        RepairAll();
     }
     
     public void TriggerWaveFinish(){
