@@ -371,6 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserFirePoint: {fileID: 0}
+  shootSoundclip: {fileID: 8300000, guid: a82e1f648e5bf2f4289a2ea6c9346429, type: 3}
   m_lineRenderer: {fileID: 4243949226765438077}
   targetPosition: {x: 0, y: 0}
 --- !u!1001 &8111257793371636126
