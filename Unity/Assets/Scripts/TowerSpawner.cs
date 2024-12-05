@@ -21,8 +21,8 @@ public class TowerSpawner : MonoBehaviour
     public static List<GameObject> towers = new List<GameObject>();
     int resolutionX = Screen.width;
     int resolutionY = Screen.height;
-    int towerCount = 9;
-    public static int hammerID = 8; // "Tower 9"
+    int towerCount = 7;
+    public static int hammerID = 6; // "Tower 7"
 
     // Fine-tuning params
     [SerializeField] float skewFactorX = 1;
@@ -133,13 +133,7 @@ public class TowerSpawner : MonoBehaviour
                 towers.Add(clone);
             }
             // Wind TowerIPAddress.Parse
-            else if (i == 7 || i == 8){
-                GameObject clone = Instantiate(TowerPrefab, stashLocation, Quaternion.identity);
-                clone.name = "Tower_" + i;
-                towers.Add(clone);
-            }
-            // Barrier
-            else if (i == 9){
+            else if (i == 7){
                 GameObject clone = Instantiate(HealingHammerPrefab, stashLocation, Quaternion.identity);
                 clone.name = "HealHammer";
                 towers.Add(clone);

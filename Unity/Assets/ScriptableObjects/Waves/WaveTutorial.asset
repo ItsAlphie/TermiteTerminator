@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaveTutorial
   m_EditorClassIdentifier: 
   waveSequence:
-  - {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
-  - {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
-  - {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
+  - {fileID: 7040709146438770483, guid: a4039d048a00b4a488e1891a65cabb73, type: 3}
+  - {fileID: 7040709146438770483, guid: b34b9692012599740a6044399fb6e68a, type: 3}
+  - {fileID: 7040709146438770483, guid: 727416e4a0ee6184db9bc02ee90d17f7, type: 3}
   timeBetweenSpawn: 3

@@ -6,12 +6,12 @@
 
 #define ssid "Galaxy S22A88A"         // Replace with your WiFi SSID
 #define password "uzjw7402"           // Replace with your WiFi password
-IPAddress ip(192, 168, 24, 10);
+IPAddress ip(192, 168, 24, 7);
 IPAddress gateway(192, 168, 24, 20);
 IPAddress subnet(255, 255, 255, 0);
 
 // Server settings
-#define serverIP "192.168.4.121"      // Unity server's IP address
+#define serverIP "192.168.24.60"      // Unity server's IP address
 #define serverPort 11000               // Unity server's port
 WiFiUDP udp;
 

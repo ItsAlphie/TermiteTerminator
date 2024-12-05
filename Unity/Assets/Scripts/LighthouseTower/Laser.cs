@@ -24,6 +24,7 @@ public class Laser : MonoBehaviour
 
     public AudioSource Draw2DRay(Vector2 startPos, Vector2 endPos, bool boost, AudioClip boostClip, AudioClip shootSoundclip)
     {
+
         if(boost==false){
             firstBoost = true;
             if(laserAudioSource == null ){
@@ -51,8 +52,7 @@ public class Laser : MonoBehaviour
         }
         
         if (startPos != endPos)
-        {            
-            
+        {             
             //StartCoroutine(StopSoundAfterDelay(laserAudioSource, 0.1f));
         }
         else

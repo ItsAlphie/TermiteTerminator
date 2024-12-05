@@ -39,7 +39,7 @@ public class LighthouseTower : BasicTower
    
     void Update()
     {
-        //if(State == TowerState.Bought){
+        if(State == TowerState.Bought){
             List<GameObject> enemies = EnemySpawner.Instance.enemyList;
             nearestEnemy = findNearestEnemy();
             Debug.Log("Boosted value in Update: " + boosted);
@@ -68,7 +68,7 @@ public class LighthouseTower : BasicTower
                 targetPosition = transform.position;
                 ShootLaser(boosted);
             }
-        //}
+        }
     }
 
     void ShootLaser(bool isBoosted)
