@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: IronAnt1
       objectReference: {fileID: 0}
+    - target: {fileID: 8825249917363962011, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.24392088
+      objectReference: {fileID: 0}
+    - target: {fileID: 8825249917363962011, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.012534238
+      objectReference: {fileID: 0}
     - target: {fileID: 8835319684226665381, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Sprite
       value: 

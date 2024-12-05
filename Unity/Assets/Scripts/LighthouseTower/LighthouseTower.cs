@@ -12,12 +12,13 @@ public class LighthouseTower : BasicTower
     private float thickness = 0.2f;
     private float boostedThickness = 0.4f;
     private LineRenderer lineRenderer;
+     
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
         laser = gameObject.transform.GetChild(0).gameObject;
         lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
@@ -31,31 +32,34 @@ public class LighthouseTower : BasicTower
         ShootLaser();
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
-        List<GameObject> enemies = EnemySpawner.Instance.enemyList;
+        if(State == TowerState.Bought){
+            List<GameObject> enemies = EnemySpawner.Instance.enemyList;
 
-        nearestEnemy = findNearestEnemy();
-        //Checking if boosted and adjusting the laser thickness 
-        if(boosted){
-            lineRenderer.startWidth = boostedThickness;
-            lineRenderer.endWidth = boostedThickness;
-        }
-        else{
-            lineRenderer.startWidth = thickness;
-            lineRenderer.endWidth = thickness;
+            nearestEnemy = findNearestEnemy();
+            //Checking if boosted and adjusting the laser thickness 
+            if(boosted){
+                lineRenderer.startWidth = boostedThickness;
+                lineRenderer.endWidth = boostedThickness;
+            }
+            else{
+                lineRenderer.startWidth = thickness;
+                lineRenderer.endWidth = thickness;
+            }
+            
+            if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
+                
+                getPositionOfNearestEnemy();
+                ShootLaser();
+            }
+            else{
+                targetPosition = transform.position;
+                ShootLaser();
+            }
         }
         
-        if(nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive){
-            
-            getPositionOfNearestEnemy();
-            ShootLaser();
-        }
-        else{
-            targetPosition = transform.position;
-            ShootLaser();
-        }
     }
     void ShootLaser(){
         laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition);

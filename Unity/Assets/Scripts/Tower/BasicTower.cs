@@ -11,10 +11,17 @@ public partial class BasicTower : MonoBehaviour
 {
     [SerializeField] private GameObject ProjectilePrefab;
     [SerializeField] private GameObject BoostProjectilePrefab;
+    [SerializeField] private AudioClip projectileClip;
+    [SerializeField] public AudioClip placeClip;
+    public AudioSource placingAudioSource;  
+    public AudioSource projectileAudioSource;
+    
     List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
     public bool boosted = false;
     private float timeLeft;
+    //
+    //
     public enum TowerState { Broken, Bought, Available};
     TowerState state = TowerState.Available;
     [SerializeField] public IPAddress IP;
@@ -25,16 +32,25 @@ public partial class BasicTower : MonoBehaviour
     void Awake()
     {
         timeLeft = shootSpeed;
+        placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
     }
 
     // Update is called once per frame
     void Update()
     {   
+        if(State == TowerState.Bought){
+            shoot();
+        }
+        
+    }
+
+    void shoot(){
         updateEnemyList();
         if(enemies.Count != 0){
             timeLeft -= Time.deltaTime;
             if(timeLeft <= 0){
                 GameObject nearestEnemy = findNearestEnemy();
+                projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.8f);
                 if(boosted){
                     print("Boosted Projectile");
                     GameObject projectile = Instantiate(BoostProjectilePrefab, transform.position, Quaternion.identity);
@@ -42,13 +58,13 @@ public partial class BasicTower : MonoBehaviour
                     timeLeft = shootSpeed;
                 }
                 else{
-                    GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);  
+                    GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
+                    Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
                     projectile.GetComponent<Projectile>().initialize(nearestEnemy);
                     timeLeft = shootSpeed;
                 }
             }
         }
-        
     }
 
     void OnMouseDown(){
@@ -86,5 +102,13 @@ public partial class BasicTower : MonoBehaviour
 
     public void SetIP(IPAddress newIP){
         IP = newIP;
+    }
+    private IEnumerator StopSoundAfterDelay(AudioSource source, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (source != null)
+        {
+            SoundController.instance.StopSound(source);
+        }
     }
 }

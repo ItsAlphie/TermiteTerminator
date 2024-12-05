@@ -35,13 +35,13 @@ public class Hammer : BasicTower
         foreach (GameObject tower in towers){
             if(tower != hammer){
                 TowerHealthController healthCtrl = tower.GetComponent<TowerHealthController>();
+                BasicTower bTower = tower.GetComponent<BasicTower>();
                 Vector2 locationTower = tower.transform.position;
                 float distance = Vector2.Distance(locationHammer, locationTower);
                 print("Distance to tower " + tower + " is " + distance);
                 
                 if(distance <= 1){
-                    if(healthCtrl.killed == true){
-                        BasicTower bTower = tower.GetComponent<BasicTower>();
+                    if(bTower.State == TowerState.Broken){
                         cmCtrl.SendMsg("r", bTower);
                     }
                     if(boosted){

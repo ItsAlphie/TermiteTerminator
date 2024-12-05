@@ -9,6 +9,7 @@ public class Pulse : BasicTower
     public float maxDistance = 10f;
     private int damage = 40;
     private Vector2 startPosition;
+    [SerializeField] private AudioClip shootSoundclip;
    
     
      
@@ -16,6 +17,7 @@ public class Pulse : BasicTower
     {
         direction = new Vector2(1, 0);
         startPosition = transform.position;
+        SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 1f);
     }
     
     
@@ -32,27 +34,26 @@ public class Pulse : BasicTower
     }
     
     void OnTriggerEnter2D(Collider2D collision){
+        Debug.Log("col");
+        GameObject collidedObject = collision.gameObject;
+        HealthController healthController = collidedObject.GetComponent<HealthController>();
 
-        GameObject collidedEnemy = collision.gameObject;
-        if ((collidedEnemy.tag == "Enemy") && collidedEnemy.GetComponent<BasicEnemy>().Alive)
+        if (collidedObject.tag == "Enemy")
         {   
-            HealthController healthController = collidedEnemy.GetComponent<HealthController>();
-            if (collidedEnemy.GetComponent<BasicEnemy>() != null){
-
-                
-                if(collidedEnemy.GetComponent<BasicEnemy>().type == 1){
-                    healthController.takeDamage(2*damage);
-                    Debug.Log("Double damage");
+            if (collidedObject.GetComponent<BasicEnemy>() != null){
+                if(collidedObject.GetComponent<BasicEnemy>().type == 1){
+                    damage *= 2;
                 }
-                else{
-                    healthController.takeDamage(damage);
-                    Debug.Log("Normal damage1");
-                }
-                    
-                
+                healthController.takeDamage(damage);
             }
-            
         }
+        else{
+            if(collidedObject != null){
+                Debug.Log("gfdas");
+                healthController.takeDamage(damage);
+            }
+        }
+        Destroy(gameObject);
       }
     
     private Vector2 updateVector(float xvalue)

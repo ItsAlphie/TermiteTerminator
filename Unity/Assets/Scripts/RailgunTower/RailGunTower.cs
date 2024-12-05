@@ -36,11 +36,13 @@ public class RailGunTower : BasicTower
         */
 
 
-        if (boosted)
+        if (boosted && State == TowerState.Bought)
         {
-            
             firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);
+            Debug.Log("tower" + gameObject.GetComponent<Collider2D>());
+
+            Physics2D.IgnoreCollision(pulseProjectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
             boosted = false;
         }
     }   
