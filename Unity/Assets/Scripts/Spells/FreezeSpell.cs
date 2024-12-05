@@ -6,7 +6,8 @@ public class FreezeSpell : BasicSpell
 {
     override protected void spell_effect()
     {
-        //get all nearby enemies
+        //get all enemies in triangle
+        
         //slow down enemies
 
     }
@@ -16,4 +17,5 @@ public class FreezeSpell : BasicSpell
         //speed up enemies 
         //animation
     }
+
 }
