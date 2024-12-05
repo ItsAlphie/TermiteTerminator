@@ -433,6 +433,9 @@ IPAddress subnet(255, 255, 255, 0);
 #define serverIP "192.168.24.60"      // Unity server's IP address
 #define serverPort 11000               // Unity server's port
 
+int redPin= 14;
+int greenPin = 12;
+
 Servo servo;
 WiFiUDP udp;
 
@@ -459,6 +462,10 @@ void setup() {
   servo.attach(0);
   servo.write(0);
   delay(10);
+
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  setColor(255, 0); // Red Color
 
   Serial.print("Connecting to WiFi...");
   WiFi.mode(WIFI_STA);
@@ -556,10 +563,12 @@ static int protothreadOLEDUpdate(struct pt *pt)
     }
     else{
       charged = true;
+      setColor(0, 255); // Green Color
       lastTimeUpdatedButton = millis();
       PT_WAIT_UNTIL(pt, millis() - lastTimeUpdatedButton > 350);
       if(boosted){
         //Serial.println("Too qucik");
+        setColor(255, 0); // Red Color
         capacity = 0;
         boosted = false;
         charged = false;
@@ -568,4 +577,10 @@ static int protothreadOLEDUpdate(struct pt *pt)
     }
   }
   PT_END(pt);
+}
+
+void setColor(int redValue, int greenValue) {
+  analogWrite(redPin, 255 - redValue);
+  analogWrite(greenPin, 255 - greenValue);
+  //analogWrite(bluePin, 255 - blueValue);
 }

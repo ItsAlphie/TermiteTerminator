@@ -12,12 +12,13 @@ public class LighthouseTower : BasicTower
     private float thickness = 0.2f;
     private float boostedThickness = 0.4f;
     private LineRenderer lineRenderer;
+     
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
         laser = gameObject.transform.GetChild(0).gameObject;
         lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
@@ -31,7 +32,7 @@ public class LighthouseTower : BasicTower
         ShootLaser();
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
         if(State == TowerState.Bought){

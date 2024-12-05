@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
+    //
     public Transform laserFirePoint;
     [SerializeField] private AudioClip shootSoundclip;
     public LineRenderer m_lineRenderer;
