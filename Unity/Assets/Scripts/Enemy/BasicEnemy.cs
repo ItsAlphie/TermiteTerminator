@@ -61,10 +61,10 @@ public class BasicEnemy : MonoBehaviour
     }
 
     void OnTriggerExit2D(Collider2D other){
-        //if(other.tag == "Spell"){
+        if(other.tag == "Spell"){
             ExitFreezeSpell();
             Debug.Log("Exit Freeze Spell");
-        //}
+        }
     }
 
     void EnterFreezeSpell(){

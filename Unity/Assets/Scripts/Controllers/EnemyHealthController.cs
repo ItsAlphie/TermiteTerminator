@@ -12,6 +12,7 @@ public class EnemyHealthController : HealthController
     public override void die()
     {
         enemy.MoveSpeed = 0;
+        Debug.Log(enemy.MoveSpeed);
         enemy.Alive = false;
         Destroy(gameObject.GetComponent<Collider2D>());
         Destroy(gameObject.GetComponent<Rigidbody2D>());

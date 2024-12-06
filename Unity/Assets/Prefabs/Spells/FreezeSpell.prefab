@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1576484638270083897}
   - component: {fileID: 8841048838457651546}
   - component: {fileID: 3581983308092908739}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Snow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4858,7 +4858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1521342884929459007}
   - component: {fileID: 5945958021167503403}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4943,7 +4943,7 @@ GameObject:
   - component: {fileID: 6913162212194489147}
   - component: {fileID: 7376435058066498502}
   - component: {fileID: -3498051973464478944}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: FreezeSpell
   m_TagString: Spell
   m_Icon: {fileID: 0}
