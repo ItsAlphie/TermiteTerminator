@@ -26,7 +26,7 @@ public partial class BasicTower : MonoBehaviour
   
     public enum TowerState { Broken, Bought, Available};
     TowerState state = TowerState.Available;
-    [SerializeField] public IPAddress IP;
+    public IPAddress IP;
 
     public TowerState State { get => state; set => state = value; }
 

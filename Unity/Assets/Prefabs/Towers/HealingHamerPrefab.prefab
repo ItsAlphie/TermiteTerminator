@@ -224,5 +224,5 @@ MonoBehaviour:
   boostedAudioSource: {fileID: 0}
   shootSpeed: 0
   boosted: 0
-  healBoost: 2
-  healAmount: 10
+  healBoost: 5
+  healAmount: 1

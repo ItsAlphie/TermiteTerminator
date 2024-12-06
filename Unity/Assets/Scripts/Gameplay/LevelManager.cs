@@ -87,7 +87,7 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Wave finished");
     }
     private void KillAll(){
-        List<GameObject> towers = TowerSpawner.towers;
+        List<GameObject> towers = TowerSpawner.Instance.towers;
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){
@@ -97,7 +97,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void RepairAll(){
-        List<GameObject> towers = TowerSpawner.towers;
+        List<GameObject> towers = TowerSpawner.Instance.towers;
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){

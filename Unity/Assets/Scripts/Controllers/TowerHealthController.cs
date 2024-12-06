@@ -23,9 +23,6 @@ public class TowerHealthController : HealthController
     }
     
     void Update(){
-        if(currHealth > 0){
-            InventoryManager.Instance.removeFromBroken(gameObject);
-        }
     }
 
     public void repair(){
