@@ -53,21 +53,23 @@ public class BasicEnemy : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Spell"){
             EnterFreezeSpell();
+            Debug.Log("Enter Freeze Spell");
         }
     }
 
     void OnTriggerExit2D(Collider2D other){
-        if(other.tag == "Spell"){
+        //if(other.tag == "Spell"){
             ExitFreezeSpell();
-        }
+            Debug.Log("Exit Freeze Spell");
+        //}
     }
 
     void EnterFreezeSpell(){
-        moveSpeed = 0.1f;
+        moveSpeed = 0.001f;
     }
 
     void ExitFreezeSpell(){
-        moveSpeed = 0.01f;
+        moveSpeed = 0.5f;
     }
 }
 
