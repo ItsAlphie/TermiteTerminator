@@ -32,4 +32,8 @@ public class HealthDisplay : MonoBehaviour
 
     }
 
+    public void deadDisplay(){
+        gameObject.GetComponent<SpriteRenderer>().sprite = healthDisplaySprites[0];
+    }
+
 }

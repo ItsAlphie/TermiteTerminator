@@ -11,7 +11,7 @@ public class TowerHealthController : HealthController
         gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Broken;
         InventoryManager.Instance.moveToBroken(gameObject);
         CommunicationController.Instance.SendMsg("k", gameObject.GetComponent<BasicTower>());
-
+        onDied.Invoke();
         // Make object inactive
         // Take tower out of inventory
         // Send kill message
