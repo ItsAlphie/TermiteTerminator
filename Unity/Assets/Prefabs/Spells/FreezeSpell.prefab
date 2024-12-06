@@ -4942,4 +4942,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550fbd3867b00ea40a49a6d6d2e04ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spell_duration: 60
+  spell_duration: 10
