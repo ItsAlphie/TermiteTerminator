@@ -162,6 +162,7 @@ MonoBehaviour:
   moveSpeed: 0.6
   pointsIndex: 0
   type: 0
+  coinDrop: 2
 --- !u!50 &-7639947875795090581
 Rigidbody2D:
   serializedVersion: 4

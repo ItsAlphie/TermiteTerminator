@@ -13,10 +13,13 @@ public class BasicEnemy : MonoBehaviour
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public bool Alive { get => alive; set => alive = value; }
+    public int CoinDrop { get => coinDrop; set => coinDrop = value; }
 
     [SerializeField] public int type = 0; // 0 = normal, 1 = fire, 2 = ??, 3 = ??
 
     private int environment = 0;
+
+    [SerializeField ]private int coinDrop = 2;
 
     // Start is called before the first frame update
     void Start()
