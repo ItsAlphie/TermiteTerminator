@@ -19,11 +19,13 @@ public class LevelManager : MonoBehaviour
     private int environment = 0; //To do: change this to an enum
 
     public bool GameOver = false;
+    public bool start = false;
 
     [SerializeField] private UnityEvent OnWaveFinish;
     [SerializeField] private UnityEvent OnGameOver;
     [SerializeField] public GameObject PathCollider;
 
+    int hammerID = 6;
 
     private static LevelManager _instance;
     public static LevelManager Instance{
@@ -48,7 +50,6 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RepairAll();
         MoneyManager.Instance.initializeMoney(100);
         UIManager.Instance.InitializeHUD();
     }
@@ -56,16 +57,20 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!start){
+            start = true;
+            RepairAll();
+        }
     }
 
     public void TriggerGameOver(){
-        KillAll();
         GameOver = true;
         OnGameOver.Invoke();
         Debug.Log("Game Over");
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
+        KillAll();
+
     }
     int GetLevel(){
         return level;
@@ -91,18 +96,22 @@ public class LevelManager : MonoBehaviour
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){
-            TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
-            healthController.die();
+            if(towerObject != towers[hammerID]){
+                TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
+                healthController.die();
+            }
         }
     }
 
     private void RepairAll(){
         List<GameObject> towers = TowerSpawner.Instance.towers;
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
-        print("Killing all towers");
+        print("Repairing all towers");
         foreach (GameObject towerObject in towers){
-            TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
-            healthController.repair();
+            if(towerObject != towers[hammerID]){
+                TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
+                healthController.repair();
+            }
         }
     }
 }
