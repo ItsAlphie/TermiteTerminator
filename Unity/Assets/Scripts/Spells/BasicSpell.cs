@@ -9,6 +9,7 @@ using System.Threading;
 public abstract partial class BasicSpell : MonoBehaviour
 {
 
+    [SerializeField] protected float spell_duration;
     protected float t0;
 
     void Start()
@@ -20,11 +21,15 @@ public abstract partial class BasicSpell : MonoBehaviour
 
     void Update()
     {   
+
+        //get all enemies in collider
+        //get_enemies();
+
         //check time
-        if (Time.time - t0 > 5)
+        if (Time.time - t0 > spell_duration)
         {
-            
             Destroy(gameObject);
+
         }
         //if time is up, destroy object
     }

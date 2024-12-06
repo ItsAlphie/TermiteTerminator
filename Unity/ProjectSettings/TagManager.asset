@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - LightHouseTower
   - RailgunTower
+  - Spell
   layers:
   - Default
   - TransparentFX
