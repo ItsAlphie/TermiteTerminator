@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.ComponentModel.Design;
 
 public class Hammer : BasicTower
 {
@@ -26,7 +27,7 @@ public class Hammer : BasicTower
 
     public void ProximityCheck(){
         // Check if the hammer is close to other towers
-        List<GameObject> towers = TowerSpawner.towers;
+        List<GameObject> towers = TowerSpawner.Instance.towers;
         GameObject levelManager = GameObject.Find("LevelManager");
         CommunicationController cmCtrl = levelManager.GetComponent<CommunicationController>();
         GameObject hammer = towers[hammerID];
@@ -42,7 +43,7 @@ public class Hammer : BasicTower
                 
                 if(distance <= 1){
                     if(bTower.State == TowerState.Broken){
-                        cmCtrl.SendMsg("r", bTower);
+                        healthCtrl.repair();
                     }
                     if(boosted){
                         healthCtrl.heal((int)Mathf.Round(healBoost*healAmount));

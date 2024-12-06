@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Linq;
 public class CommunicationController : MonoBehaviour
 {
     private const int listenPort = 11000;
@@ -34,7 +35,7 @@ public class CommunicationController : MonoBehaviour
     void Start()
     {
         GameObject levelManager = GameObject.Find("LevelManager");
-        towerSpawner = levelManager.GetComponent<TowerSpawner>();
+        towerSpawner = TowerSpawner.Instance;
         
         print("Starting Communication thread");
         Thread towerThread = new Thread(ReceiveMessages);
@@ -55,10 +56,16 @@ public class CommunicationController : MonoBehaviour
                 print("Waiting for messages");
                 byte[] bytes = listener.Receive(ref groupEP);
                 string senderIP = groupEP.Address.ToString();
-                print("Got message from " + senderIP);
+                print("Got message (" + bytes.Length + ") from " + senderIP);
+                int size = bytes.Length;
                 if (senderIP.Equals("127.0.0.1")){
-                    print("Handling towers");
-                    towerSpawner.ReceiveTowerInfo(bytes);
+                    if(size > 25){
+                        towerSpawner.ReceiveTowerInfo(bytes);
+                    }
+                    else{
+                        print("Spell info");
+                        ProcessSpell(bytes);
+                    }
                 }
                 else{
                     print("Queueing boost");
@@ -80,9 +87,8 @@ public class CommunicationController : MonoBehaviour
     {
         print("Handling boost of tower " + towerIP);
         string towerID = towerIP.Substring(towerIP.Length-1);
-        print("I think I got a message from tower " + towerID);
 
-        List<GameObject> towers = TowerSpawner.towers;
+        List<GameObject> towers = TowerSpawner.Instance.towers;
         GameObject towerObject = towers[int.Parse(towerID)-1];
         BasicTower tower = towerObject.GetComponent<BasicTower>();
 
@@ -120,5 +126,20 @@ public class CommunicationController : MonoBehaviour
         {
             print(e);
         }   
+    }
+
+    public void ProcessSpell(byte[] bytes){
+        string message = System.Text.Encoding.UTF8.GetString(bytes);
+        string[] values = message.Split(',');
+
+        int index = Int32.Parse(values[0]);
+        float X = float.Parse(values[1]);
+        float Y = float.Parse(values[2]);
+        if(X > 0 || Y > 0){
+            List<GameObject> spells = towerSpawner.spells;
+            GameObject spellObject = spells[index];
+            BasicSpell spell = spellObject.GetComponent<BasicSpell>();
+            spell.CastSpell(X,Y);
+        }
     }
 }

@@ -21,8 +21,7 @@ public class ClickSpawn : MonoBehaviour
             GameObject tower = Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
             tower.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
             InventoryManager.Instance.addItem(tower);
-            TowerSpawner.towers.Add(tower);
-
+            TowerSpawner.Instance.towers.Add(tower);
         }
 
     }

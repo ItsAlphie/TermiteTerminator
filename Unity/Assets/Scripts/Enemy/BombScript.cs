@@ -33,7 +33,7 @@ public class BombScript : MonoBehaviour
         alive = false;
         animator.SetBool("isDead", true);
         //damage all towers in range
-        List<GameObject> towers = TowerSpawner.towers;
+        List<GameObject> towers = TowerSpawner.Instance.towers;
         foreach (GameObject t in towers)
         {
             if(t == null) continue;

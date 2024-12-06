@@ -18,24 +18,44 @@ public class TowerSpawner : MonoBehaviour
     [SerializeField] GameObject LightTowerPrefab;
     [SerializeField] GameObject RailGunPrefab;
     [SerializeField] GameObject HealingHammerPrefab;
-    public static List<GameObject> towers = new List<GameObject>();
-    int resolutionX = Screen.width;
-    int resolutionY = Screen.height;
+    [SerializeField] GameObject FreezeSpellPrefab;
+    public List<GameObject> towers = new List<GameObject>();
+    public List<GameObject> spells = new List<GameObject>();
+    public int resolutionX;
+    public int resolutionY;
     int towerCount = 7;
     public static int hammerID = 6; // "Tower 7"
 
+     private static TowerSpawner _instance;
+    public static TowerSpawner Instance{
+        get{
+            if(_instance == null){
+                Debug.LogError("TowerSpawner instance is null");
+            }
+            return  _instance;  
+        }
+    }
+
+    private void Awake(){
+        _instance = this;
+        resolutionX = Screen.width;
+        resolutionY = Screen.height;
+    }
+
     // Fine-tuning params
-    [SerializeField] float skewFactorX = 1;
-    [SerializeField] float skewFactorY = 1;
-    [SerializeField] float startSkewY = 0;
+    [SerializeField] public float skewFactorX = 1;
+    [SerializeField] public float skewFactorY = 1;
+    [SerializeField] public float startSkewY = 0;
 
     // Thread-safe queue to handle received matrices
     public ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
 
     void Start(){
         TowerSpawn();
+        //SpellSpawn();
         SetIps();
         HideTowers();
+        //HideSpells();
     }
 
     public void ReceiveTowerInfo(byte[] bytes){
@@ -143,15 +163,31 @@ public class TowerSpawner : MonoBehaviour
         }
     }
 
+    private void SpellSpawn(){
+        print("Spawning spells");
+        Vector2 stashLocation = Camera.main.ScreenToWorldPoint(new Vector3 (-resolutionX,-resolutionY,0));
+
+        // Freeze Spell
+        GameObject clone = Instantiate(FreezeSpellPrefab, stashLocation, Quaternion.identity);
+        clone.name = "Freeze Spell";
+        spells.Add(clone);
+        }
+
     private void SetIps(){
         for (int i = 0; i < towers.Count; i++){
             BasicTower tower = towers[i].GetComponent<BasicTower>();
-            tower.SetIP(IPAddress.Parse("192.168.24." + i));
+            tower.SetIP(IPAddress.Parse("192.168.24." + (i+1)));
         }
     }
     private void HideTowers(){
         for (int i = 0; i < towers.Count; i++){
             towers[i].SetActive(false);
+        }
+    }
+
+    private void HideSpells(){
+        for (int i = 0; i < spells.Count; i++){
+            spells[i].SetActive(false);
         }
     }
 
@@ -187,7 +223,6 @@ public class TowerSpawner : MonoBehaviour
             bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
             ShopManager shopManager = towers[i].GetComponent<ShopManager>();
 
-            //TODO: Differentiate tower and hammer here
             if(i == hammerID){
                 if (outOfScreen){
                     towers[i].SetActive(false);

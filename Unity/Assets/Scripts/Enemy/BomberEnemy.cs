@@ -47,7 +47,7 @@ public class BomberEnemy : BasicEnemy
 
     float FindNearestTower(){
         float closestDistance = 1000000;
-        List<GameObject> towers = TowerSpawner.towers;
+        List<GameObject> towers = TowerSpawner.Instance.towers;
         if (towers.Count == 0) return 10000f;
         foreach (GameObject t in towers)
         {
