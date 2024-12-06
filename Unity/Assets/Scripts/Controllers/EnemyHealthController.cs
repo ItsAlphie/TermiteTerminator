@@ -11,7 +11,6 @@ public class EnemyHealthController : HealthController
 
     public override void die()
     {
-        takeDamage(0); //invoke onDamage
         enemy.MoveSpeed = 0;
         Debug.Log(enemy.MoveSpeed);
         enemy.Alive = false;

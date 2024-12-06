@@ -7,7 +7,7 @@ public class TowerHealthController : HealthController
     [SerializeField] GameObject healthDisplay;
     // Implement the abstract method die()
     public override void die()
-    {
+    {   
         gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Broken;
         InventoryManager.Instance.moveToBroken(gameObject);
         CommunicationController.Instance.SendMsg("k", gameObject.GetComponent<BasicTower>());
