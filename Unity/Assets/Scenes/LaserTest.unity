@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0dd3697904be138a4eb54093e774ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+  TowerPrefab: {fileID: 3598248750024016555, guid: 0394cbefc334c0e4c98a335c07731356, type: 3}
 --- !u!114 &891508072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3977,6 +3977,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3619880523954228064, guid: f37ac722208f1b64ebd7907d0c5d3a29, type: 3}
+      propertyPath: winGameClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bbc4f8df4d140db4cb5429efdcdfe48e, type: 3}
+    - target: {fileID: 3619880523954228064, guid: f37ac722208f1b64ebd7907d0c5d3a29, type: 3}
+      propertyPath: loseGameClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3391f63ee47a09c478b809381f508c30, type: 3}
+    - target: {fileID: 3619880523954228064, guid: f37ac722208f1b64ebd7907d0c5d3a29, type: 3}
+      propertyPath: startGameClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ca2e0df3fa3b562418e8567ecd20a0f4, type: 3}
+    - target: {fileID: 3619880523954228064, guid: f37ac722208f1b64ebd7907d0c5d3a29, type: 3}
+      propertyPath: backgroundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 498146a6c472e25479b9193fad64fc8e, type: 3}
     - target: {fileID: 3937673692238370584, guid: f37ac722208f1b64ebd7907d0c5d3a29, type: 3}
       propertyPath: m_Name
       value: SoundFXController

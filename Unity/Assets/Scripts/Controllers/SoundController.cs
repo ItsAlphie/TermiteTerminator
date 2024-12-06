@@ -7,7 +7,15 @@ public class SoundController : MonoBehaviour
     public static SoundController instance;
     private AudioSource audioSource;
     [SerializeField] private AudioSource soundFXObject;
-    [SerializeField] private AudioClip gameOver;
+    [SerializeField] public AudioClip startGameClip;
+    [SerializeField] public AudioClip loseGameClip;
+    [SerializeField] public AudioClip winGameClip;
+    [SerializeField] public AudioClip backgroundClip;
+    [SerializeField] public AudioSource startGameSource;
+    [SerializeField] public AudioSource loseGameSource;
+    [SerializeField] public AudioSource winGameSource;
+    [SerializeField] public AudioSource backgroundSource;
+
 
     private List<AudioSource> activeAudioSources = new List<AudioSource>();
 
@@ -37,6 +45,16 @@ public class SoundController : MonoBehaviour
         // Remove from tracking after it finishes
         StartCoroutine(CleanupAfterPlay(audioSource, cliplength));
         return audioSource; // Return the AudioSource so it can be used elsewhere
+    }
+    public void PlayBackground(){
+        backgroundSource = Instantiate(soundFXObject);
+        backgroundSource.clip = backgroundClip;
+        backgroundSource.volume = 0.1f;
+        backgroundSource.loop = true;
+        backgroundSource.Play();
+        activeAudioSources.Add(audioSource);
+        
+        
     }
 
     public void StopSound(AudioSource source)
@@ -79,6 +97,7 @@ public class SoundController : MonoBehaviour
             Destroy(source.gameObject);
         }
     }
+
 
     public void InterruptSound()
     {

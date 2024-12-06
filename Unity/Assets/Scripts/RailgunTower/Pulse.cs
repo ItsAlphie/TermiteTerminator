@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pulse : BasicTower
+public class Pulse : MonoBehaviour
 {
     public Vector2 direction;
     public float speed = 5f;
-    public float maxDistance = 10f;
+    public float maxDistance = 30f;
     private int damage = 40;
     private Vector2 startPosition;
-    [SerializeField] private AudioClip shootSoundclip;
+    //[SerializeField] private AudioClip shootSoundclip;
    
     
      
@@ -17,7 +17,7 @@ public class Pulse : BasicTower
     {
         direction = new Vector2(1, 0);
         startPosition = transform.position;
-        SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 1f);
+        //SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 1f);
     }
     
     
@@ -28,13 +28,14 @@ public class Pulse : BasicTower
         transform.Translate(direction * Time.deltaTime);
 
         float distanceTraveled = Vector2.Distance(startPosition,transform.position);
+        Debug.Log(distanceTraveled);
+        Debug.Log("maxDistance"+ maxDistance);
         if(distanceTraveled >=maxDistance){
             Destroy(gameObject);
         } 
     }
     
     void OnTriggerEnter2D(Collider2D collision){
-        Debug.Log("col");
         GameObject collidedObject = collision.gameObject;
         HealthController healthController = collidedObject.GetComponent<HealthController>();
 
@@ -49,11 +50,10 @@ public class Pulse : BasicTower
         }
         else{
             if(collidedObject != null){
-                Debug.Log("gfdas");
                 healthController.takeDamage(damage);
             }
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
       }
     
     private Vector2 updateVector(float xvalue)
