@@ -90,8 +90,8 @@ public class LevelManager : MonoBehaviour
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){
-            BasicTower tower = towerObject.GetComponent<BasicTower>();
-            cmCtrl.SendMsg("k", tower);
+            TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
+            healthController.die();
         }
     }
 
@@ -100,8 +100,8 @@ public class LevelManager : MonoBehaviour
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         print("Killing all towers");
         foreach (GameObject towerObject in towers){
-            BasicTower tower = towerObject.GetComponent<BasicTower>();
-            cmCtrl.SendMsg("r", tower);
+            TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
+            healthController.repair();
         }
     }
 }

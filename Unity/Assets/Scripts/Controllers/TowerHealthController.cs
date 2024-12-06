@@ -28,4 +28,9 @@ public class TowerHealthController : HealthController
         }
     }
 
+    public void repair(){
+        gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
+        InventoryManager.Instance.removeFromBroken(gameObject);
+        CommunicationController.Instance.SendMsg("r", gameObject.GetComponent<BasicTower>());
+    }
 }
