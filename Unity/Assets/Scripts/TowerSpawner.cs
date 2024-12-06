@@ -238,6 +238,7 @@ public class TowerSpawner : MonoBehaviour
             }
             else{
                 if (outOfScreen){
+                    Debug.Log("Tower out of screen");
                     towers[i].SetActive(false);
                     UIManager.Instance.disableTowerFeedbackScreen();
                     shopManager.sellItem();
@@ -245,9 +246,11 @@ public class TowerSpawner : MonoBehaviour
                 
                 else if (towerLifted == 1){
                     // Tower preview, not yet placed nor bought.
+                    Debug.Log("Tower lifted");
                     UIManager.Instance.setTowerFeedbackScreen();
                 }
                 else{
+                    Debug.Log("Tower placing");
                     UIManager.Instance.disableTowerFeedbackScreen();
                     print("Attempting to buy " + towers[i] + shopManager);
                     if(shopManager.buyItem()){

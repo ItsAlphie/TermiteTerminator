@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject HUD;
     [SerializeField] public GameObject towerFeedbackScreen;
 
+    private bool towerFeedbackScreenOn = false;
+
     private TMP_Text currentMoneyDisplay;
 
     public static UIManager Instance{
@@ -44,7 +46,13 @@ public class UIManager : MonoBehaviour
     }
 
     public void setTowerFeedbackScreen(){
-        towerFeedbackScreen.SetActive(true);
+        if(!towerFeedbackScreenOn){
+            Debug.Log("entered if statement");
+            towerFeedbackScreenOn = true;
+            towerFeedbackScreen.SetActive(true);
+            Debug.Log(towerFeedbackScreenOn);
+
+        }
     }
 
     public void disableTowerFeedbackScreen(){
