@@ -36,15 +36,14 @@ public class Pulse : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision){
         GameObject collidedObject = collision.gameObject;
         HealthController healthController = collidedObject.GetComponent<HealthController>();
-        Debug.Log("I had a colission");
         
 
         if (collidedObject.tag == "Enemy")
         {   
-            Debug.Log("i hit an enemy");
+
             if (collidedObject.GetComponent<BasicEnemy>() != null){
                 if(collidedObject.GetComponent<BasicEnemy>().type == 1){
-                    Debug.Log("i did damage to enemy");
+   
                     damage *= 2;
                 }
                 healthController.takeDamage(damage);

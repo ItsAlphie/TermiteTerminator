@@ -41,32 +41,28 @@ public partial class BasicTower : MonoBehaviour
     void Update()
     {   
         if(State == TowerState.Bought){
-            shoot();
+            if(boosted){
+                shoot();
+                
+            }
+            
+            
+            
         }
         
     }
 
     void shoot(){
         updateEnemyList();
-        if(enemies.Count != 0){
-            timeLeft -= Time.deltaTime;
-            if(timeLeft <= 0){
+        if(enemies.Count != 0){            
                 GameObject nearestEnemy = findNearestEnemy();
-                projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.8f);
-                if(boosted){
-                    print("Boosted Projectile");
-                    GameObject projectile = Instantiate(BoostProjectilePrefab, transform.position, Quaternion.identity);
-                    projectile.GetComponent<Projectile>().initialize(nearestEnemy);
-                    timeLeft = shootSpeed;
-                }
-                else{
-                    GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
-                    Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
-                    projectile.GetComponent<Projectile>().initialize(nearestEnemy);
-                    timeLeft = shootSpeed;
-                }
-            }
+                projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.5f);
+                GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
+                Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
+                projectile.GetComponent<Projectile>().initialize(nearestEnemy);
+                timeLeft = shootSpeed;              
         }
+        boosted = false;
     }
 
     void OnMouseDown(){

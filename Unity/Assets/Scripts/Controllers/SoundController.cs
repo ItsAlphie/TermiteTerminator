@@ -11,10 +11,14 @@ public class SoundController : MonoBehaviour
     [SerializeField] public AudioClip loseGameClip;
     [SerializeField] public AudioClip winGameClip;
     [SerializeField] public AudioClip backgroundClip;
-    [SerializeField] public AudioSource startGameSource;
-    [SerializeField] public AudioSource loseGameSource;
-    [SerializeField] public AudioSource winGameSource;
-    [SerializeField] public AudioSource backgroundSource;
+    [SerializeField] public AudioClip receiveMoneyClip;
+    [SerializeField] public AudioClip loseMoneyClip;
+    public AudioSource startGameSource;
+    public AudioSource loseGameSource;
+    public AudioSource winGameSource;
+    public AudioSource backgroundSource;
+    public AudioSource receiveMoneySource;
+    public AudioSource loseMoneySource;
 
 
     private List<AudioSource> activeAudioSources = new List<AudioSource>();
@@ -66,6 +70,22 @@ public class SoundController : MonoBehaviour
         backgroundSource.loop = true;
         backgroundSource.Play();
         activeAudioSources.Add(backgroundSource);
+    }
+    public void PlayMoneyReceive(){
+        receiveMoneySource = Instantiate(soundFXObject);
+        receiveMoneySource.clip = receiveMoneyClip;
+        receiveMoneySource.volume = 1f;
+        receiveMoneySource.Play();
+        float receiveMoneyClipLength = receiveMoneySource.clip.length;
+        Destroy(receiveMoneySource.gameObject, receiveMoneyClipLength);
+    }
+    public void PlayMoneyLose(){
+        loseMoneySource = Instantiate(soundFXObject);
+        loseMoneySource.clip = loseMoneyClip;
+        loseMoneySource.volume = 1f;
+        loseMoneySource.Play();
+        float loseMoneyClipLength = loseMoneySource.clip.length;
+        Destroy(loseMoneySource.gameObject, loseMoneyClipLength);
     }
 
 
