@@ -49,7 +49,11 @@ MonoBehaviour:
   loseGameClip: {fileID: 8300000, guid: 3391f63ee47a09c478b809381f508c30, type: 3}
   winGameClip: {fileID: 8300000, guid: bbc4f8df4d140db4cb5429efdcdfe48e, type: 3}
   backgroundClip: {fileID: 8300000, guid: 498146a6c472e25479b9193fad64fc8e, type: 3}
+  receiveMoneyClip: {fileID: 8300000, guid: fd13a9a64db4508459478ef2236c2458, type: 3}
+  loseMoneyClip: {fileID: 8300000, guid: 04cacf1f8458bec44bb302cf97f5857d, type: 3}
   startGameSource: {fileID: 0}
   loseGameSource: {fileID: 0}
   winGameSource: {fileID: 0}
   backgroundSource: {fileID: 0}
+  receiveMoneySource: {fileID: 0}
+  loseMoneySource: {fileID: 0}
