@@ -10,6 +10,8 @@ TagManager:
   - LightHouseTower
   - RailgunTower
   - PathCollider
+  - Spell
+
   layers:
   - Default
   - TransparentFX
