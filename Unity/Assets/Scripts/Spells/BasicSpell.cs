@@ -9,7 +9,7 @@ using System.Threading;
 
 abstract public partial class BasicSpell : MonoBehaviour
 {
-    bool active = false;
+    public bool active = false;
     private float timer = 0.0f;
     [SerializeField] protected float spell_duration = 3.0f; 
 

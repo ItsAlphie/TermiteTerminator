@@ -52,10 +52,10 @@ public class TowerSpawner : MonoBehaviour
 
     void Start(){
         TowerSpawn();
-        //SpellSpawn();
+        SpellSpawn();
         SetIps();
         HideTowers();
-        //HideSpells();
+        HideSpells();
     }
 
     public void ReceiveTowerInfo(byte[] bytes){
