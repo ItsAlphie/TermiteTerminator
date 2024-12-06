@@ -182,7 +182,7 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 4748434344119101974, guid: 67aae0f5966053c67b2f94f65ecb9222, type: 3}
   BoostProjectilePrefab: {fileID: 1882620363957009387, guid: 8a648b4620cc1a843a635078368aeecb, type: 3}
   projectileClip: {fileID: 8300000, guid: 28143d6c7b415ae42800f5c567655022, type: 3}
-  boostedClip: {fileID: 0}
+  boostedClip: {fileID: 8300000, guid: dd8a027b8d52830418d71f29cc93cadb, type: 3}
   placeClip: {fileID: 8300000, guid: bbc1212cf8cc23b4387711b9a4a6f495, type: 3}
   placingAudioSource: {fileID: 0}
   projectileAudioSource: {fileID: 0}
