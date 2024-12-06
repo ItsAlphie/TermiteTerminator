@@ -15,7 +15,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject HUD;
     [SerializeField] public GameObject towerFeedbackScreen;
 
+    private float towerFeedbackScreenTimer;
+
     private bool towerFeedbackScreenOn = false;
+    private bool towerFeedbackScreenTimerOn = false;
 
     private TMP_Text currentMoneyDisplay;
 
@@ -30,6 +33,16 @@ public class UIManager : MonoBehaviour
 
     private void Awake(){
         _instance = this;
+    }
+
+    void Update(){
+        if(towerFeedbackScreenTimerOn){
+            towerFeedbackScreenTimer -= Time.deltaTime; 
+            if(towerFeedbackScreenTimer <= 0){
+                towerFeedbackScreen.SetActive(false);
+                towerFeedbackScreenOn = false;
+            }
+        }
     }
 
     public void InitializeHUD(){
@@ -47,16 +60,18 @@ public class UIManager : MonoBehaviour
 
     public void setTowerFeedbackScreen(){
         if(!towerFeedbackScreenOn){
-            Debug.Log("entered if statement");
             towerFeedbackScreenOn = true;
             towerFeedbackScreen.SetActive(true);
-            Debug.Log(towerFeedbackScreenOn);
-
+            initializeTowerFeedbackScreenTimer();
         }
     }
 
     public void disableTowerFeedbackScreen(){
-        towerFeedbackScreen.SetActive(false);
+        towerFeedbackScreenTimerOn = true;
+    }
+
+    public void initializeTowerFeedbackScreenTimer(){
+        towerFeedbackScreenTimer = 5;
     }
 
     public void updateCurrentMoney(){
