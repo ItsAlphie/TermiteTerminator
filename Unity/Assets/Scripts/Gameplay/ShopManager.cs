@@ -30,6 +30,7 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
+        MoneyManager.Instance.deductMoney(0);
         return false;
     }
 
