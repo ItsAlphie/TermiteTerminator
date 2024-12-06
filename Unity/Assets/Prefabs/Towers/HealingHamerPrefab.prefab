@@ -216,7 +216,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectilePrefab: {fileID: 0}
   BoostProjectilePrefab: {fileID: 0}
+  projectileClip: {fileID: 0}
+  boostedClip: {fileID: 0}
+  placeClip: {fileID: 0}
+  placingAudioSource: {fileID: 0}
+  projectileAudioSource: {fileID: 0}
+  boostedAudioSource: {fileID: 0}
   shootSpeed: 0
   boosted: 0
-  healBoost: 2
-  healAmount: 10
+  healBoost: 5
+  healAmount: 1
