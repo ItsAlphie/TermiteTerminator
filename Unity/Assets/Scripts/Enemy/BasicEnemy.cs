@@ -67,7 +67,7 @@ public class BasicEnemy : MonoBehaviour
     }
 
     void ExitFreezeSpell(){
-        moveSpeed = 0.5f;
+        moveSpeed = 0.01f;
     }
 }
 
