@@ -9,9 +9,8 @@ TagManager:
   - Projectile
   - LightHouseTower
   - RailgunTower
-  - PathCollider
   - Spell
-
+  - PathCollider
   layers:
   - Default
   - TransparentFX
@@ -22,7 +21,7 @@ TagManager:
   - enemy
   - towers
   - projectile
-  - pathCollider
+  - path
   - 
   - 
   - 
