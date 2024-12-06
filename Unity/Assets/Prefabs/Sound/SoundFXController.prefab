@@ -45,4 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundFXObject: {fileID: 7264189536296445850, guid: a9e56f3a68f5d3947817777f16c202fd, type: 3}
-  gameOver: {fileID: 8300000, guid: ba203c7741186fd468be22a1966c46ad, type: 3}
+  startGameClip: {fileID: 8300000, guid: ca2e0df3fa3b562418e8567ecd20a0f4, type: 3}
+  loseGameClip: {fileID: 8300000, guid: 3391f63ee47a09c478b809381f508c30, type: 3}
+  winGameClip: {fileID: 8300000, guid: bbc4f8df4d140db4cb5429efdcdfe48e, type: 3}
+  backgroundClip: {fileID: 8300000, guid: 498146a6c472e25479b9193fad64fc8e, type: 3}
+  startGameSource: {fileID: 0}
+  loseGameSource: {fileID: 0}
+  winGameSource: {fileID: 0}
+  backgroundSource: {fileID: 0}

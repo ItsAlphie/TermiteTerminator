@@ -50,14 +50,14 @@ public class RailGunTower : BasicTower
         
         if(boosted)
         {
-            
+            Debug.Log("is boosted");
             firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);          
             Physics2D.IgnoreCollision(pulseProjectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
             boosted = false;
-            SoundController.instance.StopAllSounds();
+            //SoundController.instance.StopAllSounds();
             projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.8f);
-            
+
         }
     }   
     void OnMouseDown(){

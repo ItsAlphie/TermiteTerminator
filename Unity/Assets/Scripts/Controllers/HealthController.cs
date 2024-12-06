@@ -20,9 +20,13 @@ public abstract class HealthController : MonoBehaviour
 
     public void takeDamage(int damage)
     {
+        Debug.Log("enemy took damage");
+        Debug.Log(currHealth+"health before damage");
         currHealth -= damage;
+        Debug.Log(currHealth+"health after damage");
         onDamage.Invoke(currHealth, totalHealth);
         if(currHealth <= 0){
+            Debug.Log("i died");
             currHealth = 0;
             die();
         }

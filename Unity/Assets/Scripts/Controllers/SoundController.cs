@@ -46,16 +46,28 @@ public class SoundController : MonoBehaviour
         StartCoroutine(CleanupAfterPlay(audioSource, cliplength));
         return audioSource; // Return the AudioSource so it can be used elsewhere
     }
-    public void PlayBackground(){
+    public void PlayBackground()
+    {
+        
+        startGameSource = Instantiate(soundFXObject);
+        startGameSource.clip = startGameClip;
+        startGameSource.volume = 0.1f;
+        startGameSource.Play();
+        StartCoroutine(PlayBackgroundAfterDelay(startGameClip.length));
+    }
+
+    private IEnumerator PlayBackgroundAfterDelay(float delay)
+    {
+
+        yield return new WaitForSeconds(delay);
         backgroundSource = Instantiate(soundFXObject);
         backgroundSource.clip = backgroundClip;
         backgroundSource.volume = 0.1f;
         backgroundSource.loop = true;
         backgroundSource.Play();
-        activeAudioSources.Add(audioSource);
-        
-        
+        activeAudioSources.Add(backgroundSource);
     }
+
 
     public void StopSound(AudioSource source)
     {
