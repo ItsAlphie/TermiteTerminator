@@ -18,20 +18,14 @@ public class LighthouseTower : BasicTower
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Starting LighthouseTower.");
-        Debug.Log("Boosted value in Start: " + boosted);
-
         placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
-        laser = gameObject.transform.GetChild(0).gameObject; // Initialize laser before using it.
+        laser = gameObject.transform.GetChild(0).gameObject; 
         projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, boosted,boostedClip, projectileClip);
         lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
         targetPosition = transform.position;
-
         lineRenderer.startWidth = thickness;
         lineRenderer.endWidth = thickness;
-
-        Debug.Log("Shooting laser for the first time.");
         ShootLaser(boosted);
     }
 

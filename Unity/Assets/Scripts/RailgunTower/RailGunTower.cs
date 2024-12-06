@@ -14,8 +14,10 @@ public class RailGunTower : BasicTower
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Railgun started");
         firepoint = transform.Find("Firepoint");
         charged = false;
+        //placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
         
     }
 
@@ -36,14 +38,26 @@ public class RailGunTower : BasicTower
         */
 
 
-        if (boosted && State == TowerState.Bought)
+        /*if (boosted && State == TowerState.Bought)
         {
             firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);
             Debug.Log("tower" + gameObject.GetComponent<Collider2D>());
-
+            projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.8f);
             Physics2D.IgnoreCollision(pulseProjectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
             boosted = false;
+        }*/
+        
+        if(boosted)
+        {
+            
+            firepoint.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
+            GameObject pulseProjectile = Instantiate(pulsePrefab, firepoint.position, firepoint.rotation);          
+            Physics2D.IgnoreCollision(pulseProjectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+            boosted = false;
+            SoundController.instance.StopAllSounds();
+            projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.8f);
+            
         }
     }   
     void OnMouseDown(){

@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake(){
         _instance = this;
+        SoundController.instance.PlayBackground();
     }
 
 
