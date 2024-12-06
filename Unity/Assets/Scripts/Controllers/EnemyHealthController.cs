@@ -9,7 +9,7 @@ public class EnemyHealthController : HealthController
 
     BasicEnemy enemy;
 
-    protected override void die()
+    public override void die()
     {
         enemy.MoveSpeed = 0;
         enemy.Alive = false;
