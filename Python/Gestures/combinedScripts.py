@@ -592,7 +592,7 @@ def GestureMain(frame):
             X,Y = getCenter(thumbL, thumbR, indexL, indexR)
             transform = defineAxis()
             scalars = calculateRelative(X, Y, transform)
-            msg = "0," + str(scalars[0]) + "," + str(scalars[1])
+            msg = "0," + str(round(scalars[0],3)) + "," + str(round(scalars[1],3))
             print(msg)
             sendData(msg)
 
