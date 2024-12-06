@@ -2773,7 +2773,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 259114844}
   waveFinishedScreen: {fileID: 0}
   HUD: {fileID: 1183733891}
-  towerFeedbackScreen: {fileID: 0}
+  towerFeedbackScreen: {fileID: 1481446545}
 --- !u!1 &833140303
 GameObject:
   m_ObjectHideFlags: 0
