@@ -47,6 +47,10 @@ public class UIManager : MonoBehaviour
         towerFeedbackScreen.SetActive(true);
     }
 
+    public void disableTowerFeedbackScreen(){
+        towerFeedbackScreen.SetActive(false);
+    }
+
     public void updateCurrentMoney(){
         currentMoneyDisplay.text = MoneyManager.Instance.CurrentMoney.ToString();
     }
@@ -60,5 +64,4 @@ public class UIManager : MonoBehaviour
         currentMoneyDisplay.GetComponent<Animator>().SetTrigger("OnMoneyAdded");
         updateCurrentMoney();
     }
-
 }
