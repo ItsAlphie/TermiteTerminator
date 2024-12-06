@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
         enemyDirection = (nearestEnemy.transform.position - transform.position).normalized;
      }
 
-      void OnCollisionEnter2D(Collision2D collision){
+      void OnTriggerEnter2D(Collider2D collision){
         GameObject collidedObject = collision.gameObject;
         HealthController healthController = collidedObject.GetComponent<HealthController>();
 

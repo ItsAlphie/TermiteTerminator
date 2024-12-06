@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using Unity.VisualScripting;
 
 public partial class BasicTower : MonoBehaviour
 {
@@ -110,6 +111,12 @@ public partial class BasicTower : MonoBehaviour
         if (source != null)
         {
             SoundController.instance.StopSound(source);
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.CompareTag("PathCollider")){
+            gameObject.GetComponent<TowerHealthController>().die();
         }
     }
 }

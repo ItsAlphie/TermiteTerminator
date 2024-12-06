@@ -22,6 +22,7 @@ public class ClickSpawn : MonoBehaviour
             tower.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
             InventoryManager.Instance.addItem(tower);
             TowerSpawner.towers.Add(tower);
+
         }
 
     }

@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private UnityEvent OnWaveFinish;
     [SerializeField] private UnityEvent OnGameOver;
+    [SerializeField] public GameObject PathCollider;
+
 
     private static LevelManager _instance;
     public static LevelManager Instance{
