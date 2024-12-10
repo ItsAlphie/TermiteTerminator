@@ -10,6 +10,7 @@ public abstract class HealthController : MonoBehaviour
     [SerializeField] protected int totalHealth;
     [SerializeField] protected UnityEvent<int, int> onHeal;
     [SerializeField] protected UnityEvent<int, int> onDamage;
+    [SerializeField] protected UnityEvent onDied;
 
 
     public abstract void die();
