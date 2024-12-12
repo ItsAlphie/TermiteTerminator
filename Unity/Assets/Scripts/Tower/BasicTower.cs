@@ -55,12 +55,12 @@ public partial class BasicTower : MonoBehaviour
     void shoot(){
         updateEnemyList();
         if(enemies.Count != 0){            
-                GameObject nearestEnemy = findNearestEnemy();
-                projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.5f);
-                GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
-                Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
-                projectile.GetComponent<Projectile>().initialize(nearestEnemy);
-                timeLeft = shootSpeed;              
+            GameObject nearestEnemy = findNearestEnemy();
+            projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.5f);
+            GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
+            Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
+            projectile.GetComponent<Projectile>().initialize(nearestEnemy);
+            timeLeft = shootSpeed;              
         }
         boosted = false;
     }
