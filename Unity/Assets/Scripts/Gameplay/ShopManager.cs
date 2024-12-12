@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Uduino;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShopManager : MonoBehaviour
 {
@@ -31,7 +32,8 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
-        MoneyManager.Instance.deductMoney(0);
+        UIManager.Instance.showNotEnoughMoneyPopUp(transform.position);
+        SoundController.instance.PlayErrorSound();
         return false;
     }
 

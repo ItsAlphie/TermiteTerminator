@@ -41,7 +41,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake(){
         _instance = this;
-        SoundController.instance.PlayBackground();
     }
 
 
@@ -52,6 +51,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundController.instance.PlayBackground();
         MoneyManager.Instance.initializeMoney(100);
         UIManager.Instance.InitializeHUD();
     }
