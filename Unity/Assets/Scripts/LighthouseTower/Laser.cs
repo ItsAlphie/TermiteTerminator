@@ -28,7 +28,7 @@ public class Laser : MonoBehaviour
         if(boost==false){
             firstBoost = true;
             if(laserAudioSource == null ){
-                laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.2f);
+                laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.7f);
             }
             else{
                 SoundController.instance.ChangeVolume(laserAudioSource, 0.2f);
@@ -37,11 +37,11 @@ public class Laser : MonoBehaviour
         }
         if(boost == true){
             if(firstBoost == true){
-                boostAudioSource = SoundController.instance.PlaySoundFXClip(boostClip, transform, 0.8f);
+                boostAudioSource = SoundController.instance.PlaySoundFXClip(boostClip, transform, 1f);
             }
             firstBoost = false;
             if(laserAudioSource == null){
-                laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.8f);
+                laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 1f);
             }
             else{
                 SoundController.instance.ChangeVolume(laserAudioSource, 0.8f);
