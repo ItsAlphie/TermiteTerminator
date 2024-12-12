@@ -46,23 +46,23 @@ public class WindTower : BasicTower
             }
         }
     }
-    private GameObject findNearestEnemy()
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Find all active enemies in the scene
-        float closestDistance = float.MaxValue;
-        GameObject closestEnemy = null;
-        foreach (GameObject enemy in enemies)
-        {
-            if (enemy != null && enemy.GetComponent<BasicEnemy>().Alive)
-            {
-                float distance = Vector2.Distance(transform.position, enemy.transform.position);
-                if (distance < closestDistance)
-                {
-                    closestDistance = distance;
-                    closestEnemy = enemy;
-                }
-            }
-        }
-        return closestEnemy;
-    }
+    // private GameObject findNearestEnemy()
+    // {
+    //     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // Find all active enemies in the scene
+    //     float closestDistance = float.MaxValue;
+    //     GameObject closestEnemy = null;
+    //     foreach (GameObject enemy in enemies)
+    //     {
+    //         if (enemy != null && enemy.GetComponent<BasicEnemy>().Alive)
+    //         {
+    //             float distance = Vector2.Distance(transform.position, enemy.transform.position);
+    //             if (distance < closestDistance)
+    //             {
+    //                 closestDistance = distance;
+    //                 closestEnemy = enemy;
+    //             }
+    //         }
+    //     }
+    //     return closestEnemy;
+    // }
 }
