@@ -55,8 +55,7 @@ public class BasicEnemy : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
         if(other.tag == "Spell"){
-            EnterFreezeSpell();
-            Debug.Log("Enter Freeze Spell");
+            EnterFreezeSpell(other);
         }
     }
 
@@ -67,8 +66,8 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-    void EnterFreezeSpell(){
-        moveSpeed = 0.001f;
+    void EnterFreezeSpell(Collider2D other){
+        moveSpeed = other.GetComponent<FreezeSpell>().GetNewSpeed();
     }
 
     void ExitFreezeSpell(){

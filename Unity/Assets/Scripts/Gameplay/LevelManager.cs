@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private UnityEvent OnWaveFinish;
     [SerializeField] private UnityEvent OnGameOver;
+
+    [SerializeField] private UnityEvent OnWaveStart;
     [SerializeField] public GameObject PathCollider;
 
     int hammerID = 6;
@@ -90,6 +92,11 @@ public class LevelManager : MonoBehaviour
     public void TriggerWaveFinish(){
         OnWaveFinish.Invoke();
         Debug.Log("Wave finished");
+    }
+
+    public void TriggerWaveStart(){
+        OnWaveStart.Invoke();
+        Debug.Log("Wave started");
     }
     private void KillAll(){
         List<GameObject> towers = TowerSpawner.Instance.towers;
