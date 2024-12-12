@@ -61,6 +61,10 @@ public class UIManager : MonoBehaviour
         waveFinishedScreen.SetActive(true);  
     }
 
+    public void UnsetWaveFinishedScreen(){
+        waveFinishedScreen.SetActive(false);  
+    }
+
     public void setTowerFeedbackScreen(){
         if(!towerFeedbackScreenOn){
             towerFeedbackScreenOn = true;
