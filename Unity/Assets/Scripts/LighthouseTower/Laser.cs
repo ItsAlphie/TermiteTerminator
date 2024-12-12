@@ -28,7 +28,6 @@ public class Laser : MonoBehaviour
         if(boost==false){
             firstBoost = true;
             if(laserAudioSource == null ){
-                Debug.Log("boost is false laser");
                 laserAudioSource = SoundController.instance.PlaySoundFXClip(shootSoundclip, transform, 0.2f);
             }
             else{
@@ -37,7 +36,6 @@ public class Laser : MonoBehaviour
             
         }
         if(boost == true){
-            Debug.Log("boost is true laser");
             if(firstBoost == true){
                 boostAudioSource = SoundController.instance.PlaySoundFXClip(boostClip, transform, 0.8f);
             }

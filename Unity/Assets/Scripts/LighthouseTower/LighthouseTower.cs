@@ -36,29 +36,24 @@ public class LighthouseTower : BasicTower
         if(State == TowerState.Bought){
             List<GameObject> enemies = EnemySpawner.Instance.enemyList;
             nearestEnemy = findNearestEnemy();
-            Debug.Log("Boosted value in Update: " + boosted);
             if (boosted == false)
             {
-                Debug.Log("not boosted");
                 lineRenderer.startWidth = thickness;
                 lineRenderer.endWidth = thickness;
             }
             else
             {
-                Debug.Log("i am boosted");
                 lineRenderer.startWidth = boostedThickness;
                 lineRenderer.endWidth = boostedThickness;
             }
 
             if (nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive)
             {
-                Debug.Log("Shooting Laser at enemy.");
                 getPositionOfNearestEnemy();
                 ShootLaser(boosted);
             }
             else
             {
-                Debug.Log("No enemy. Laser stationary.");
                 targetPosition = transform.position;
                 ShootLaser(boosted);
             }

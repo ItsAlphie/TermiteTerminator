@@ -21,7 +21,6 @@ public class EnemyHealthController : HealthController
         MoneyManager.Instance.addMoney(enemy.CoinDrop);
         animator.SetBool("isDead", true);
         Destroy(gameObject, 3);
-        Debug.Log("kut");
     }
 
     // Start is called before the first frame update

@@ -14,7 +14,6 @@ public class RailGunTower : BasicTower
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Railgun started");
         firepoint = transform.Find("Firepoint");
         charged = false;
         //placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
