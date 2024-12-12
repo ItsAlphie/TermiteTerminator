@@ -41,7 +41,7 @@ public class Hammer : BasicTower
                 float distance = Vector2.Distance(locationHammer, locationTower);
                 print("Distance to tower " + tower + " is " + distance);
                 
-                if(distance <= 1){
+                if(distance <= 5){
                     if(bTower.State == TowerState.Broken){
                         healthCtrl.repair();
                     }

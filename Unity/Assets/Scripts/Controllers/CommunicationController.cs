@@ -16,6 +16,7 @@ public class CommunicationController : MonoBehaviour
     private float boostTime = 3;
     TowerSpawner towerSpawner;
     public ConcurrentQueue<Action> mainThreadActions = new ConcurrentQueue<Action>();
+    public ConcurrentQueue<float[]> spellData = new ConcurrentQueue<float[]>();
     private static CommunicationController _instance;
 
     public static CommunicationController Instance{
@@ -104,9 +105,18 @@ public class CommunicationController : MonoBehaviour
     void Update()
     {
         // Process all actions queued for the main thread
+        // First the boosts, then the spells
         while (mainThreadActions.TryDequeue(out var action))
         {
             action?.Invoke();
+        }
+
+        while (spellData.TryDequeue(out float[] data))
+        {
+            List<GameObject> spells = TowerSpawner.Instance.spells;
+            GameObject spellObject = spells[(int) data[0]];
+            BasicSpell spell = spellObject.GetComponent<BasicSpell>();
+            spell.CastSpell(data[1],data[2]);
         }
     }
     public void SendMsg(string msg, BasicTower receivingTower)
@@ -132,14 +142,11 @@ public class CommunicationController : MonoBehaviour
         string message = System.Text.Encoding.UTF8.GetString(bytes);
         string[] values = message.Split(',');
 
-        int index = Int32.Parse(values[0]);
-        float X = float.Parse(values[1]);
-        float Y = float.Parse(values[2]);
-        if(X > 0 || Y > 0){
-            List<GameObject> spells = towerSpawner.spells;
-            GameObject spellObject = spells[index];
-            BasicSpell spell = spellObject.GetComponent<BasicSpell>();
-            spell.CastSpell(X,Y);
-        }
+        float[] data = new float[3];
+        data[0] = Int32.Parse(values[0]); // Index
+        data[1] = float.Parse(values[1]); // X
+        data[2] = float.Parse(values[2]); // Y
+
+        spellData.Enqueue(data);
     }
 }
