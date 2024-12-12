@@ -689,7 +689,8 @@ def getLength(topLeftX, topLeftY, bottomRightX, bottomRightY):
 
 def checkLifted(refLength, length):
 	scale = length/refLength
-	if(scale > 1):
+	print(scale)
+	if(scale > 1.35):
 		return 1
 	else:
 		return 0
