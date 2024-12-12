@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopPrices shopPrices;    
     private ShopPrices shopPricesCopy;    
+    [SerializeField] private UnityEvent OnBuyFailed;
 
     void Awake(){
         shopPricesCopy = Instantiate(shopPrices);
@@ -30,7 +32,7 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
-        MoneyManager.Instance.deductMoney(0);
+        OnBuyFailed.Invoke();
         return false;
     }
 
