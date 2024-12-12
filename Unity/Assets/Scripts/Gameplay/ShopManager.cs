@@ -9,7 +9,6 @@ public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopPrices shopPrices;    
     private ShopPrices shopPricesCopy;    
-    [SerializeField] private UnityEvent OnBuyFailed;
 
     void Awake(){
         shopPricesCopy = Instantiate(shopPrices);
@@ -33,7 +32,8 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
-        OnBuyFailed.Invoke();
+        UIManager.Instance.showNotEnoughMoneyPopUp(transform.position);
+        SoundController.instance.PlayErrorSound();
         return false;
     }
 

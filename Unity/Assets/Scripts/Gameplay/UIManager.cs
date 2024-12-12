@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject HUD;
     [SerializeField] public GameObject towerFeedbackScreen;
     [SerializeField] public GameObject coinPopUp;
+    [SerializeField] public GameObject notEnoughMoneyPopUp;
+
 
     private float towerFeedbackScreenTimer;
 
@@ -124,4 +126,10 @@ public class UIManager : MonoBehaviour
         }
         Destroy(popUp, 4);
     }
+
+    public void showNotEnoughMoneyPopUp(Vector3 position){
+        GameObject popUp = Instantiate(notEnoughMoneyPopUp, position, Quaternion.identity);
+        Destroy(popUp, 4);
+    }
+    
 }

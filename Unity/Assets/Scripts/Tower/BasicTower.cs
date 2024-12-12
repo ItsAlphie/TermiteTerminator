@@ -67,7 +67,7 @@ public partial class BasicTower : MonoBehaviour
     }
 
     void OnMouseDown(){
-        gameObject.GetComponent<TowerHealthController>().takeDamage(10);
+        GetComponent<ShopManager>().buyItem();
     }
 
 
