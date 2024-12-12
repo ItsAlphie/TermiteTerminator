@@ -33,6 +33,7 @@ public partial class BasicTower : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 1f);
         timeLeft = shootSpeed;
         placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
     }

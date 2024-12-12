@@ -52,7 +52,6 @@ public class SoundController : MonoBehaviour
     }
     public void PlayBackground()
     {
-        
         startGameSource = Instantiate(soundFXObject);
         startGameSource.clip = startGameClip;
         startGameSource.volume = 0.1f;
@@ -62,7 +61,6 @@ public class SoundController : MonoBehaviour
 
     private IEnumerator PlayBackgroundAfterDelay(float delay)
     {
-
         yield return new WaitForSeconds(delay);
         backgroundSource = Instantiate(soundFXObject);
         backgroundSource.clip = backgroundClip;
@@ -86,6 +84,15 @@ public class SoundController : MonoBehaviour
         loseMoneySource.Play();
         float loseMoneyClipLength = loseMoneySource.clip.length;
         Destroy(loseMoneySource.gameObject, loseMoneyClipLength);
+    }
+    public void PlayLoseGame(){
+        StopAllSounds();
+        loseGameSource = Instantiate(soundFXObject);
+        loseGameSource.clip = loseGameClip;
+        loseGameSource.volume = 1f;
+        loseGameSource.Play();
+        float loseGameClipLength = loseGameSource.clip.length;
+        Destroy(loseGameSource.gameObject, loseGameClipLength);
     }
 
 
