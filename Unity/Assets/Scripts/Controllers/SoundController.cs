@@ -8,12 +8,14 @@ public class SoundController : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioSource soundFXObject;
     [SerializeField] public AudioClip startGameClip;
+    [SerializeField] public AudioClip errorClip;
     [SerializeField] public AudioClip loseGameClip;
     [SerializeField] public AudioClip winGameClip;
     [SerializeField] public AudioClip backgroundClip;
     [SerializeField] public AudioClip receiveMoneyClip;
     [SerializeField] public AudioClip loseMoneyClip;
     public AudioSource startGameSource;
+    public AudioSource errorSource;
     public AudioSource loseGameSource;
     public AudioSource winGameSource;
     public AudioSource backgroundSource;
@@ -93,6 +95,14 @@ public class SoundController : MonoBehaviour
         loseGameSource.Play();
         float loseGameClipLength = loseGameSource.clip.length;
         Destroy(loseGameSource.gameObject, loseGameClipLength);
+    }
+    public void PlayErrorSound(){
+        errorSource = Instantiate(soundFXObject);
+        errorSource.clip = errorClip;
+        errorSource.volume = 1f;
+        errorSource.Play();
+        float errorClipLength = errorSource.clip.length;
+        Destroy(errorSource.gameObject, errorClipLength);
     }
 
 
