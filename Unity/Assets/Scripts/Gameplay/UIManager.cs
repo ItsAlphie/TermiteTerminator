@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject waveFinishedScreen;
     [SerializeField] public GameObject HUD;
     [SerializeField] public GameObject towerFeedbackScreen;
+    [SerializeField] public GameObject coinPopUp;
 
     private float towerFeedbackScreenTimer;
 
@@ -86,5 +87,17 @@ public class UIManager : MonoBehaviour
     public void showMoneyAdded(){
         currentMoneyDisplay.GetComponent<Animator>().SetTrigger("OnMoneyAdded");
         updateCurrentMoney();
+    }
+
+    public void showCoinPopUp(Vector3 position, int value, bool positive){
+        GameObject popUp = Instantiate(coinPopUp, position, Quaternion.identity);
+        TMP_Text popUpValue = popUp.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        if(positive){
+            popUpValue.text = ("+ " + value).ToString();
+        }
+        else{
+            popUpValue.text = ("- " + value).ToString();
+        }
+        Destroy(popUp, 4);
     }
 }

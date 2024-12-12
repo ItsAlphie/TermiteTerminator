@@ -17,9 +17,11 @@ public class EnemyHealthController : HealthController
         Destroy(gameObject.GetComponent<Collider2D>());
         Destroy(gameObject.GetComponent<Rigidbody2D>());
         EnemySpawner.Instance.enemyList.Remove(gameObject);
+        UIManager.Instance.showCoinPopUp(enemy.gameObject.transform.position, enemy.CoinDrop, true);
         MoneyManager.Instance.addMoney(enemy.CoinDrop);
         animator.SetBool("isDead", true);
         Destroy(gameObject, 3);
+        Debug.Log("kut");
     }
 
     // Start is called before the first frame update
