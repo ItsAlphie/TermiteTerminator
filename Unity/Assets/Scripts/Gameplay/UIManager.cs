@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     private bool towerFeedbackScreenTimerOn = false;
 
     private TMP_Text currentMoneyDisplay;
+    private TMP_Text freezeTime;
 
     public static UIManager Instance{
         get{
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
 
     public void InitializeHUD(){
         currentMoneyDisplay = HUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        freezeTime = HUD.transform.GetChild(1).gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         updateCurrentMoney();
     }
 
@@ -77,6 +79,28 @@ public class UIManager : MonoBehaviour
 
     public void updateCurrentMoney(){
         currentMoneyDisplay.text = MoneyManager.Instance.CurrentMoney.ToString();
+    }
+
+    public void updateFreezeTime(int time){
+        freezeTime.text = time.ToString();
+    }
+
+    public void updateFreezeReady(){
+        freezeTime.text = "Ready!";
+        updateColorFreezeTime(3);
+    }
+
+    public void updateColorFreezeTime(int index) {
+        Color newColor;
+
+        if (index == 1){
+            newColor = Color.green; // Green
+        } else if (index == 2) {
+            newColor = Color.red; // Red
+        } else {
+            newColor = new Color(1, 1, 0, 1); // Orange-ish
+        }
+        freezeTime.color = newColor;
     }
 
     public void showMoneyDeducted(){
