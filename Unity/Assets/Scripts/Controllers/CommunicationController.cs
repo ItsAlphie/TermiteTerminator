@@ -54,22 +54,18 @@ public class CommunicationController : MonoBehaviour
         {
             while (true)
             {
-                print("Waiting for messages");
                 byte[] bytes = listener.Receive(ref groupEP);
                 string senderIP = groupEP.Address.ToString();
-                print("Got message (" + bytes.Length + ") from " + senderIP);
                 int size = bytes.Length;
                 if (senderIP.Equals("127.0.0.1")){
                     if(size > 25){
                         towerSpawner.ReceiveTowerInfo(bytes);
                     }
                     else{
-                        print("Spell info");
                         ProcessSpell(bytes);
                     }
                 }
                 else{
-                    print("Queueing boost");
                     mainThreadActions.Enqueue(() => BoostTower(bytes, senderIP));
                 }
             }

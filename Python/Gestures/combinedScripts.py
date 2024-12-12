@@ -687,10 +687,11 @@ def getLength(topLeftX, topLeftY, bottomRightX, bottomRightY):
 	distance = np.sqrt(np.square(X) + np.square(Y))
 	return distance
 
-def checkLifted(refLength, length):
+def checkLifted(length):
+	refLength = 26.9
 	scale = length/refLength
 	print(scale)
-	if(scale > 1.35):
+	if(scale > 1.25):
 		return 1
 	else:
 		return 0
@@ -718,7 +719,7 @@ def getMarkerAngle(angle):
 	else:
 		return angleX_deg
 
-def MarkerMain(frame, refMarkerSize):
+def MarkerMain(frame):
     # grab the frame from the threaded video stream and resize it
 	# to have a maximum width of 600 pixels
 	#frame = vs.read()
@@ -775,7 +776,7 @@ def MarkerMain(frame, refMarkerSize):
 			if markerID == 21:
 				TV[0] = np.array([cX, cY])
 				TVready[0] = 1
-				refMarkerSize = getLength(int(topLeft[0]), int(topLeft[1]), int(bottomRight[0]), int(bottomRight[1]))
+				# refMarkerSize = getLength(int(topLeft[0]), int(topLeft[1]), int(bottomRight[0]), int(bottomRight[1]))
 				#print("Origin set at x=" + str(cX) + " y=" + str(cY))
 			elif markerID == 22:
 				TV[1] = np.array([cX, cY])
@@ -826,12 +827,12 @@ def MarkerMain(frame, refMarkerSize):
 
 					# Check if the tower is lifted
 					markerSize = getLength(topLeft[0], topLeft[1], bottomRight[0], bottomRight[1])
-					lifted = checkLifted(refMarkerSize, markerSize)
+					# lifted = checkLifted(markerSize)
 					
 				# Add markers to list of id, TVcX, TVcY, lifted
 					towers[markerID-1][1] = round(scalars[0],2)
 					towers[markerID-1][2] = round(scalars[1],2)
-					towers[markerID-1][3] = lifted
+					towers[markerID-1][3] = round(markerSize,1) #lifted
 					towers[markerID-1][4] = round(getMarkerAngle(angle),0)*0.1
 
 		# Pass data to unity
@@ -841,9 +842,6 @@ def MarkerMain(frame, refMarkerSize):
 			sendData(str(towers))
 			print("Succesfully Sent Data to Unity")
 
-		if refMarkerSize is not None:
-			return refMarkerSize
-
 	# show the output frame
 	#cv2.imshow("Frame", frame)
 
@@ -852,17 +850,18 @@ def MarkerMain(frame, refMarkerSize):
 ############################################################################################
 
 def main():
-    refMarkerSize = None
+    refMarkerSize = 1000
     while True:
         frame = shared_video_stream.read()
         if frame is None:
             break
-        refMarkerSize = MarkerMain(frame, refMarkerSize)
+        MarkerMain(frame)
         if np.array_equal(TVready, np.array([1, 1, 1])):
             GestureMain(frame)
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
+        time.sleep(0.2)
     # cleanup
     cap.release()
     cv2.destroyAllWindows()

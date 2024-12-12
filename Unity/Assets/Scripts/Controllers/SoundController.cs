@@ -8,12 +8,14 @@ public class SoundController : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioSource soundFXObject;
     [SerializeField] public AudioClip startGameClip;
+    [SerializeField] public AudioClip errorClip;
     [SerializeField] public AudioClip loseGameClip;
     [SerializeField] public AudioClip winGameClip;
     [SerializeField] public AudioClip backgroundClip;
     [SerializeField] public AudioClip receiveMoneyClip;
     [SerializeField] public AudioClip loseMoneyClip;
     public AudioSource startGameSource;
+    public AudioSource errorSource;
     public AudioSource loseGameSource;
     public AudioSource winGameSource;
     public AudioSource backgroundSource;
@@ -72,7 +74,7 @@ public class SoundController : MonoBehaviour
     public void PlayMoneyReceive(){
         receiveMoneySource = Instantiate(soundFXObject);
         receiveMoneySource.clip = receiveMoneyClip;
-        receiveMoneySource.volume = 1f;
+        receiveMoneySource.volume = 0.6f;
         receiveMoneySource.Play();
         float receiveMoneyClipLength = receiveMoneySource.clip.length;
         Destroy(receiveMoneySource.gameObject, receiveMoneyClipLength);
@@ -80,19 +82,37 @@ public class SoundController : MonoBehaviour
     public void PlayMoneyLose(){
         loseMoneySource = Instantiate(soundFXObject);
         loseMoneySource.clip = loseMoneyClip;
-        loseMoneySource.volume = 1f;
+        loseMoneySource.volume = 0.6f;
         loseMoneySource.Play();
         float loseMoneyClipLength = loseMoneySource.clip.length;
         Destroy(loseMoneySource.gameObject, loseMoneyClipLength);
     }
     public void PlayLoseGame(){
         StopAllSounds();
+        StopSound(backgroundSource);
+        StopSound(startGameSource);
         loseGameSource = Instantiate(soundFXObject);
         loseGameSource.clip = loseGameClip;
         loseGameSource.volume = 1f;
         loseGameSource.Play();
         float loseGameClipLength = loseGameSource.clip.length;
         Destroy(loseGameSource.gameObject, loseGameClipLength);
+    }
+    public void PlayErrorSound(){
+        errorSource = Instantiate(soundFXObject);
+        errorSource.clip = errorClip;
+        errorSource.volume = 1f;
+        errorSource.Play();
+        float errorClipLength = errorSource.clip.length;
+        Destroy(errorSource.gameObject, errorClipLength);
+    }
+    public void PlayWinWave(){
+        winGameSource = Instantiate(soundFXObject);
+        winGameSource.clip = winGameClip;
+        winGameSource.volume = 1f;
+        winGameSource.Play();
+        float winWaveClipLength = winGameSource.clip.length;
+        Destroy(winGameSource.gameObject, winWaveClipLength);
     }
 
 

@@ -108,8 +108,7 @@ public class LevelManager : MonoBehaviour
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
         foreach (GameObject towerObject in towers){
             if(towerObject != towers[hammerID]){
-                TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
-                healthController.repair();
+                cmCtrl.SendMsg("r", towerObject.GetComponent<BasicTower>());
             }
         }
     }

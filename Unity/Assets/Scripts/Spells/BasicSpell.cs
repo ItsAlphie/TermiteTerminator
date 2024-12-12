@@ -12,12 +12,12 @@ abstract public partial class BasicSpell : MonoBehaviour
 {
     public bool active = false;
     public bool cooldown = false;
-    private float timer = 0.0f;
+    public float timer = 0.0f;
     [SerializeField] protected float spell_duration = 3.0f; 
-    [SerializeField] protected float spell_cooldown = 7.5f;
+    [SerializeField] protected float spell_cooldown = 7.0f;
 
     void Start(){
-        
+        UpdateUI(0, 3);
     }
 
     void Update(){
@@ -25,26 +25,39 @@ abstract public partial class BasicSpell : MonoBehaviour
             if (timer > spell_duration)
             {
                 active = false;
-                gameObject.SetActive(false);
+                ToggleOff();
                 timer = 0;
                 cooldown = true;
             }
             timer += UnityEngine.Time.deltaTime;
+            if (Mathf.Abs(timer - Mathf.Round(timer)) < 0.01f) {
+                int roundedTime = Mathf.RoundToInt(spell_duration - timer);
+                UpdateUI(roundedTime, 1);
+            }
         }
         if (cooldown){
             if (timer > spell_cooldown)
             {
                 cooldown = false;
                 timer = 0;
-                // TODO: Alert shop that spell is available again
+                ShopManager shopManager = gameObject.GetComponent<ShopManager>();
+                shopManager.sellItem();
             }
             timer += UnityEngine.Time.deltaTime;
+            if (Mathf.Abs(timer - Mathf.Round(timer)) < 0.01f) {
+                int roundedTime = Mathf.RoundToInt(spell_cooldown - timer);
+                UpdateUI(roundedTime, 2);
+            }
+        }
+        if(!cooldown && !active){
+            UpdateUI(0,3);
         }
     }
 
     public void CastSpell(float x, float y){
         float[] cali = CameraCalibration(x, y);
         TowerSpawner towerSpawner = LevelManager.Instance.GetComponent<TowerSpawner>();
+        ShopManager shopManager = gameObject.GetComponent<ShopManager>();
         int resolutionX = towerSpawner.resolutionX;
         int resolutionY = towerSpawner.resolutionY;
         float X = cali[0] * resolutionX;
@@ -55,8 +68,8 @@ abstract public partial class BasicSpell : MonoBehaviour
         {
             if(!cooldown){
                 if(!active){
-                    // Buy spell from the shop (put in an if move)
-                    gameObject.SetActive(true);
+                    MoneyManager.Instance.deductMoney(15);
+                    ToggleOn();
                     active = true;
                 }
                 // Keep moving the spell once activated
@@ -101,4 +114,28 @@ abstract public partial class BasicSpell : MonoBehaviour
     abstract protected void spell_effect();
 
     abstract protected void finish_effect();
+
+    void UpdateUI(int time, int color){
+        GameObject UIManager = GameObject.Find("UIManager");
+        UIManager UI = UIManager.GetComponent<UIManager>();
+        if(color > 2){
+            UI.updateFreezeReady();
+        }
+        else{
+            UI.updateColorFreezeTime(color);
+            UI.updateFreezeTime(time);
+        }
+    }
+
+    void ToggleOff(){
+        gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.transform.GetChild(1).gameObject.SetActive(false);
+    }
+
+    void ToggleOn(){
+        gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        gameObject.transform.GetChild(1).gameObject.SetActive(true);
+    }
 }
