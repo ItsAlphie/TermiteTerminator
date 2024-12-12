@@ -196,17 +196,26 @@ public class TowerSpawner : MonoBehaviour
         for (int i = 0; i < towers.Count; i++){
             float X = matrix[i,1];
             float Y = matrix[i,2];
-            // horizontal skew
-            if (X > 0.5){
-                float d = (X - (float)0.5) / (float)0.5;
+
+            // Horizontal skew
+            if (X > 0.5f){
+                float d = (X - 0.5f) / 0.5f;
                 X = X * (1 - skewFactorX * d);
             }
             else{
-                float d = ((float)0.5 - X) / (float)0.5;
+                float d = (0.5f - X) / 0.5f;
                 X = X * (1 + skewFactorX * d);
             }
-            // vertical skew
-            Y = Y * skewFactorY - startSkewY;
+
+            // Vertical skew
+            if (Y > 0.5f){
+                float d = (Y - 0.5f) / 0.5f;
+                Y = Y * (1 - skewFactorY * d);
+            }
+            else{
+                float d = (0.5f - X) / 0.5f;
+                Y = Y * (1 + skewFactorY * d);
+            }
 
             calibratedMatrix[i,1] = X;
             calibratedMatrix[i,2] = Y;
