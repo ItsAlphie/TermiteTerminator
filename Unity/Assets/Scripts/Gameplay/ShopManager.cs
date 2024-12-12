@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Uduino;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -22,7 +23,7 @@ public class ShopManager : MonoBehaviour
     
     public bool buyItem(){
         var shopItem = shopPricesCopy.priceList.Find(x => x.tag == gameObject.tag);
-        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)&& gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
+        if((shopItem.totalAmount  > 0) && (MoneyManager.Instance.CurrentMoney > shopItem.buyPrice)&& (gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available)){
             MoneyManager.Instance.deductMoney(shopItem.buyPrice);
             shopItem.totalAmount--;
             InventoryManager.Instance.addItem(gameObject);

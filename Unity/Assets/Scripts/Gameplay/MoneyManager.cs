@@ -46,7 +46,6 @@ public class    MoneyManager : MonoBehaviour
     public void initializeMoney(int starterMoneyValue){
         starterMoney = starterMoneyValue;
         currentMoney = starterMoney;
-
     }
 
 
