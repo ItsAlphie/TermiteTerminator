@@ -38,9 +38,7 @@ public class Hammer : BasicTower
                 TowerHealthController healthCtrl = tower.GetComponent<TowerHealthController>();
                 BasicTower bTower = tower.GetComponent<BasicTower>();
                 Vector2 locationTower = tower.transform.position;
-                float distance = Vector2.Distance(locationHammer, locationTower);
-                print("Distance to tower " + tower + " is " + distance);
-                
+                float distance = Vector2.Distance(locationHammer, locationTower);                
                 if(distance <= 5){
                     if(bTower.State == TowerState.Broken){
                         healthCtrl.repair();

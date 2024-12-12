@@ -106,7 +106,6 @@ public class LevelManager : MonoBehaviour
     private void RepairAll(){
         List<GameObject> towers = TowerSpawner.Instance.towers;
         CommunicationController cmCtrl = gameObject.GetComponent<CommunicationController>();
-        print("Repairing all towers");
         foreach (GameObject towerObject in towers){
             if(towerObject != towers[hammerID]){
                 TowerHealthController healthController = towerObject.GetComponent<TowerHealthController>();
