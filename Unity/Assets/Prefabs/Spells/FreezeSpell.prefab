@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1576484638270083897
 Transform:
   m_ObjectHideFlags: 0
@@ -4864,7 +4864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1521342884929459007
 Transform:
   m_ObjectHideFlags: 0
@@ -4922,7 +4922,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.5254902, g: 1, b: 1, a: 0.105882354}
+  m_Color: {r: 0.5254902, g: 1, b: 1, a: 0.54509807}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4943,6 +4943,7 @@ GameObject:
   - component: {fileID: 6913162212194489147}
   - component: {fileID: 7376435058066498502}
   - component: {fileID: -3498051973464478944}
+  - component: {fileID: -102432425853089362}
   m_Layer: 10
   m_Name: FreezeSpell
   m_TagString: Spell
@@ -4960,7 +4961,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1576484638270083897}
@@ -4974,7 +4975,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7985840232252309835}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -5028,4 +5029,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
-  spell_duration: 10
+  cooldown: 0
+  timer: 0
+  spell_duration: 5
+  spell_cooldown: 10
+--- !u!114 &-102432425853089362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7985840232252309835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de035cf41e545765fb7952d43af38fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopPrices: {fileID: 11400000, guid: b8b5c8ce5dc0b0cd6954a8547efc1eb8, type: 2}
