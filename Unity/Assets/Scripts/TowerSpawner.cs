@@ -45,7 +45,7 @@ public class TowerSpawner : MonoBehaviour
     // Fine-tuning params
     [SerializeField] public float skewFactorX = 1;
     [SerializeField] public float skewFactorY = 1;
-    [SerializeField] public float startSkewY = 0;
+    [SerializeField] public float heightLimit = 27;
 
     // Thread-safe queue to handle received matrices
     public ConcurrentQueue<float[,]> matrixQueue = new ConcurrentQueue<float[,]>();
@@ -55,7 +55,7 @@ public class TowerSpawner : MonoBehaviour
         SpellSpawn();
         SetIps();
         HideTowers();
-        HideSpells();
+        //HideSpells();
     }
 
     public void ReceiveTowerInfo(byte[] bytes){
@@ -66,7 +66,6 @@ public class TowerSpawner : MonoBehaviour
 
             // Read out received data                
             float[,] matrix = ProcessUDP(Encoding.ASCII.GetString(bytes, 0, bytes.Length), towerCount);
-            print("Processed towers, sending info to main thread");
             matrixQueue.Enqueue(matrix);
 
             // Check if the data is received and processed properly
@@ -213,7 +212,7 @@ public class TowerSpawner : MonoBehaviour
                 Y = Y * (1 - skewFactorY * d);
             }
             else{
-                float d = (0.5f - X) / 0.5f;
+                float d = (0.5f - Y) / 0.5f;
                 Y = Y * (1 + skewFactorY * d);
             }
 
@@ -228,7 +227,7 @@ public class TowerSpawner : MonoBehaviour
         for (int i = 0; i < towers.Count; i++){
             float X = matrix[i,1] * resolutionX;
             float Y = matrix[i,2] * resolutionY;
-            int towerLifted = (int)matrix[i,3];
+            float towerLifted = matrix[i,3];
             bool outOfScreen = (X > resolutionX || Y > resolutionY) || (X <= 0 || Y <= 0);
             ShopManager shopManager = towers[i].GetComponent<ShopManager>();
 
@@ -248,12 +247,12 @@ public class TowerSpawner : MonoBehaviour
             else{
                 if (outOfScreen){
                     Debug.Log("Tower out of screen");
+                    shopManager.sellItem();
                     towers[i].SetActive(false);
                     UIManager.Instance.disableTowerFeedbackScreen();
-                    shopManager.sellItem();
                 }
                 
-                else if (towerLifted == 1){
+                else if (towerLifted == heightLimit){
                     // Tower preview, not yet placed nor bought.
                     Debug.Log("Tower lifted");
                     UIManager.Instance.setTowerFeedbackScreen();
