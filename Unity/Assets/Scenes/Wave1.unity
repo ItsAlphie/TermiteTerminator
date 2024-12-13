@@ -1589,7 +1589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2372, y: -579}
+  m_AnchoredPosition: {x: -2400, y: -579}
   m_SizeDelta: {x: 300, y: 209.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &434428274
@@ -3048,6 +3048,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnWaveStart:
+    m_PersistentCalls:
+      m_Calls: []
   PathCollider: {fileID: 5936642153681210372, guid: d5a197b577a9a33c782fa53e4fe8510d, type: 3}
   Path: []
 --- !u!114 &891508073
@@ -3065,8 +3068,9 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
   EnemyPrefab2: {fileID: 2838611505213734618, guid: 7a3493da0af5c5d798b0d059dd171825, type: 3}
   SpawnPoint: {fileID: 7951326647625111514, guid: 922ef9426b7bae6218b494bb7d753fb2, type: 3}
-  enemyWave: {fileID: 11400000, guid: c1b938793c42803eab6693e1627f2a96, type: 2}
+  waveList: []
   enemyList: []
+  timeBetweenWaves: 15
 --- !u!114 &891508074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6318,7 +6322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 580.5, y: -358.3}
+  m_AnchoredPosition: {x: 345, y: -359}
   m_SizeDelta: {x: 1260.9, y: 816.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1184223695
@@ -6819,7 +6823,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: -24}
+  m_AnchoredPosition: {x: 3390, y: 1885}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1340502047
@@ -7342,7 +7346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0
+  m_text: READY!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -7737,7 +7741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 802, y: -24}
+  m_AnchoredPosition: {x: 2428, y: 1876}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1771012220
