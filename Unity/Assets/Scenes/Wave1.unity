@@ -2854,7 +2854,6 @@ MonoBehaviour:
   HUD: {fileID: 1183733891}
   towerFeedbackScreen: {fileID: 1481446545}
   coinPopUp: {fileID: 496879205873001799, guid: 262110b2462374990a7e3d94172117dd, type: 3}
-  notEnoughMoneyPopUp: {fileID: 496879205873001799, guid: e881c08628a874061b0c6a3efacee16e, type: 3}
 --- !u!1 &833140303
 GameObject:
   m_ObjectHideFlags: 0
@@ -3068,7 +3067,9 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 3685360570025742025, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
   EnemyPrefab2: {fileID: 2838611505213734618, guid: 7a3493da0af5c5d798b0d059dd171825, type: 3}
   SpawnPoint: {fileID: 7951326647625111514, guid: 922ef9426b7bae6218b494bb7d753fb2, type: 3}
-  waveList: []
+  waveList:
+  - {fileID: 11400000, guid: c1b938793c42803eab6693e1627f2a96, type: 2}
+  - {fileID: 11400000, guid: b0fc876bca16b894ea54ba64957e3f68, type: 2}
   enemyList: []
   timeBetweenWaves: 15
 --- !u!114 &891508074
@@ -3094,7 +3095,7 @@ MonoBehaviour:
   resolutionY: 0
   skewFactorX: 0.05
   skewFactorY: 0.05
-  heightLimit: 27
+  heightLimit: 34
 --- !u!114 &891508075
 MonoBehaviour:
   m_ObjectHideFlags: 0
