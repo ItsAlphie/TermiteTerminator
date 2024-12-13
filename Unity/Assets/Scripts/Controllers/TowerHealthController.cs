@@ -8,13 +8,11 @@ public class TowerHealthController : HealthController
     // Implement the abstract method die()
     public override void die()
     {   
+        currHealth = 0;
         gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Broken;
         InventoryManager.Instance.moveToBroken(gameObject);
         CommunicationController.Instance.SendMsg("k", gameObject.GetComponent<BasicTower>());
         onDied.Invoke();
-        // Make object inactive
-        // Take tower out of inventory
-        // Send kill message
     }
 
     protected override void Start()
