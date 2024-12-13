@@ -22,7 +22,6 @@ public partial class BasicTower : MonoBehaviour
     List<GameObject> enemies;
     [SerializeField] private float shootSpeed;
     [SerializeField] public bool boosted = false;
-    [SerializeField] private GameObject notEnoughMoneyPopUpPrefab;
     private float timeLeft;
   
     public enum TowerState { Broken, Bought, Available};
@@ -118,9 +117,5 @@ public partial class BasicTower : MonoBehaviour
             Debug.Log("Tower placed on path");
             gameObject.GetComponent<TowerHealthController>().die();
         }
-    }
-
-    public void showInsufficientFundsPopUp(){
-        notEnoughMoneyPopUpPrefab.transform.GetChild(0).GetComponent<Animator>().SetTrigger("NotEnoughMoney");
     }
 }

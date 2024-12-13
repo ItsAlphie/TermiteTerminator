@@ -33,7 +33,7 @@ public class ShopManager : MonoBehaviour
             return true;
         }
         else if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
-            gameObject.GetComponent<BasicTower>().showInsufficientFundsPopUp();
+            UIManager.Instance.showInsufficientFundsPopUp(gameObject.transform.position);
             SoundController.instance.PlayErrorSound();
         }
         

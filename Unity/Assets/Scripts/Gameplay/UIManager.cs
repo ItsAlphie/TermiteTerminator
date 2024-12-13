@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject HUD;
     [SerializeField] public GameObject towerFeedbackScreen;
     [SerializeField] public GameObject coinPopUp;
-
+    [SerializeField] public GameObject notEnoughMoneyPopUp;
     private float towerFeedbackScreenTimer;
 
     private bool towerFeedbackScreenOn = false;
@@ -127,6 +127,11 @@ public class UIManager : MonoBehaviour
             popUpValue.text = ("- " + value).ToString();
         }
         Destroy(popUp, 4);
+    }
+
+    public void showInsufficientFundsPopUp(Vector3 pos){
+        notEnoughMoneyPopUp.transform.position = pos;
+        notEnoughMoneyPopUp.transform.GetChild(0).GetComponent<Animator>().SetTrigger("NotEnoughMoney");
     }
     
 }
