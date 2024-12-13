@@ -17,9 +17,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject coinPopUp;
     [SerializeField] public GameObject notEnoughMoneyPopUp;
     private float towerFeedbackScreenTimer;
+    private float notEnoughMoneyPopUpTimer;
 
     private bool towerFeedbackScreenOn = false;
     private bool towerFeedbackScreenTimerOn = false;
+
+    private bool notEnoughMoneyPopUpOn = false;
+    private bool notEnoughMoneyPopUpTimerOn = false;
 
     private TMP_Text currentMoneyDisplay;
     private TMP_Text freezeTime;
@@ -43,6 +47,13 @@ public class UIManager : MonoBehaviour
             if(towerFeedbackScreenTimer <= 0){
                 towerFeedbackScreen.SetActive(false);
                 towerFeedbackScreenOn = false;
+            }
+        }
+        else if(notEnoughMoneyPopUpTimerOn){
+            notEnoughMoneyPopUpTimer -= Time.deltaTime;
+            if(notEnoughMoneyPopUpTimer <= 0){
+                hideInsufficientFundsPopUp();
+                notEnoughMoneyPopUpTimerOn = false;
             }
         }
     }
@@ -79,6 +90,10 @@ public class UIManager : MonoBehaviour
 
     public void initializeTowerFeedbackScreenTimer(){
         towerFeedbackScreenTimer = 5;
+    }
+
+    public void initializeNotEnoughMoneyPopUpTimer(){
+        notEnoughMoneyPopUpTimer = 1;
     }
 
     public void updateCurrentMoney(){
@@ -130,8 +145,16 @@ public class UIManager : MonoBehaviour
     }
 
     public void showInsufficientFundsPopUp(Vector3 pos){
-        notEnoughMoneyPopUp.transform.position = pos;
-        notEnoughMoneyPopUp.transform.GetChild(0).GetComponent<Animator>().SetTrigger("NotEnoughMoney");
+        if(!notEnoughMoneyPopUpOn){
+            notEnoughMoneyPopUp.transform.position = pos;
+            notEnoughMoneyPopUp.transform.GetChild(0).GetComponent<Animator>().SetBool("NotEnoughMoney", true);
+            initializeNotEnoughMoneyPopUpTimer();
+        }
+        
+    }
+
+    public void hideInsufficientFundsPopUp(){
+        notEnoughMoneyPopUp.transform.GetChild(0).GetComponent<Animator>().SetBool("NotEnoughMoney", false);
     }
     
 }
