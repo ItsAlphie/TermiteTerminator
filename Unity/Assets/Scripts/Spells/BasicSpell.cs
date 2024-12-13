@@ -15,6 +15,7 @@ abstract public partial class BasicSpell : MonoBehaviour
     public float timer = 0.0f;
     [SerializeField] protected float spell_duration = 3.0f; 
     [SerializeField] protected float spell_cooldown = 7.0f;
+    [SerializeField] protected int spellCost = 15;
 
     void Start(){
         UpdateUI(0, 3);
@@ -40,8 +41,6 @@ abstract public partial class BasicSpell : MonoBehaviour
             {
                 cooldown = false;
                 timer = 0;
-                ShopManager shopManager = gameObject.GetComponent<ShopManager>();
-                shopManager.sellItem();
             }
             timer += UnityEngine.Time.deltaTime;
             if (Mathf.Abs(timer - Mathf.Round(timer)) < 0.01f) {
@@ -57,7 +56,6 @@ abstract public partial class BasicSpell : MonoBehaviour
     public void CastSpell(float x, float y){
         float[] cali = CameraCalibration(x, y);
         TowerSpawner towerSpawner = LevelManager.Instance.GetComponent<TowerSpawner>();
-        ShopManager shopManager = gameObject.GetComponent<ShopManager>();
         int resolutionX = towerSpawner.resolutionX;
         int resolutionY = towerSpawner.resolutionY;
         float X = cali[0] * resolutionX;
@@ -68,9 +66,15 @@ abstract public partial class BasicSpell : MonoBehaviour
         {
             if(!cooldown){
                 if(!active){
-                    MoneyManager.Instance.deductMoney(15);
-                    ToggleOn();
-                    active = true;
+                    if(MoneyManager.Instance.CurrentMoney >= spellCost){
+                        MoneyManager.Instance.deductMoney(spellCost);
+                        ToggleOn();
+                        active = true;
+                    }
+                    else{
+                        UIManager.Instance.showInsufficientFundsPopUp(Camera.main.ScreenToWorldPoint(new Vector3(X, Y, 0)));
+                        SoundController.instance.PlayErrorSound();
+                    }
                 }
                 // Keep moving the spell once activated
                 Debug.Log("Placing spell at " + X + "/" + Y);
@@ -116,8 +120,7 @@ abstract public partial class BasicSpell : MonoBehaviour
     abstract protected void finish_effect();
 
     void UpdateUI(int time, int color){
-        GameObject UIManager = GameObject.Find("UIManager");
-        UIManager UI = UIManager.GetComponent<UIManager>();
+        UIManager UI = UIManager.Instance.GetComponent<UIManager>();
         if(color > 2){
             UI.updateFreezeReady();
         }
