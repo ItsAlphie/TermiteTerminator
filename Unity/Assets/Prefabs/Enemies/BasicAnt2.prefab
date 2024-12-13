@@ -21,6 +21,10 @@ PrefabInstance:
       value: BasicAnt2
       objectReference: {fileID: 0}
     - target: {fileID: 3963292400792368574, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: coinDrop
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3963292400792368574, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: moveSpeed
       value: 0.6
       objectReference: {fileID: 0}

@@ -162,7 +162,7 @@ MonoBehaviour:
   moveSpeed: 0.6
   pointsIndex: 0
   type: 0
-  coinDrop: 2
+  coinDrop: 5
 --- !u!50 &-7639947875795090581
 Rigidbody2D:
   serializedVersion: 4
@@ -208,6 +208,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  onDied:
     m_PersistentCalls:
       m_Calls: []
 --- !u!61 &8825249917363962011

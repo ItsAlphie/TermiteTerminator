@@ -33,7 +33,7 @@ public class BomberEnemy : BasicEnemy
         }
 
         float distance = FindNearestTower();
-        if(distance < 2f && !bombDropped){ // drop bomb if enemy is close to tower
+        if(distance < 5f && !bombDropped){ // drop bomb if enemy is close to tower
             DropBomb();
         }
 
