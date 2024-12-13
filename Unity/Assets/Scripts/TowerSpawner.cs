@@ -252,7 +252,7 @@ public class TowerSpawner : MonoBehaviour
                     UIManager.Instance.disableTowerFeedbackScreen();
                 }
                 
-                else if (towerLifted == heightLimit){
+                else if (towerLifted >= heightLimit){
                     // Tower preview, not yet placed nor bought.
                     Debug.Log("Tower lifted");
                     UIManager.Instance.setTowerFeedbackScreen();

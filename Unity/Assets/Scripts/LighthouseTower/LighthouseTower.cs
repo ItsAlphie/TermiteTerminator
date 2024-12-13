@@ -23,6 +23,7 @@ public class LighthouseTower : BasicTower
         projectileAudioSource = laser.GetComponent<Laser>().Draw2DRay(transform.position, targetPosition, boosted,boostedClip, projectileClip);
         lineRenderer = laser.GetComponent<LineRenderer>();
         hitpoint = gameObject.transform.GetChild(1).gameObject;
+        Physics2D.IgnoreCollision(hitpoint.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
         targetPosition = transform.position;
         lineRenderer.startWidth = thickness;
         lineRenderer.endWidth = thickness;
@@ -73,7 +74,8 @@ public class LighthouseTower : BasicTower
     }
      
     void OnTriggerEnter2D(Collider2D col){
-    Debug.Log(col.gameObject.tag);
+    Debug.Log("lighth" + col.gameObject.tag);
+
     if(col.gameObject.CompareTag("PathCollider")){
         Debug.Log("Tower placed on path");
         gameObject.GetComponent<TowerHealthController>().die();

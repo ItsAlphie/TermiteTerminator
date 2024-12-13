@@ -65,7 +65,7 @@ public class RailGunTower : BasicTower
     }
 
     void OnTriggerEnter2D(Collider2D col){
-        Debug.Log(col.gameObject.tag);
+        Debug.Log("railg" + col.gameObject.tag);
         if(col.gameObject.CompareTag("PathCollider")){
             Debug.Log("Tower placed on path");
             gameObject.GetComponent<TowerHealthController>().die();

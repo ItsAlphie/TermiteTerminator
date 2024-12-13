@@ -3179,7 +3179,7 @@ MonoBehaviour:
   resolutionY: 0
   skewFactorX: 0.05
   skewFactorY: 0.05
-  heightLimit: 27
+  heightLimit: 34
 --- !u!114 &891508075
 MonoBehaviour:
   m_ObjectHideFlags: 0

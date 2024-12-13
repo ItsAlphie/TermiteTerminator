@@ -833,14 +833,13 @@ def MarkerMain(frame):
 					towers[markerID-1][1] = round(scalars[0],2)
 					towers[markerID-1][2] = round(scalars[1],2)
 					towers[markerID-1][3] = round(markerSize,1) #lifted
+					print(round(markerSize,1))
 					towers[markerID-1][4] = round(getMarkerAngle(angle),0)*0.1
 
 		# Pass data to unity
 		if np.array_equal(TVready, np.array([1, 1, 1])):
-			print("Sending Data to Unity:")
 			print(str(towers))
 			sendData(str(towers))
-			print("Succesfully Sent Data to Unity")
 
 	# show the output frame
 	#cv2.imshow("Frame", frame)
@@ -861,7 +860,7 @@ def main():
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
             break
-        time.sleep(0.2)
+        time.sleep(0.1)
     # cleanup
     cap.release()
     cv2.destroyAllWindows()
