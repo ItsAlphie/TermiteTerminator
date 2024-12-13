@@ -145,12 +145,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void showInsufficientFundsPopUp(Vector3 pos){
-        if(!notEnoughMoneyPopUpOn){
-            notEnoughMoneyPopUp.transform.position = pos;
-            notEnoughMoneyPopUp.transform.GetChild(0).GetComponent<Animator>().SetBool("NotEnoughMoney", true);
-            initializeNotEnoughMoneyPopUpTimer();
-        }
-        
+        notEnoughMoneyPopUp.transform.position = pos;
+        notEnoughMoneyPopUp.transform.GetChild(0).GetComponent<Animator>().SetBool("NotEnoughMoney", true); 
+        initializeNotEnoughMoneyPopUpTimer();  
+        notEnoughMoneyPopUpTimerOn = true;     
     }
 
     public void hideInsufficientFundsPopUp(){
