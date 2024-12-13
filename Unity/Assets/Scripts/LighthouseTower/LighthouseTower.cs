@@ -72,4 +72,11 @@ public class LighthouseTower : BasicTower
         targetPosition = nearestEnemy.transform.position;
     }
      
+    void OnTriggerEnter2D(Collider2D col){
+    Debug.Log(col.gameObject.tag);
+    if(col.gameObject.CompareTag("PathCollider")){
+        Debug.Log("Tower placed on path");
+        gameObject.GetComponent<TowerHealthController>().die();
+    }
+}
 }
