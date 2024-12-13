@@ -13,7 +13,6 @@ public class CommunicationController : MonoBehaviour
     private const int listenPort = 11000;
     UdpClient listener = new UdpClient(listenPort);
     IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-    private float boostTime = 3;
     TowerSpawner towerSpawner;
     public ConcurrentQueue<Action> mainThreadActions = new ConcurrentQueue<Action>();
     public ConcurrentQueue<float[]> spellData = new ConcurrentQueue<float[]>();
@@ -91,13 +90,8 @@ public class CommunicationController : MonoBehaviour
 
         tower.boosted = true;
         print(towerID + " is boosted");
-        StartCoroutine(BoostReset(tower));
     }
-    private IEnumerator BoostReset(BasicTower tower)
-    {
-        yield return new WaitForSeconds(boostTime);
-        tower.boosted = false;
-    }
+
     void Update()
     {
         // Process all actions queued for the main thread
