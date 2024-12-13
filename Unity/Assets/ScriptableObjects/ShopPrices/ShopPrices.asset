@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priceList:
   - tag: Tower
-    buyPrice: 10
-    sellPrice: 5
+    buyPrice: 80
+    sellPrice: 50
     totalAmount: 2
   - tag: RailgunTower
-    buyPrice: 10
-    sellPrice: 5
+    buyPrice: 130
+    sellPrice: 70
     totalAmount: 2
   - tag: LightHouseTower
-    buyPrice: 10
-    sellPrice: 5
+    buyPrice: 50
+    sellPrice: 25
     totalAmount: 2
