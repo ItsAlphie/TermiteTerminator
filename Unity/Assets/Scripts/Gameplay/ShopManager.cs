@@ -33,7 +33,8 @@ public class ShopManager : MonoBehaviour
             return true;
         }
         else if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
-            StartCoroutine(notBoughtFeedback());
+            gameObject.GetComponent<BasicTower>().showInsufficientFundsPopUp();
+            SoundController.instance.PlayErrorSound();
         }
         
         return false;
@@ -50,14 +51,6 @@ public class ShopManager : MonoBehaviour
         }
         return false;
     }
-
-    IEnumerator notBoughtFeedback()
-{
-    yield return new WaitForSeconds(2);
-    if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
-        UIManager.Instance.showNotEnoughMoneyPopUp(transform.position);
-        SoundController.instance.PlayErrorSound();
-    }
-    }
+ 
     
 }
