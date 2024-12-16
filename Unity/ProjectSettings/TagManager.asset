@@ -11,6 +11,8 @@ TagManager:
   - RailgunTower
   - Spell
   - PathCollider
+  - HighscoreTable
+  - PointsController
   layers:
   - Default
   - TransparentFX

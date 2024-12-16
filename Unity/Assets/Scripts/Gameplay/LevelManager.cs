@@ -39,7 +39,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake(){
         _instance = this;
-        SoundController.instance.PlayBackground();
+        
     }
 
 
@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour
     {
         MoneyManager.Instance.initializeMoney(100);
         UIManager.Instance.InitializeHUD();
+        SoundController.instance.PlayBackground();
     }
 
     // Update is called once per frame

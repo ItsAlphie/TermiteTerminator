@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Highscoretable : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class Highscoretable : MonoBehaviour
     private Transform entryTemplate;
     private List<HighscoreEntry> highscoreEntryList;
     private List<Transform> highscoreEntryTransformList;
+    [SerializeField] InputField inputField;
+    [SerializeField] Text resultText;
 
     private void Start()
     {
+        
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");
         entryTemplate.gameObject.SetActive(false);
+        
 
         // Load saved Highscores
         string jsonString = PlayerPrefs.GetString("highscoreTable", "");
@@ -37,6 +42,16 @@ public class Highscoretable : MonoBehaviour
         }
 
         SaveHighscores(new Highscores { highscoreEntryList = highscoreEntryList });
+    }
+    public void ValidateInput(int score){
+        string input = inputField.text;
+        if(input.Length > 3){
+            resultText.text = "Your name can only be 3 letters";
+            resultText.color = Color.red;
+        }
+        else{
+            AddHighscoreEntry(score,input);
+        }
     }
 
     private void SaveHighscores(Highscores highscores)
@@ -102,6 +117,14 @@ public class Highscoretable : MonoBehaviour
 
         // Save updated Highscores
         SaveHighscores(highscores);
+    }
+    public void ClearAllPlayerPrefs()
+    {
+        // Delete all PlayerPrefs data
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+        
+        Debug.Log("All PlayerPrefs entries have been cleared.");
     }
 
 
