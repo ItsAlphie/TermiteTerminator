@@ -25,7 +25,7 @@ public partial class BasicTower : MonoBehaviour
     private float timeLeft;
   
     public enum TowerState { Broken, Bought, Available};
-    TowerState state = TowerState.Available;
+    public TowerState state = TowerState.Available;
     public IPAddress IP;
 
     public TowerState State { get => state; set => state = value; }
@@ -67,7 +67,7 @@ public partial class BasicTower : MonoBehaviour
     }
 
     void OnMouseDown(){
-        gameObject.GetComponent<TowerHealthController>().takeDamage(10);
+        GetComponent<ShopManager>().buyItem();
     }
 
 
@@ -112,7 +112,9 @@ public partial class BasicTower : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D col){
+        Debug.Log(col.gameObject.tag);
         if(col.gameObject.CompareTag("PathCollider")){
+            Debug.Log("Tower placed on path");
             gameObject.GetComponent<TowerHealthController>().die();
         }
     }

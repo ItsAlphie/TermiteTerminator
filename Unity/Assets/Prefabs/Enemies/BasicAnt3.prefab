@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasicAnt3
       objectReference: {fileID: 0}
+    - target: {fileID: 3963292400792368574, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: coinDrop
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8835319684226665381, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Sprite
       value: 

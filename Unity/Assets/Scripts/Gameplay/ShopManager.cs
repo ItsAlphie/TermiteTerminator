@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Uduino;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShopManager : MonoBehaviour
 {
@@ -31,7 +32,11 @@ public class ShopManager : MonoBehaviour
             Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
-        MoneyManager.Instance.deductMoney(0);
+        else if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
+            UIManager.Instance.showInsufficientFundsPopUp(gameObject.transform.position);
+            SoundController.instance.PlayErrorSound();
+        }
+        
         return false;
     }
 
@@ -46,5 +51,6 @@ public class ShopManager : MonoBehaviour
         }
         return false;
     }
+ 
     
 }

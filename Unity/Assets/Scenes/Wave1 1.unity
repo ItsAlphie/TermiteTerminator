@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0dd3697904be138a4eb54093e774ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 3598248750024016555, guid: 0394cbefc334c0e4c98a335c07731356, type: 3}
+  TowerPrefab: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
 --- !u!114 &891508072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +430,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850a0b87f94495806bf9aebcbadc58b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOverScreen: {fileID: 0}
+  GameOver: 0
+  start: 0
+  OnWaveFinish:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameOver:
+    m_PersistentCalls:
+      m_Calls: []
+  PathCollider: {fileID: 0}
   Path: []
 --- !u!1 &896258056
 GameObject:
@@ -3797,6 +3805,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1618309135
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.9915581
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.0583785
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3500894841532853571, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5356104189857425583, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
+      propertyPath: m_Name
+      value: LighthousePrefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f5163fb3e786f1d4d80b62a82389afac, type: 3}
 --- !u!1 &1644054703
 GameObject:
   m_ObjectHideFlags: 0
@@ -3829,7 +3894,7 @@ MonoBehaviour:
   EnemyPrefab: {fileID: 7040709146438770483, guid: a4039d048a00b4a488e1891a65cabb73, type: 3}
   EnemyPrefab2: {fileID: 7040709146438770483, guid: a4039d048a00b4a488e1891a65cabb73, type: 3}
   SpawnPoint: {fileID: 553292977}
-  enemyWave: {fileID: 11400000, guid: c1b938793c42803eab6693e1627f2a96, type: 2}
+  enemyWave: {fileID: 11400000, guid: b0fc876bca16b894ea54ba64957e3f68, type: 2}
   enemyList: []
 --- !u!4 &1644054705
 Transform:
@@ -3857,3 +3922,4 @@ SceneRoots:
   - {fileID: 996648368}
   - {fileID: 891508070}
   - {fileID: 1454523385}
+  - {fileID: 1618309135}
