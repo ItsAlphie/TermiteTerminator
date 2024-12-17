@@ -6,13 +6,11 @@ public class EnemyHealthController : HealthController
 {
     private Animator animator;
     private GameObject enemySprite;
-    private PointsController pointsController;
     BasicEnemy enemy;
 
     public override void die()
     {
-        pointsController.AddPoints(totalHealth);
-        //pointsController.EndOfGame();
+        PointsController.globalPointsController.AddPoints(totalHealth);
         enemy.MoveSpeed = 0;
         enemy.Alive = false;
         Destroy(gameObject.GetComponent<Collider2D>());
@@ -33,7 +31,7 @@ public class EnemyHealthController : HealthController
         enemy = gameObject.GetComponent<BasicEnemy>();
         enemySprite = gameObject.transform.GetChild(0).gameObject;
         animator = enemySprite.GetComponent<Animator>();
-        pointsController = GameObject.FindGameObjectWithTag("PointsController")?.GetComponent<PointsController>();
+        //pointsController = GameObject.FindGameObjectWithTag("PointsController")?.GetComponent<PointsController>();
     }
 
   

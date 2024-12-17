@@ -6,14 +6,24 @@ public class PointsController : MonoBehaviour
 {
     [SerializeField] public int playerScore;
 
-    // Reference to the HighscoreTable
+    
     private HighscoreTable highscoreTable;
+    public static PointsController globalPointsController;
+    void Awake()
+    {
+        if (globalPointsController == null)
+        {
+            globalPointsController = this;  
+            DontDestroyOnLoad(gameObject);  
+        }
+        else
+        {
+            Destroy(gameObject);  
+        }
+    }
 
     void Start()
     {
-        // Initialize the score to zero at the start of the game
-        Debug.Log("Started the pointercontroller");
-        //playerScore = 9000;
         
 
         // Find the HighscoreTable instance (assuming it's attached to a GameObject tagged "HighscoreTable")
