@@ -4,18 +4,17 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class Highscoretable : MonoBehaviour
+public class HighscoreTable : MonoBehaviour
 {
     private Transform entryContainer;
     private Transform entryTemplate;
     private List<HighscoreEntry> highscoreEntryList;
     private List<Transform> highscoreEntryTransformList;
-    [SerializeField] InputField inputField;
-    [SerializeField] Text resultText;
+    
 
     private void Start()
     {
-        
+                
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");
         entryTemplate.gameObject.SetActive(false);
@@ -43,16 +42,38 @@ public class Highscoretable : MonoBehaviour
 
         SaveHighscores(new Highscores { highscoreEntryList = highscoreEntryList });
     }
-    public void ValidateInput(int score){
-        string input = inputField.text;
-        if(input.Length > 3){
-            resultText.text = "Your name can only be 3 letters";
-            resultText.color = Color.red;
+    private void loadScores()
+    {
+        
+        string jsonString = PlayerPrefs.GetString("highscoreTable", "");
+        Highscores loadHighscores = JsonUtility.FromJson<Highscores>(jsonString) ?? new Highscores { highscoreEntryList = new List<HighscoreEntry>() };
+        highscoreEntryList = loadHighscores.highscoreEntryList;
+
+        
+        highscoreEntryList.Sort((a, b) => b.score.CompareTo(a.score));
+        if (highscoreEntryList.Count > 5)
+            highscoreEntryList.RemoveRange(5, highscoreEntryList.Count - 5);
+
+        
+        foreach (Transform child in entryContainer)
+        {
+            Destroy(child.gameObject); 
         }
-        else{
-            AddHighscoreEntry(score,input);
+
+        
+        highscoreEntryTransformList = new List<Transform>();
+        foreach (HighscoreEntry highscoreEntry in highscoreEntryList)
+        {
+            CreateHighscoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
         }
+        
+        
+        string updatedJson = JsonUtility.ToJson(new Highscores { highscoreEntryList = highscoreEntryList });
+        PlayerPrefs.SetString("highscoreTable", updatedJson);
+        PlayerPrefs.Save();
     }
+
+    
 
     private void SaveHighscores(Highscores highscores)
     {
@@ -117,6 +138,7 @@ public class Highscoretable : MonoBehaviour
 
         // Save updated Highscores
         SaveHighscores(highscores);
+        loadScores();
     }
     public void ClearAllPlayerPrefs()
     {

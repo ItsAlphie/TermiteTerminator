@@ -7,7 +7,7 @@ public class PointsController : MonoBehaviour
     [SerializeField] public int playerScore;
 
     // Reference to the HighscoreTable
-    private Highscoretable highscoreTable;
+    private HighscoreTable highscoreTable;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class PointsController : MonoBehaviour
         
 
         // Find the HighscoreTable instance (assuming it's attached to a GameObject tagged "HighscoreTable")
-        highscoreTable = GameObject.FindGameObjectWithTag("HighscoreTable")?.GetComponent<Highscoretable>();
+        highscoreTable = GameObject.FindGameObjectWithTag("HighscoreTable")?.GetComponent<HighscoreTable>();
         //Debug.Log("going to end the game");
         //EndOfGame();
     }
