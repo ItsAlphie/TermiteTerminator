@@ -263,6 +263,7 @@ public class TowerSpawner : MonoBehaviour
                     print("Attempting to buy " + towers[i] + shopManager);
                     if(shopManager.buyItem()){
                         towers[i].SetActive(true);
+                        HintManager.Instance.TowerPlace(towers[i]);
                     }
                     print("Putting tower " + i + " at " + X + "/"+ Y);
                     Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
