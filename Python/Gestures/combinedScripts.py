@@ -424,7 +424,7 @@ def draw_info(image, fps):
     #                   cv2.LINE_AA)
     return image
 
-def CheckTriangle(thumbL, indexL, thumbR, indexR, indexRootR, hand_sign_idR, hand_sign_idL):
+def CheckTriangle(thumbL, indexL, thumbR, indexR, indexRootR):
     # Empty checks
     if (thumbL == []) or ( indexL == []) or ( thumbR == []) or ( indexR == []) or ( indexRootR == []):
         return False
@@ -433,7 +433,7 @@ def CheckTriangle(thumbL, indexL, thumbR, indexR, indexRootR, hand_sign_idR, han
     distanceIndex = getDistance(indexR, indexL)
     distanceThumb = getDistance(thumbR, thumbL)
 
-    if (distanceIndex <= proximity) & (distanceThumb <= proximity): # & (hand_sign_idL == 4) & (hand_sign_idR == 4):
+    if (distanceIndex <= proximity) & (distanceThumb <= proximity):
         print("Triangle Detected")
         return True
     else:
@@ -525,8 +525,10 @@ def GestureMain(frame):
         indexL = []
         thumbR = []
         thumbL = []
-        hand_sign_idR = 0
-        hand_sign_idL = 0
+        
+        leftHands = []
+        rightHands = []
+
         for hand_landmarks, handedness in zip(results.multi_hand_landmarks,
                                                 results.multi_handedness):
             # Bounding box calculation
@@ -577,24 +579,28 @@ def GestureMain(frame):
             # Assuming `classification` is the object you want to inspect
             index = handedness.classification[0].index
 
+            # indexR [8], indexRootR [5], thumbR [4]
             if index == 1:
-                palmR = landmark_list[0]
-                indexR = landmark_list[8]
-                indexRootR = landmark_list[5]
-                thumbR = landmark_list[4]
+                rightHands.append([landmark_list[8], landmark_list[5], landmark_list[4]])
+
             elif index == 0:
-                palmL = landmark_list[0]
-                indexL = landmark_list[8]
-                thumbL = landmark_list[4]
+                leftHands.append([landmark_list[8], landmark_list[4]])
 
         # Collecting data to send to Unity
-        if CheckTriangle(thumbL, indexL, thumbR, indexR, indexRootR, hand_sign_idR, hand_sign_idL):
-            X,Y = getCenter(thumbL, thumbR, indexL, indexR)
-            transform = defineAxis()
-            scalars = calculateRelative(X, Y, transform)
-            msg = "0," + str(round(scalars[0],3)) + "," + str(round(scalars[1],3))
-            print(msg)
-            sendData(msg)
+        for rightHand in rightHands:
+            indexR = rightHand[0]
+            indexRootR = rightHand[1]
+            thumbR = rightHand[2]
+            for leftHand in leftHands:
+                indexL = leftHand[0]
+                thumbL = leftHand[1]
+                if CheckTriangle(thumbL, indexL, thumbR, indexR, indexRootR):
+                    X,Y = getCenter(thumbL, thumbR, indexL, indexR)
+                    transform = defineAxis()
+                    scalars = calculateRelative(X, Y, transform)
+                    msg = "0," + str(round(scalars[0],3)) + "," + str(round(scalars[1],3))
+                    print(msg)
+                    sendData(msg)
 
     else:
         point_history.append([0, 0])
@@ -849,7 +855,6 @@ def MarkerMain(frame):
 ############################################################################################
 
 def main():
-    refMarkerSize = 1000
     while True:
         frame = shared_video_stream.read()
         if frame is None:
