@@ -14,6 +14,8 @@ public class SoundController : MonoBehaviour
     [SerializeField] public AudioClip backgroundClip;
     [SerializeField] public AudioClip receiveMoneyClip;
     [SerializeField] public AudioClip loseMoneyClip;
+    [SerializeField] public AudioClip bombClip;
+    [SerializeField] public AudioClip towerHitClip;
     public AudioSource startGameSource;
     public AudioSource errorSource;
     public AudioSource loseGameSource;
@@ -21,6 +23,8 @@ public class SoundController : MonoBehaviour
     public AudioSource backgroundSource;
     public AudioSource receiveMoneySource;
     public AudioSource loseMoneySource;
+    public AudioSource bombSource;
+    public AudioSource towerHitSource;
 
 
     private List<AudioSource> activeAudioSources = new List<AudioSource>();
@@ -113,6 +117,22 @@ public class SoundController : MonoBehaviour
         winGameSource.Play();
         float winWaveClipLength = winGameSource.clip.length;
         Destroy(winGameSource.gameObject, winWaveClipLength);
+    }
+    public void PlayBomb(){
+        bombSource = Instantiate(soundFXObject);
+        bombSource.clip = bombClip;
+        bombSource.volume = 1f;
+        bombSource.Play();
+        float bombClipLength = bombSource.clip.length;
+        Destroy(bombSource.gameObject, bombClipLength);
+    }
+    public void PlayTowerHit(){
+        towerHitSource = Instantiate(soundFXObject);
+        towerHitSource.clip = towerHitClip;
+        towerHitSource.volume = 1f;
+        towerHitSource.Play();
+        float towerClipLength = towerHitSource.clip.length;
+        Destroy(towerHitSource.gameObject, towerClipLength);
     }
 
 

@@ -6552,6 +6552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HighscoreTable
       objectReference: {fileID: 0}
+    - target: {fileID: 5707517570334977524, guid: 8618a73f438c03c449d6b17c4fb35ca2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6945106694271410806, guid: 8618a73f438c03c449d6b17c4fb35ca2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
