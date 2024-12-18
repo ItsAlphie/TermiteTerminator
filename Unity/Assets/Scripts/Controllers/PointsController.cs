@@ -4,22 +4,32 @@ using UnityEngine;
 
 public class PointsController : MonoBehaviour
 {
-    private int playerScore;
+    [SerializeField] public int playerScore;
 
-    // Reference to the HighscoreTable
-    private Highscoretable highscoreTable;
+    
+    private HighscoreTable highscoreTable;
+    public static PointsController globalPointsController;
+    void Awake()
+    {
+        if (globalPointsController == null)
+        {
+            globalPointsController = this;  
+            DontDestroyOnLoad(gameObject);  
+        }
+        else
+        {
+            Destroy(gameObject);  
+        }
+    }
 
     void Start()
     {
-        // Initialize the score to zero at the start of the game
-        Debug.Log("Started the pointercontroller");
-        playerScore = 9000;
         
 
         // Find the HighscoreTable instance (assuming it's attached to a GameObject tagged "HighscoreTable")
-        highscoreTable = GameObject.FindGameObjectWithTag("HighscoreTable")?.GetComponent<Highscoretable>();
-        Debug.Log("going to end the game");
-        EndOfGame();
+        highscoreTable = GameObject.FindGameObjectWithTag("HighscoreTable")?.GetComponent<HighscoreTable>();
+        //Debug.Log("going to end the game");
+        //EndOfGame();
     }
 
     public void AddPoints(int enemyHealth)
@@ -43,7 +53,7 @@ public class PointsController : MonoBehaviour
     {
         // Ensure the highscoreTable reference is valid
         Debug.Log("Ending the game");
-        highscoreTable.AddHighscoreEntry(playerScore, "BBB");
+        highscoreTable.AddHighscoreEntry(playerScore,"bbb");
         Debug.Log("Added to Highscore Table: " + playerScore);
 
         

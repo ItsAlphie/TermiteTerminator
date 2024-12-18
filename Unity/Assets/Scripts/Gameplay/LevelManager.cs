@@ -52,6 +52,7 @@ public class LevelManager : MonoBehaviour
         SoundController.instance.PlayBackground();
         MoneyManager.Instance.initializeMoney(100);
         UIManager.Instance.InitializeHUD();
+        SoundController.instance.PlayBackground();
     }
 
     // Update is called once per frame

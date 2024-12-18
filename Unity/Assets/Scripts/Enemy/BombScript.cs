@@ -13,6 +13,7 @@ public class BombScript : MonoBehaviour
     [SerializeField] private int damage = 10;
 
     private int bombCountdown = 3;
+
     public bool Activated { get => activated; set => activated = value; }
 
 
@@ -43,6 +44,7 @@ public class BombScript : MonoBehaviour
 
     public void Explode(){
         Activated = false;
+        SoundController.instance.PlayBomb();
         //damage all towers in range
         List<GameObject> towers = TowerSpawner.Instance.towers;
         foreach (GameObject t in towers)

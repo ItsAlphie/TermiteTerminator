@@ -97,6 +97,7 @@ public partial class BasicTower : MonoBehaviour
     }
 
     public void TakeDamage(int damage){
+        SoundController.instance.PlayTowerHit();
         Destroy(gameObject);
     }
 
