@@ -20,7 +20,7 @@ public partial class BasicTower : MonoBehaviour
     public AudioSource boostedAudioSource;
     
     List<GameObject> enemies;
-    [SerializeField] private float shootSpeed;
+    [SerializeField] private float shootSpeed = 1;
     [SerializeField] public bool boosted = false;
     private float timeLeft;
   
@@ -38,30 +38,39 @@ public partial class BasicTower : MonoBehaviour
         placingAudioSource = SoundController.instance.PlaySoundFXClip(placeClip, transform, 0.8f);
     }
 
+    void Start(){
+        if(State == TowerState.Bought){
+            updateEnemyList();
+            shoot();
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {   
         if(State == TowerState.Bought){
+            updateEnemyList();
             if(boosted){
-                shoot();
-                
+                    shoot();   
+                }
+            if(enemies.Count != 0){
+                timeLeft -= Time.deltaTime;
+                if(timeLeft <= 0){
+                    shoot();
+                    timeLeft = shootSpeed;              
+                    }
             }
-            
-            
-            
         }
-        
     }
 
     void shoot(){
-        updateEnemyList();
-        if(enemies.Count != 0){            
+        if(enemies.Count != 0){  
             GameObject nearestEnemy = findNearestEnemy();
             projectileAudioSource = SoundController.instance.PlaySoundFXClip(projectileClip, transform, 0.5f);
             GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity); 
             Physics2D.IgnoreCollision(projectile.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>()); 
             projectile.GetComponent<Projectile>().initialize(nearestEnemy);
-            timeLeft = shootSpeed;              
         }
         boosted = false;
     }

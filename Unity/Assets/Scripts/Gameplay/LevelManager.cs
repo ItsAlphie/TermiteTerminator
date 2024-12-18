@@ -45,8 +45,6 @@ public class LevelManager : MonoBehaviour
 
 
     [SerializeField] private Transform[] Path;
-    //tba -> maps and paths for each level
-
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +66,6 @@ public class LevelManager : MonoBehaviour
     public void TriggerGameOver(){
         GameOver = true;
         OnGameOver.Invoke();
-        Debug.Log("Game Over");
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
         KillAll();

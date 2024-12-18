@@ -77,7 +77,6 @@ abstract public partial class BasicSpell : MonoBehaviour
                     }
                 }
                 // Keep moving the spell once activated
-                Debug.Log("Placing spell at " + X + "/" + Y);
                 Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3(X, Y, 0));
                 gameObject.transform.position = location;
             }
