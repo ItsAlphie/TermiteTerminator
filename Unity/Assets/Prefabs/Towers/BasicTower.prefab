@@ -188,7 +188,7 @@ MonoBehaviour:
   placingAudioSource: {fileID: 0}
   projectileAudioSource: {fileID: 0}
   boostedAudioSource: {fileID: 0}
-  shootSpeed: 1
+  shootSpeed: 3
   boosted: 0
   state: 2
 --- !u!114 &6359639095416734115
