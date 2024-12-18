@@ -29,6 +29,7 @@ public class ShopManager : MonoBehaviour
             shopItem.totalAmount--;
             InventoryManager.Instance.addItem(gameObject);
             gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
+            UIManager.Instance.showCoinPopUp(new Vector3(transform.position.x + 2f, transform.position.y + 0.85f, transform.position.z), shopItem.buyPrice, false);
             return true;
         }
         else if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){

@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject towerFeedbackScreen;
     [SerializeField] public GameObject coinPopUp;
     [SerializeField] public GameObject notEnoughMoneyPopUp;
+    
     private float towerFeedbackScreenTimer;
     private float notEnoughMoneyPopUpTimer;
 
