@@ -28,7 +28,6 @@ public class BasicEnemy : MonoBehaviour
         environment = GameObject.Find("LevelManager").GetComponent<LevelManager>().GetEnvironment();
         if(environment == type && environment != 0){
             gameObject.GetComponent<EnemyHealthController>().DoubleHealth();
-            //to do: add visual effect to differentiate boosted enemies
         }
 
         transform.position = Points[pointsIndex].transform.position;
@@ -62,7 +61,6 @@ public class BasicEnemy : MonoBehaviour
     void OnTriggerExit2D(Collider2D other){
         if(other.tag == "Spell"){
             ExitFreezeSpell();
-            Debug.Log("Exit Freeze Spell");
         }
     }
 

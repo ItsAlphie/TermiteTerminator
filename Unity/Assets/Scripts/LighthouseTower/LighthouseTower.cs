@@ -90,8 +90,6 @@ public class LighthouseTower : BasicTower
     }
      
     void OnTriggerEnter2D(Collider2D col){
-        Debug.Log("light" + col.gameObject.tag);
-
         if(col.gameObject.CompareTag("PathCollider")){
             Debug.Log("Tower placed on path");
             gameObject.GetComponent<TowerHealthController>().die();

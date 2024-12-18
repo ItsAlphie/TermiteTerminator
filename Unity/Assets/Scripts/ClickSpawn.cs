@@ -16,9 +16,9 @@ public class ClickSpawn : MonoBehaviour
     void Update()
     {
         if(Input.GetMouseButtonDown(1)){
-            Debug.Log("Click");
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameObject tower = Instantiate(TowerPrefab, mousePosition, Quaternion.identity);
+            TowerSpawner.Instance.towers.Add(tower);
             tower.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
             InventoryManager.Instance.addItem(tower);
             TowerSpawner.Instance.towers.Add(tower);

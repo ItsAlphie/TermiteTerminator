@@ -21,8 +21,6 @@ public class UIManager : MonoBehaviour
 
     private bool towerFeedbackScreenOn = false;
     private bool towerFeedbackScreenTimerOn = false;
-
-    private bool notEnoughMoneyPopUpOn = false;
     private bool notEnoughMoneyPopUpTimerOn = false;
 
     private TMP_Text currentMoneyDisplay;
