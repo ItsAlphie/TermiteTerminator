@@ -139,7 +139,7 @@ public class HintManager : MonoBehaviour
                         GameObject hint = gameObject.transform.GetChild(3).gameObject;
                         hint.SetActive(true);
                         SpellStatus = HintState.Hinting;
-                        SpellStatus = 0;
+                        SpellTimer = 0;
                     }
                     SpellTimer += UnityEngine.Time.deltaTime;
                     break;
