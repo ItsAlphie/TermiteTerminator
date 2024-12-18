@@ -5,33 +5,45 @@ using UnityEngine;
 public class BombScript : MonoBehaviour
 {
 
-    private bool alive = true;
+    private bool activated = false;
 
     private float t0;
 
     private Animator animator;
+    [SerializeField] private int damage = 10;
+
+    private int bombCountdown = 3;
+    public bool Activated { get => activated; set => activated = value; }
 
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        t0 = Time.time;
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if((Time.time - t0) > 3 && alive){
+    {   
+        if(Activated){
+            if((Time.time - t0) > bombCountdown){
             Explode();
+            }
         }
     }
 
 
+    public void initializeExplosion(){
+        if(!activated){
+            t0 = Time.time;
+            activated = true;
+            animator.SetTrigger("isActive"); 
+            Debug.Log(activated);
+        }
+    }
 
-    void Explode(){
-        alive = false;
-        animator.SetBool("isDead", true);
+    public void Explode(){
+        Activated = false;
         //damage all towers in range
         List<GameObject> towers = TowerSpawner.Instance.towers;
         foreach (GameObject t in towers)
@@ -41,9 +53,8 @@ public class BombScript : MonoBehaviour
             float distance = Vector2.Distance(transform.position, t.transform.position);
             if (distance < 3)
             {
-                t.GetComponent<TowerHealthController>().takeDamage(10);
+                t.GetComponent<TowerHealthController>().takeDamage(damage);
             }
         }
-        Destroy(gameObject, 1);    
     }
 }
