@@ -57,7 +57,6 @@ public class BomberEnemy : BasicEnemy
             if(t == null || t.GetComponent<BasicTower>().State != BasicTower.TowerState.Bought) continue;
             
             float distance = Vector2.Distance(transform.position, t.transform.position);
-            Debug.Log(t + "has " + t.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance; 
