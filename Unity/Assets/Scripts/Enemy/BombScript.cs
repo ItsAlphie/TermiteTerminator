@@ -38,7 +38,6 @@ public class BombScript : MonoBehaviour
             t0 = Time.time;
             activated = true;
             animator.SetTrigger("isActive"); 
-            Debug.Log(activated);
         }
     }
 

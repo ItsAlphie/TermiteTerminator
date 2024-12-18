@@ -29,7 +29,6 @@ public class ShopManager : MonoBehaviour
             shopItem.totalAmount--;
             InventoryManager.Instance.addItem(gameObject);
             gameObject.GetComponent<BasicTower>().State = BasicTower.TowerState.Bought;
-            Debug.Log("Inventory:" + InventoryManager.Instance.inventoryItems);
             return true;
         }
         else if(gameObject.GetComponent<BasicTower>().State == BasicTower.TowerState.Available){
