@@ -81,7 +81,6 @@ public class CommunicationController : MonoBehaviour
     */
     private void BoostTower(byte[] bytes, string towerIP)
     {
-        print("Handling boost of tower " + towerIP);
         string towerID = towerIP.Substring(towerIP.Length-1);
 
         List<GameObject> towers = TowerSpawner.Instance.towers;
@@ -89,7 +88,6 @@ public class CommunicationController : MonoBehaviour
         BasicTower tower = towerObject.GetComponent<BasicTower>();
 
         tower.boosted = true;
-        print(towerID + " is boosted");
     }
 
     void Update()

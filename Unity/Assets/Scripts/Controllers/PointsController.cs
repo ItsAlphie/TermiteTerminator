@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PointsController : MonoBehaviour
 {
-    [SerializeField] public int playerScore = 0;
+    [SerializeField] public int playerScore;
 
     
     private HighscoreTable highscoreTable;
     public static PointsController globalPointsController;
     void Awake()
     {
-        playerScore = 0;
+        //playerScore = 0;
         if (globalPointsController == null)
         {
             globalPointsController = this;  

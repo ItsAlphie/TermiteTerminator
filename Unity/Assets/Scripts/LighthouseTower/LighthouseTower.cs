@@ -47,7 +47,7 @@ public class LighthouseTower : BasicTower
                 lineRenderer.endWidth = boostedThickness;
             }
 
-            if (nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive && !LevelManager.Instance.GameOver)
+            if (nearestEnemy != null && nearestEnemy.GetComponent<BasicEnemy>().Alive)
             {
                 getPositionOfNearestEnemy();
                 ShootLaser(gameBoost);

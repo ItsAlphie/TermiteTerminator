@@ -3140,7 +3140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec0dd3697904be138a4eb54093e774ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TowerPrefab: {fileID: 5129546351905534963, guid: f46e7602df60d57c0bd612b149dd035a, type: 3}
+  TowerPrefab: {fileID: 5356104189857425583, guid: b2f3809137b7245f09f19e1e773fc747, type: 3}
 --- !u!114 &891508072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3153,7 +3153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 850a0b87f94495806bf9aebcbadc58b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameOver: 0
   start: 0
   OnWaveFinish:
     m_PersistentCalls:
@@ -3246,6 +3245,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0fc876bca16b894ea54ba64957e3f68, type: 2}
   - {fileID: 11400000, guid: efd2ba5853ba28d439a24424a1ba8fa3, type: 2}
   - {fileID: 11400000, guid: 4f8f37c8a066fcc4b935389436b7ad8f, type: 2}
+  - {fileID: 11400000, guid: 0e8b56e242364a8438a36093a406fbbd, type: 2}
+  - {fileID: 11400000, guid: ff961894736f3ef4ebbedfa3374b3012, type: 2}
   enemyList: []
   timeBetweenWaves: 15
 --- !u!114 &891508074
@@ -3273,7 +3274,7 @@ MonoBehaviour:
   skewFactorY: 0.5
   skewFactorXX: -0.02
   skewFactorYY: -0.05
-  heightLimit: 38
+  heightLimit: 38.5
 --- !u!114 &891508075
 MonoBehaviour:
   m_ObjectHideFlags: 0

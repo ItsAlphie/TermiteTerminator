@@ -13,7 +13,7 @@ public class HighscoreTable : MonoBehaviour
     private List<Transform> highscoreEntryTransformList = new List<Transform>(); 
     private void Start()
     {
-        
+        //ClearAllPlayerPrefs();
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");
         //highscoreContainer = transform.Find("highscoreEntryContainer");

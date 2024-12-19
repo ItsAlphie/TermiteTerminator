@@ -18,7 +18,7 @@ public class LevelManager : MonoBehaviour
 
     private int environment = 0; //To do: change this to an enum
 
-    public bool GameOver = false;
+    private bool isGameOver = false;
     public bool start = false;
 
     [SerializeField] private UnityEvent OnWaveFinish;
@@ -38,6 +38,8 @@ public class LevelManager : MonoBehaviour
             return  _instance;  
         }
     }
+
+    public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
     private void Awake(){
         _instance = this;
@@ -65,9 +67,9 @@ public class LevelManager : MonoBehaviour
     }
 
     public void TriggerGameOver(){
-        GameOver = true;
+        isGameOver = true;
         OnGameOver.Invoke();
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
         KillAll();
 

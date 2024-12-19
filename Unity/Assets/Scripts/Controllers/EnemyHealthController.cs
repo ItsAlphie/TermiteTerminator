@@ -41,8 +41,6 @@ public class EnemyHealthController : HealthController
 
     public override void takeDamage(int damage)
     {
-        Debug.Log("takeDamage");
-
         currHealth -= damage;
         onDamage.Invoke(currHealth, totalHealth);
         if(currHealth <= 0){
@@ -104,7 +102,6 @@ public class EnemyHealthController : HealthController
                 Debug.Log(nextForm.name);
             }
             healthClass = 0;
-            Debug.Log("health 0+");
         }
 
     }

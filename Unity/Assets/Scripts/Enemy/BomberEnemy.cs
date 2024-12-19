@@ -35,7 +35,7 @@ public class BomberEnemy : BasicEnemy
                 }
             }
             else{
-                if(!LevelManager.Instance.GameOver){
+                if(!LevelManager.Instance.IsGameOver){
                     LevelManager.Instance.TriggerGameOver();
                 }
             }
@@ -44,8 +44,8 @@ public class BomberEnemy : BasicEnemy
     }
 
     void DropBomb(){
-        if(!transform.GetChild(1).GetComponent<BombScript>().Activated)
-        transform.GetChild(1).GetComponent<BombScript>().initializeExplosion();
+        if(!transform.GetChild(2).GetComponent<BombScript>().Activated)
+        transform.GetChild(2).GetComponent<BombScript>().initializeExplosion();
     }
 
 

@@ -239,7 +239,6 @@ public class TowerSpawner : MonoBehaviour
                 }
                 else{
                     towers[i].SetActive(true);
-                    print("Putting Healing Hammer " + i + " at " + X + "/"+ Y);
                     Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
                     towers[i].transform.position = location;
                     float newAngle = matrix[i,4]*10;
@@ -256,18 +255,16 @@ public class TowerSpawner : MonoBehaviour
                 
                 else if (towerLifted >= heightLimit){
                     // Tower preview, not yet placed nor bought.
-                    Debug.Log("Tower lifted");
+                            Debug.Log("Tower lifted");
                     UIManager.Instance.setTowerFeedbackScreen();
                 }
                 else{
                     Debug.Log("Tower placing");
                     UIManager.Instance.disableTowerFeedbackScreen();
-                    print("Attempting to buy " + towers[i] + shopManager);
                     if(shopManager.buyItem()){
                         towers[i].SetActive(true);
                         HintManager.Instance.TowerPlace(towers[i]);
                     }
-                    print("Putting tower " + i + " at " + X + "/"+ Y);
                     Vector2 location = Camera.main.ScreenToWorldPoint(new Vector3 (X, Y, 0));
                     towers[i].transform.position = location;
                     float newAngle = matrix[i,4]*10;

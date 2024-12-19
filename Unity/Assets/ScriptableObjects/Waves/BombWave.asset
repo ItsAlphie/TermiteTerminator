@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BombWave
   m_EditorClassIdentifier: 
   waveSequence:
-  - {fileID: 8105342550296756692, guid: b1c7f50088853994bbc9119a0bacbc7a, type: 3}
-  - {fileID: 8105342550296756692, guid: b1c7f50088853994bbc9119a0bacbc7a, type: 3}
-  - {fileID: 8105342550296756692, guid: b1c7f50088853994bbc9119a0bacbc7a, type: 3}
+  - {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
+  - {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
+  - {fileID: 135286290328215611, guid: b767f017d8449074b84348ed7742510f, type: 3}
   timeBetweenSpawn: 2

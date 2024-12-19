@@ -221,11 +221,9 @@ public class HintManager : MonoBehaviour
         }
     }
     public void TowerPlace(GameObject tower){
-        print("Got tower " + tower);
         switch (tower.tag)
         {
             case "LightHouseTower":
-                print("It's a light tower");
                 if(!LTUsed){
                     LT = tower;
                     LTUsed = true;
@@ -233,7 +231,6 @@ public class HintManager : MonoBehaviour
                 break;
 
             case "RailgunTower":
-                print("It's a railgun tower");
                 if(!RGUsed){
                     RG = tower;
                     RGUsed = true;
@@ -241,7 +238,6 @@ public class HintManager : MonoBehaviour
                 break;
 
             case "Tower":
-                print("It's a trigger tower");
                 if(!TTUsed){
                     TT = tower;
                     TTUsed = true;
