@@ -11,11 +11,13 @@ public class UIManager : MonoBehaviour
 
     [Header("UI Objects")]
     [SerializeField] public GameObject gameOverScreen;
+    [SerializeField] public GameObject highScoreScreen;
     [SerializeField] public GameObject waveFinishedScreen;
     [SerializeField] public GameObject HUD;
     [SerializeField] public GameObject towerFeedbackScreen;
     [SerializeField] public GameObject coinPopUp;
     [SerializeField] public GameObject notEnoughMoneyPopUp;
+
     private float towerFeedbackScreenTimer;
     private float notEnoughMoneyPopUpTimer;
 
@@ -64,6 +66,12 @@ public class UIManager : MonoBehaviour
 
     public void setGameOverScreen(){
         gameOverScreen.SetActive(true);  
+    }
+    public void hideGameOverScreen(){
+        gameOverScreen.SetActive(false);
+    }
+    public void setHighscoreScreen(){
+        highScoreScreen.SetActive(true);
     }
 
     public void setWaveFinishedScreen(){

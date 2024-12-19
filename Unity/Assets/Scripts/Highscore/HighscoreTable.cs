@@ -8,15 +8,17 @@ public class HighscoreTable : MonoBehaviour
 {
     private Transform entryContainer;
     private Transform entryTemplate;
+    [SerializeField] private Transform highscoreContainer;
     private List<HighscoreEntry> highscoreEntryList;
     private List<Transform> highscoreEntryTransformList = new List<Transform>(); 
     private void Start()
     {
-        ClearAllPlayerPrefs();
+        
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");
+        //highscoreContainer = transform.Find("highscoreEntryContainer");
         entryTemplate.gameObject.SetActive(false);
-
+        highscoreContainer.gameObject.SetActive(false);
         // Load and display highscores
         LoadScores();
     }

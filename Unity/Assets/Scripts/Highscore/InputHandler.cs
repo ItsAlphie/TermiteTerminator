@@ -2,14 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class InputHandler : MonoBehaviour
 {
-    [SerializeField] InputField inputField;
+    [SerializeField] TMPro.TMP_InputField inputField;
     [SerializeField] HighscoreTable highscoreTable;
     private int score;
     private void Start(){
         //pointsController = GameObject.FindGameObjectWithTag("PointsController")?.GetComponent<PointsController>();
+        
         score = 0;
     }
     public void regulateInput()
@@ -26,5 +29,8 @@ public class InputHandler : MonoBehaviour
             highscoreTable.AddHighscoreEntry(score, input);
             Debug.Log("Highscore should be submitted");
         }
+    }
+    public void startNewGame(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

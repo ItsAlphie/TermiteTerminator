@@ -35,13 +35,13 @@ public class PointsController : MonoBehaviour
     public void AddPoints(int enemyHealth)
     {
         playerScore += enemyHealth;
-        Debug.Log("Points Added! Current Score: " + playerScore);
+        //Debug.Log("Points Added! Current Score: " + playerScore);
     }
 
     public void SubtractPointsForTower()
     {
         playerScore -= 20;
-        Debug.Log("Points Subtracted for Tower Destruction! Current Score: " + playerScore);
+        //Debug.Log("Points Subtracted for Tower Destruction! Current Score: " + playerScore);
     }
 
     public int GetScore()
@@ -52,9 +52,9 @@ public class PointsController : MonoBehaviour
     public void EndOfGame()
     {
         // Ensure the highscoreTable reference is valid
-        Debug.Log("Ending the game");
+        //Debug.Log("Ending the game");
         highscoreTable.AddHighscoreEntry(playerScore,"bbb");
-        Debug.Log("Added to Highscore Table: " + playerScore);
+        //Debug.Log("Added to Highscore Table: " + playerScore);
 
         
         
