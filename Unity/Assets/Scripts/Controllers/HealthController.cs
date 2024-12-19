@@ -19,7 +19,7 @@ public abstract class HealthController : MonoBehaviour
         currHealth = totalHealth;
     }
 
-    public void takeDamage(int damage)
+    public virtual void takeDamage(int damage)
     {
         currHealth -= damage;
         onDamage.Invoke(currHealth, totalHealth);

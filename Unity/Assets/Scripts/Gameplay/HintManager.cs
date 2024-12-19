@@ -32,6 +32,16 @@ public class HintManager : MonoBehaviour
     [SerializeField] protected float placedWait = 2.0f; 
     [SerializeField] protected float hintTime = 10.0f;
 
+    public bool IsTowerDamaged;
+    HintState DamagedHint = HintState.PreHint;
+    public float DamTimer = 0.0f;
+    private GameObject DamT;
+
+    public bool IsTowerDowned;
+    HintState DownedHint = HintState.PreHint;
+    public float DowTimer = 0.0f;
+    private GameObject DowT;
+
     private static HintManager _instance;
     public static HintManager Instance{
         get{
@@ -157,6 +167,58 @@ public class HintManager : MonoBehaviour
                     break;
             }
         }
+
+        // Hint Logic for Damaged Tower
+        if (IsTowerDamaged){
+            switch (DamagedHint)
+            {
+                case HintState.PreHint:
+                    if(DamTimer > placedWait){
+                        HintDamagedTower();
+                        DamagedHint = HintState.Hinting;
+                        DamTimer = 0;
+                    }
+                    DamTimer += UnityEngine.Time.deltaTime;
+                    break;
+
+                case HintState.Hinting:
+                    if(DamTimer > hintTime){
+                        HideHintDamagedTower();
+                        DamagedHint = HintState.Hinted;
+                    }
+                    DamTimer += UnityEngine.Time.deltaTime;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        // Hint Logic for Downed Tower
+        if (IsTowerDowned){
+            switch (DownedHint)
+            {
+                case HintState.PreHint:
+                    if(DowTimer > placedWait){
+                        HintDownedTower();
+                        DownedHint = HintState.Hinting;
+                        DowTimer = 0;
+                    }
+                    DowTimer += UnityEngine.Time.deltaTime;
+                    break;
+
+                case HintState.Hinting:
+                    if(DowTimer > hintTime){
+                        HideHintDownedTower();
+                        DownedHint = HintState.Hinted;
+                    }
+                    DowTimer += UnityEngine.Time.deltaTime;
+                    break;
+
+                default:
+                    break;
+            }
+        }
     }
     public void TowerPlace(GameObject tower){
         print("Got tower " + tower);
@@ -188,6 +250,20 @@ public class HintManager : MonoBehaviour
 
             default:
                 break;
+        }
+    }
+
+    public void TowerDamaged(GameObject tower){
+        if(!IsTowerDamaged){
+            DamT = tower;
+            IsTowerDamaged = true;
+        }
+    }
+
+    public void TowerDowned(GameObject tower){
+        if(!IsTowerDowned){
+            DowT = tower;
+            IsTowerDowned = true;
         }
     }
 
@@ -227,6 +303,28 @@ public class HintManager : MonoBehaviour
     }
     void HideHintRailGun(){
         GameObject hint = gameObject.transform.GetChild(2).gameObject;
+        hint.SetActive(false);
+    }
+
+    void HintDamagedTower(){
+        GameObject hint = gameObject.transform.GetChild(4).gameObject;
+        hint.transform.position = DamT.transform.position;
+
+        hint.SetActive(true);
+    }
+    void HideHintDamagedTower(){
+        GameObject hint = gameObject.transform.GetChild(4).gameObject;
+        hint.SetActive(false);
+    }
+
+    void HintDownedTower(){
+        GameObject hint = gameObject.transform.GetChild(5).gameObject;
+        hint.transform.position = DowT.transform.position;
+
+        hint.SetActive(true);
+    }
+    void HideHintDownedTower(){
+        GameObject hint = gameObject.transform.GetChild(5).gameObject;
         hint.SetActive(false);
     }
 }

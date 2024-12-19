@@ -6,6 +6,17 @@ public class TowerHealthController : HealthController
 {
     [SerializeField] GameObject healthDisplay;
     
+    public override void takeDamage(int damage)
+    {
+        currHealth -= damage;
+        onDamage.Invoke(currHealth, totalHealth);
+        HintManager.Instance.TowerDamaged(gameObject);
+        if(currHealth <= 0){
+            currHealth = 0;
+            die();
+        }
+    }
+
     // Implement the abstract method die()
     public override void die()
     {   
@@ -14,6 +25,7 @@ public class TowerHealthController : HealthController
         InventoryManager.Instance.moveToBroken(gameObject);
         CommunicationController.Instance.SendMsg("k", gameObject.GetComponent<BasicTower>());
         onDied.Invoke();
+        HintManager.Instance.TowerDowned(gameObject);
     }
 
     protected override void Start()

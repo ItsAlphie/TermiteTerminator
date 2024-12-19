@@ -1734,6 +1734,10 @@ MonoBehaviour:
   SpellTimer: 0
   placedWait: 2
   hintTime: 10
+  IsTowerDamaged: 0
+  DamTimer: 0
+  IsTowerDowned: 0
+  DowTimer: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
