@@ -7,6 +7,8 @@ public class BasicEnemy : MonoBehaviour
     [SerializeField] protected Transform[] Points;
     [SerializeField] protected float moveSpeed = 0.5f;
 
+    private float freezeMultiplier = 1f;
+
     [SerializeField] protected int pointsIndex;
 
     protected bool alive = true;
@@ -19,7 +21,7 @@ public class BasicEnemy : MonoBehaviour
 
     private int environment = 0;
 
-    [SerializeField ]private int coinDrop = 2;
+    [SerializeField] private int coinDrop = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,7 @@ public class BasicEnemy : MonoBehaviour
     void Update()
     {
         if(pointsIndex <= Points.Length - 1){
-            transform.position = Vector2.MoveTowards(transform.position, Points[pointsIndex].transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, Points[pointsIndex].transform.position, freezeMultiplier*moveSpeed * Time.deltaTime);
             if(transform.position == Points[pointsIndex].transform.position){
                 pointsIndex+=1;
             }
@@ -65,11 +67,11 @@ public class BasicEnemy : MonoBehaviour
     }
 
     void EnterFreezeSpell(Collider2D other){
-        moveSpeed = other.GetComponent<FreezeSpell>().GetNewSpeed();
+        freezeMultiplier = 0.1f;
     }
 
     void ExitFreezeSpell(){
-        moveSpeed = 0.5f;
+        freezeMultiplier = 1f;
     }
 }
 

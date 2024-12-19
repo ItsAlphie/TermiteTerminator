@@ -9,8 +9,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -2786433913775387447, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
+      propertyPath: nextForm
+      value: 
+      objectReference: {fileID: 8385280852898773667, guid: 1cdcfea81d52f2449b19b0b994fde76d, type: 3}
+    - target: {fileID: -2786433913775387447, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: totalHealth
-      value: 50
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 3317074277029450927, guid: 6b416283769bd5dd69d7cff8e52b227b, type: 3}
       propertyPath: m_Controller
@@ -110,7 +114,7 @@ MonoBehaviour:
   - {fileID: 2811635201444189113, guid: 59c36c12238db8fa0825db1787af2b8f, type: 3}
   - {fileID: 8488031229871601342, guid: 2c0cef65636b4a11db6468a059ce7ace, type: 3}
   - {fileID: 4740726953656487720, guid: 64019c3dcbb2d11078ab451f1e07fc19, type: 3}
-  moveSpeed: 0.6
+  moveSpeed: 1.2
   pointsIndex: 0
   type: 0
   coinDrop: 10

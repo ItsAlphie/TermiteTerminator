@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b22d520f5712795ae8731564c68af2f9, type: 3}
   m_Name: BombWave
   m_EditorClassIdentifier: 
-  waveSequence: []
-  timeBetweenSpawn: 0
+  waveSequence:
+  - {fileID: 8105342550296756692, guid: b1c7f50088853994bbc9119a0bacbc7a, type: 3}
+  - {fileID: 8105342550296756692, guid: b1c7f50088853994bbc9119a0bacbc7a, type: 3}
+  - {fileID: 8105342550296756692, guid: b1c7f50088853994bbc9119a0bacbc7a, type: 3}
+  timeBetweenSpawn: 2
