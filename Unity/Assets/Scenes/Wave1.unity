@@ -2971,6 +2971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverScreen: {fileID: 259114844}
+  highScoreScreen: {fileID: 0}
   waveFinishedScreen: {fileID: 2123104353}
   HUD: {fileID: 1183733891}
   towerFeedbackScreen: {fileID: 1481446545}
@@ -3231,6 +3232,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0fc876bca16b894ea54ba64957e3f68, type: 2}
   - {fileID: 11400000, guid: efd2ba5853ba28d439a24424a1ba8fa3, type: 2}
   - {fileID: 11400000, guid: 4f8f37c8a066fcc4b935389436b7ad8f, type: 2}
+  - {fileID: 11400000, guid: 0e8b56e242364a8438a36093a406fbbd, type: 2}
+  - {fileID: 11400000, guid: ff961894736f3ef4ebbedfa3374b3012, type: 2}
   enemyList: []
   timeBetweenWaves: 15
 --- !u!114 &891508074
