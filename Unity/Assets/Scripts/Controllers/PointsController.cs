@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PointsController : MonoBehaviour
 {
-    [SerializeField] public int playerScore;
+    [SerializeField] public int playerScore = 0;
 
     
     private HighscoreTable highscoreTable;
     public static PointsController globalPointsController;
     void Awake()
     {
+        playerScore = 0;
         if (globalPointsController == null)
         {
             globalPointsController = this;  
@@ -25,7 +26,7 @@ public class PointsController : MonoBehaviour
     void Start()
     {
         
-
+        playerScore = 0;
         // Find the HighscoreTable instance (assuming it's attached to a GameObject tagged "HighscoreTable")
         highscoreTable = GameObject.FindGameObjectWithTag("HighscoreTable")?.GetComponent<HighscoreTable>();
         //Debug.Log("going to end the game");

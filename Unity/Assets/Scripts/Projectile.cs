@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {   
     [SerializeField] private float projectileSpeed;
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damage = 3;
 
     private GameObject nearestEnemy = null;
 

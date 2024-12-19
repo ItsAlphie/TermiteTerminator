@@ -97,7 +97,7 @@ public class SoundController : MonoBehaviour
         StopSound(startGameSource);
         loseGameSource = Instantiate(soundFXObject);
         loseGameSource.clip = loseGameClip;
-        loseGameSource.volume = 1f;
+        loseGameSource.volume = 0.7f;
         loseGameSource.Play();
         float loseGameClipLength = loseGameSource.clip.length;
         Destroy(loseGameSource.gameObject, loseGameClipLength);

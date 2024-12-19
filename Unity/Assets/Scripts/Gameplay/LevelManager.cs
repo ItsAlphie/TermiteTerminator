@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
         OnGameOver.Invoke();
         Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
-        //KillAll();
+        KillAll();
 
     }
     int GetLevel(){
@@ -83,11 +83,9 @@ public class LevelManager : MonoBehaviour
     private IEnumerator WaitForGameRestart() {
         yield return new WaitForSecondsRealtime(10);
         Time.timeScale = 1;
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //RepairAll();
+        RepairAll();
         UIManager.Instance.hideGameOverScreen();
-        UIManager.Instance.setHighscoreScreen();
-
+        UIManager.Instance.setHighscoreScreen();        
     }
     
     public void TriggerWaveFinish(){

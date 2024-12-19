@@ -45,6 +45,8 @@ public class TowerSpawner : MonoBehaviour
     // Fine-tuning params
     [SerializeField] public float skewFactorX = 1;
     [SerializeField] public float skewFactorY = 1;
+    [SerializeField] public float skewFactorXX = 1;
+    [SerializeField] public float skewFactorYY = 1;
     [SerializeField] public float heightLimit = 27;
 
     // Thread-safe queue to handle received matrices
@@ -198,21 +200,21 @@ public class TowerSpawner : MonoBehaviour
 
             // Horizontal skew
             if (X > 0.5f){
-                float d = (X - 0.5f) / 0.5f;
-                X = X * (1 - skewFactorX * d);
+                float d = (0.5f - X) * 2f;
+                X = X * (1 - skewFactorXX * d);
             }
             else{
-                float d = (0.5f - X) / 0.5f;
+                float d = (0.5f - X) * 2f;
                 X = X * (1 + skewFactorX * d);
             }
 
             // Vertical skew
             if (Y > 0.5f){
-                float d = (Y - 0.5f) / 0.5f;
-                Y = Y * (1 - skewFactorY * d);
+                float d = (0.5f - Y) * 2f;
+                Y = Y * (1 - skewFactorYY * d);
             }
             else{
-                float d = (0.5f - Y) / 0.5f;
+                float d = (0.5f - Y) * 2f;
                 Y = Y * (1 + skewFactorY * d);
             }
 

@@ -87,24 +87,26 @@ abstract public partial class BasicSpell : MonoBehaviour
         TowerSpawner towerSpawner = LevelManager.Instance.GetComponent<TowerSpawner>();
         float skewFactorX = towerSpawner.skewFactorX;
         float skewFactorY = towerSpawner.skewFactorY;
+        float skewFactorXX = towerSpawner.skewFactorXX;
+        float skewFactorYY = towerSpawner.skewFactorYY;
 
         // Horizontal skew
         if (X > 0.5f){
-            float d = (X - 0.5f) / 0.5f;
-            X = X * (1 - skewFactorX * d);
+            float d = (0.5f - X) * 2f;
+            X = X * (1 - skewFactorXX * d);
         }
         else{
-            float d = (0.5f - X) / 0.5f;
+            float d = (0.5f - X) * 2f;
             X = X * (1 + skewFactorX * d);
         }
 
         // Vertical skew
         if (Y > 0.5f){
-            float d = (Y - 0.5f) / 0.5f;
-            Y = Y * (1 - skewFactorY * d);
+            float d = (0.5f - Y) * 2f;
+            Y = Y * (1 - skewFactorYY * d);
         }
         else{
-            float d = (0.5f - X) / 0.5f;
+            float d = (0.5f - Y) * 2f;
             Y = Y * (1 + skewFactorY * d);
         }
 

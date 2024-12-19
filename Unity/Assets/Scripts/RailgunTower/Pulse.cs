@@ -7,7 +7,7 @@ public class Pulse : MonoBehaviour
     public Vector2 direction;
     public float speed = 5f;
     public float maxDistance = 30f;
-    private int damage = 40;
+    private int damage = 100;
     private Vector2 startPosition;
     //[SerializeField] private AudioClip shootSoundclip;
    

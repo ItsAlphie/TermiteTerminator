@@ -240,12 +240,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 253758977456193083}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &811124399870045222
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,12 +586,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1920793685527244129}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &1362775381786980454
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,12 +757,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1142234544588572057}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &1548540333427091769
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,12 +928,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 1
   m_renderer: {fileID: 219599976077561082}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &1748578077356865917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,12 +1627,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 1
   m_renderer: {fileID: 3112830903185856567}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &5707517570334977524
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,6 +1643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6945106694271410806}
   - component: {fileID: 4145756594283779872}
+  - component: {fileID: 7130146149042672159}
   m_Layer: 5
   m_Name: HighscoreTable
   m_TagString: HighscoreTable
@@ -1692,6 +1693,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   highscoreContainer: {fileID: 6945106694271410806}
+--- !u!114 &7130146149042672159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707517570334977524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8151d0a5ce9cbab4eb8c2b1eeab072e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScore: 0
 --- !u!1 &6122181725772687188
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,12 +2397,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 1
   m_renderer: {fileID: 3685367831342018869}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!1 &8900141170308806672
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,9 +2568,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 6.516487, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6394532024959125120}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
