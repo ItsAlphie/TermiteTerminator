@@ -48,4 +48,5 @@ After you managed to follow all the instruction above, you can now finally launc
 * go to /TermiteTerminator/Python/Gestures/ and launch the python Camera Vision script combinedScripts.py
 * make sure to place the three corner markers on your play area
 * start the unity game
+
 With this, the script should be sending all required information to the Unity game. Have fun!
