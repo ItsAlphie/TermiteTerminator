@@ -2,9 +2,7 @@
 For a more in-depth dive into the working and development of this project, we refer to the paper also available in this repository. Below is brief summary on how to set up the game yourself.
 
 ## Credits
-* Mention the two OpenCV repo's
-* Wij als awesome sauce team
-* Coaches?
+Both repositories below have been used as a foundation for the python script used for the marker and gesture detection:
 * OpenCV Marker Detection: https://github.com/KhairulIzwan/ArUco-markers-with-OpenCV-and-Python
 * OpenCV Gesture Detection: https://github.com/kinivi/hand-gesture-recognition-mediapipe
 
@@ -43,3 +41,11 @@ This part of the setup refers to the physical configuration. The fundamentals co
 Within Unity, more specifically in scene "Wave1" in the "LevelManager" the setup can be calibrated. Under the TowerSpawner script skewFactorX, skewFactorY, skewFactorXX, skewFactorYY and heightLimit can be adjusted to conform to the height of the camera, causing a paralax error.
 
 As for the towers, they work on 9V batteries. So, these batteries have to be connected, after which the pins from the connector have to be put in the correct pinheader. The program on the microcontrollers should still be programmed and continue sending and receiving data as normal. As for the recognition of the towers, original aRuCo markers are used with towers ranging from 1 to 7 and the corners of the TV being 21, 22 and 23.
+
+### Start the Game
+After you managed to follow all the instruction above, you can now finally launch the game. Simply follow the next few steps to start everything up:
+* launch the Unity game
+* go to /TermiteTerminator/Python/Gestures/ and launch the python Camera Vision script combinedScripts.py
+* make sure to place the three corner markers on your play area
+* start the unity game
+With this, the script should be sending all required information to the Unity game. Have fun!
