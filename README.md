@@ -1,6 +1,10 @@
 # Termite Terminator
 For a more in-depth dive into the working and development of this project, we refer to the paper also available in this repository. Below is brief summary on how to set up the game yourself.
 
+## The game
+The player manages a coin budget and uses a spell 3 types of tangible towers to face off waves of ants attempting to pass by and eat your picknick. There is a heavy hitting tower with a long cooldown, a tower with a continuisly hitting but low damage laser and a tower that shoots as fast as the player presses its button. Additionally, there is a Freeze spell to hold enemies in place for a few seconds. The ants get increasingly stronger and come in larger groups, but the more enemies are held back, the more coins you earn for more defenses.
+[🎥 Watch a demo video on YouTube](https://youtu.be/97M0W15unRk)
+
 ## Credits
 Both repositories below have been used as a foundation for the python script used for the marker and gesture detection:
 * OpenCV Marker Detection: https://github.com/KhairulIzwan/ArUco-markers-with-OpenCV-and-Python
