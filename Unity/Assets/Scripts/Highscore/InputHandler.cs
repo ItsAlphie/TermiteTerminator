@@ -10,6 +10,7 @@ public class InputHandler : MonoBehaviour
     [SerializeField] TMPro.TMP_InputField inputField;
     [SerializeField] HighscoreTable highscoreTable;
     private int score;
+    private bool submitted = false;
     private void Start(){
         //pointsController = GameObject.FindGameObjectWithTag("PointsController")?.GetComponent<PointsController>();
         
@@ -26,8 +27,9 @@ public class InputHandler : MonoBehaviour
         }
         else
         {
-            highscoreTable.AddHighscoreEntry(score, input);
-            Debug.Log("Highscore should be submitted");
+            if(!submitted){
+                highscoreTable.AddHighscoreEntry(score, input);
+                submitted = true;}
         }
     }
     public void startNewGame(){
