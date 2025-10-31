@@ -62,7 +62,7 @@ public class LevelManager : MonoBehaviour
     {
         if(!start){
             start = true;
-            // RepairAll();
+            RepairAll();
         }
     }
 
@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
         OnGameOver.Invoke();
         //Time.timeScale = 0;
         StartCoroutine(WaitForGameRestart());
-        // KillAll();
+        KillAll();
 
     }
     int GetLevel(){
@@ -85,7 +85,7 @@ public class LevelManager : MonoBehaviour
     private IEnumerator WaitForGameRestart() {
         yield return new WaitForSecondsRealtime(10);
         Time.timeScale = 1;
-        // RepairAll();
+        RepairAll();
         UIManager.Instance.hideGameOverScreen();
         UIManager.Instance.setHighscoreScreen();        
     }
