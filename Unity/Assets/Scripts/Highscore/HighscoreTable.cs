@@ -9,8 +9,9 @@ public class HighscoreTable : MonoBehaviour
     private Transform entryContainer;
     private Transform entryTemplate;
     [SerializeField] private Transform highscoreContainer;
+    [SerializeField] private TMP_Text yourScoreText;
     private List<HighscoreEntry> highscoreEntryList;
-    private List<Transform> highscoreEntryTransformList = new List<Transform>(); 
+    private List<Transform> highscoreEntryTransformList = new List<Transform>();
     private void Start()
     {
         //ClearAllPlayerPrefs();
@@ -49,6 +50,11 @@ public class HighscoreTable : MonoBehaviour
         string updatedJson = JsonUtility.ToJson(new Highscores { highscoreEntryList = highscoreEntryList });
         PlayerPrefs.SetString("highscoreTable", updatedJson);
         PlayerPrefs.Save();
+    }
+
+    public void showScore()
+    {
+        yourScoreText.text = "Your score: " + PointsController.globalPointsController.GetScore().ToString();
     }
 
     private void ClearExistingEntries()
