@@ -24,10 +24,8 @@ public class PointsController : MonoBehaviour
 
     void Start()
     {
-        
         playerScore = 0;
         highscoreTable = GameObject.FindGameObjectWithTag("HighscoreTable")?.GetComponent<HighscoreTable>();
-        //EndOfGame();
     }
 
     public void AddPoints(int enemyHealth)
@@ -39,11 +37,9 @@ public class PointsController : MonoBehaviour
     {
         return playerScore;
     }
-
-    public void EndOfGame()
+    
+    public void ResetScore()
     {
-        // Ensure the highscoreTable reference is valid
-        highscoreTable.AddHighscoreEntry(playerScore,"bbb");
-        
+        playerScore = 0;
     }
 }

@@ -33,6 +33,7 @@ public class InputHandler : MonoBehaviour
         }
     }
     public void startNewGame(){
+        PointsController.globalPointsController.ResetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
