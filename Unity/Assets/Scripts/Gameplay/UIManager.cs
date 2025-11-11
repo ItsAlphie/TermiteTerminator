@@ -72,6 +72,7 @@ public class UIManager : MonoBehaviour
     }
     public void setHighscoreScreen(){
         highScoreScreen.SetActive(true);
+        highScoreScreen.GetComponent<HighscoreTable>().showScore();
     }
 
     public void setWaveFinishedScreen(){

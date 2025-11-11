@@ -53,8 +53,6 @@ public class EnemyHealthController : HealthController
         if(currHealth >= 120){ // 6
             healthClass = 4;
             //change enemy class: animator, sprite and speed
-            Debug.Log("health 120+");
-            Debug.Log(nextForm.name);
         }
         else if(currHealth >= 90){ // 5
             if(healthClass == 4){
@@ -63,10 +61,8 @@ public class EnemyHealthController : HealthController
                 enemy.transform.GetChild(1).GetComponent<Transform>().localScale = new Vector3(0.2f,0.2f,0.2f);
                 enemy.MoveSpeed = nextForm.GetComponent<BasicEnemy>().MoveSpeed;
                 nextForm = nextForm.GetComponent<EnemyHealthController>().nextForm;
-                Debug.Log(nextForm.name);
             }
             healthClass = 3;
-            Debug.Log("health 90+");
         }
         else if(currHealth >= 60){ //4
             if(healthClass == 3){
@@ -75,10 +71,8 @@ public class EnemyHealthController : HealthController
                 enemy.transform.GetChild(1).GetComponent<Transform>().localScale = new Vector3(0.15f,0.15f,0.15f);
                 enemy.MoveSpeed = nextForm.GetComponent<BasicEnemy>().MoveSpeed;
                 nextForm = nextForm.GetComponent<EnemyHealthController>().nextForm;
-                Debug.Log(nextForm.name);
             }
             healthClass = 2;
-            Debug.Log("health 60+");
         }
         else if(currHealth >= 30){ //3
             if(healthClass == 2){
@@ -87,10 +81,8 @@ public class EnemyHealthController : HealthController
                 enemy.transform.GetChild(1).GetComponent<Transform>().localScale = new Vector3(0.10f,0.10f,0.10f);
                 enemy.MoveSpeed = nextForm.GetComponent<BasicEnemy>().MoveSpeed;
                 nextForm = nextForm.GetComponent<EnemyHealthController>().nextForm;
-                Debug.Log(nextForm.name);
             }
             healthClass = 1;
-            Debug.Log("health 30+");
         }
         else{
             if(healthClass == 1){ //2
@@ -99,7 +91,6 @@ public class EnemyHealthController : HealthController
                 enemy.MoveSpeed = nextForm.GetComponent<BasicEnemy>().MoveSpeed;
                 nextForm = nextForm.GetComponent<EnemyHealthController>().nextForm;
                 Destroy(gameObject.transform.GetChild(1).gameObject);
-                Debug.Log(nextForm.name);
             }
             healthClass = 0;
         }
